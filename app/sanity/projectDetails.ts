@@ -41,7 +41,7 @@ export const projectDetails = () => ({
 
 // TODO: Replace with YOUR production domain
 // This is used to enable stega on any URL except this one
-export const PRODUCTION_URL = 'https://ddas-manimul.vercel.app/';
+export const PRODUCTION_URL = 'https://ddas.vercel.app/';
 
 // With the logic below we enable stega only on the non-production domain
 export const frontendUrl =
