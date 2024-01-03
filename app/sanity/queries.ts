@@ -1,6 +1,72 @@
-import groq from 'groq'
+import groq from 'groq';
 
-export const HOME_QUERY = groq`*[_id == "home"][0]{ title, siteTitle }`
+export const HOME_QUERY = groq`*[_id == "home"][0]{ title, siteTitle }`;
+
+export const MEMBERS_QUERY = groq`*[_type == "member"][0...12]|order(name asc){
+  _id,
+  _type,
+  name,
+  title,
+  "slug": slug.current,
+  image,
+  bio
+}`;
+
+export const MEMBER_QUERY = groq`*[_type == "member" && slug.current == $slug][0]{
+  _id,
+  _type,
+  name,
+  title,
+  "slug": slug.current,
+  image,
+  bio
+}`;
+
+export const BOARD_MEMBERS_QUERY = groq`*[_type == "boardmember"][0...12]|order(name asc){
+  _id,
+  _type,
+  name,
+  title,
+  image,
+  phone,
+  email,
+  "slug": slug.current,
+  bio
+}`;
+
+export const BOARD_MEMBER_QUERY = groq`*[_type == "boardmember" && slug.current == $slug][0]{
+  _id,
+  _type,
+  name,
+  title,
+  image,
+  phone,
+  email,
+  "slug": slug.current,
+  bio
+}`;
+
+export const CORPORATE_MEMBERS_QUERY = groq`*[_type == "corporatemember"][0...12]|order(name asc){
+  _id,
+  _type,
+  name,
+  title,
+  website,
+  "slug": slug.current,
+  image,
+  bio
+}`;
+
+export const CORPORATE_MEMBER_QUERY = groq`*[_type == "corporatemember" && slug.current == $slug][0]{
+  _id,
+  _type,
+  name,
+  title,
+  website,
+  "slug": slug.current,
+  image,
+  bio
+}`;
 
 export const RECORDS_QUERY = groq`*[_type == "record"][0...12]|order(title asc){
     _id,
@@ -10,7 +76,7 @@ export const RECORDS_QUERY = groq`*[_type == "record"][0...12]|order(title asc){
     "slug": slug.current,
     "artist": artist->name,
     image
-  } | order(releaseDate desc)`
+  } | order(releaseDate desc)`;
 
 export const RECORD_QUERY = groq`*[_type == "record" && slug.current == $slug][0]{
   _id,
@@ -34,4 +100,4 @@ export const RECORD_QUERY = groq`*[_type == "record" && slug.current == $slug][0
     title,
     duration
   }
-}`
+}`;

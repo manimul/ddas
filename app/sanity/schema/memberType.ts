@@ -22,6 +22,8 @@ export const memberType = defineType({
     {
       type: 'image',
       name: 'image',
+      options: { hotspot: true },
+      fields: [defineField({ name: 'alt', type: 'string' })],
       title: 'Image',
     },
     {
@@ -35,18 +37,33 @@ export const memberType = defineType({
       title: 'Email',
     },
     {
+      type: 'string',
+      name: 'LinkedIn',
+      title: 'LinkedIn',
+    },
+    {
+      type: 'string',
+      name: 'Facebook',
+      title: 'Facebook',
+    },
+    {
+      type: 'string',
+      name: 'Twitter',
+      title: 'Twitter',
+    },
+    {
       type: 'array',
       name: 'bio',
       title: 'Bio',
-      of: [
-        {
-          type: 'block',
-        },
-      ],
+      of: [{ type: 'block' }],
     },
+
     {
       type: 'slug',
       name: 'slug',
+      options: {
+        source: 'name',
+      },
       title: 'Slug',
     },
   ],

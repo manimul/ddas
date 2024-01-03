@@ -24,15 +24,11 @@ export const corporateMemberType = defineType({
       name: 'image',
       title: 'Image',
     },
-    {
-      type: 'number',
-      name: 'phone',
-      title: 'Phone',
-    },
+
     {
       type: 'string',
-      name: 'email',
-      title: 'Email',
+      name: 'website',
+      title: 'Website',
     },
     {
       type: 'array',
