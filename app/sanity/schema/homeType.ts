@@ -1,5 +1,5 @@
-import {Home} from 'lucide-react'
-import {defineField, defineType} from 'sanity'
+import { Home } from 'lucide-react';
+import { defineField, defineType } from 'sanity';
 
 export const homeType = defineType({
   name: 'home',
@@ -15,6 +15,25 @@ export const homeType = defineType({
       name: 'siteTitle',
       type: 'string',
     }),
+    defineField({
+      name: 'content',
+      type: 'array',
+      of: [{ type: 'block' }, { type: 'image' }],
+    }),
+    defineField({
+      name: 'heroImage',
+      type: 'image',
+      options: { hotspot: true },
+      fields: [defineField({ name: 'alt', type: 'string' })],
+    }),
+    defineField({
+      name: 'heroHeading',
+      type: 'string',
+    }),
+    defineField({
+      name: 'heroSubtitle',
+      type: 'string',
+    }),
   ],
   preview: {
     select: {
@@ -22,4 +41,4 @@ export const homeType = defineType({
       artist: 'siteTitle',
     },
   },
-})
+});
