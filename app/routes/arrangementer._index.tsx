@@ -100,7 +100,10 @@ export default function OmArrangementer() {
       <div className='flex flex-row justify-start '>
         <div className='flex-grow'>
           <h1 className='text-4xl'>{title}</h1>
-          <Link to='/kommende-arrangementer/' unstable_viewTransition>
+          <Link
+            to='/arrangementer/kommende-arrangementer/'
+            unstable_viewTransition
+          >
             Visa Kommende Arrangementer{' '}
           </Link>
         </div>

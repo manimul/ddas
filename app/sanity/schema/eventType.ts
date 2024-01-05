@@ -27,7 +27,7 @@ export const eventType = defineType({
       group: 'details',
     }),
     defineField({
-      name: 'subtitle',
+      name: 'extract',
       type: 'string',
       group: 'details',
     }),

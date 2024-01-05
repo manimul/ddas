@@ -11,7 +11,7 @@ import { z } from 'zod';
 export const eventZ = z.object({
   _id: z.string(),
   title: z.string().nullable(),
-  subtitle: z.string().nullable(),
+  extract: z.string().nullable(),
   date: z.string().nullable(),
   location: z.string().nullable(),
   slug: z.string().nullable(),
@@ -26,7 +26,7 @@ export const eventsZ = z.array(eventZ);
 export const eventStubZ = z.object({
   _id: z.string(),
   title: z.string().nullable(),
-  subtitle: z.string().nullable(),
+  extract: z.string().nullable(),
   date: z.string().nullable(),
   location: z.string().nullable(),
   slug: z.string().nullable(),

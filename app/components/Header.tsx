@@ -14,7 +14,7 @@ export function Header(props: LayoutProps) {
       slug: '/om-oss/referater-og-arsrapporter',
       text: 'Referater og årsrapporter',
     },
-    { slug: '/om-stifteren', text: 'Om stifteren' },
+    { slug: '/om-stifteren-johannes-konnild', text: 'Om stifteren' },
   ];
   const medlemItems = [
     { slug: '/medlemshjornet', text: 'Medlemshjørnet' },

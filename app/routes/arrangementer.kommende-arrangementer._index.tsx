@@ -1,5 +1,5 @@
 import { json } from '@remix-run/node';
-import { useLoaderData } from '@remix-run/react';
+import { Outlet, useLoaderData } from '@remix-run/react';
 import { QueryResponseInitial } from '@sanity/react-loader';
 import { BoardMembers } from '~/components/BoardMembers';
 import { Events } from '~/components/Events';
@@ -47,11 +47,9 @@ export default function KommendeArrangementer() {
     return <div>Loading...</div>;
   }
   return (
-    <div
-      id='kommende'
-      className='grid grid-cols-1 border-orange-300 border-2  gap-6 lg:gap-12 '
-    >
+    <div id='kommende' className=' '>
       <Events events={data} />
+      <Outlet />
     </div>
   );
 }
