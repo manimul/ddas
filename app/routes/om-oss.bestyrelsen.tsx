@@ -42,7 +42,7 @@ export default function Bestyrelsen() {
     return <div>Loading...</div>;
   }
   return (
-    <div className='grid grid-cols-1 border-orange-300 border-2  gap-6 lg:gap-12'>
+    <div className='grid grid-cols-1 border-orange-300 border-2  gap-6 lg:gap-12 '>
       <BoardMembers boardMembers={data} />
     </div>
   );

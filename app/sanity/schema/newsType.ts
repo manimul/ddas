@@ -40,6 +40,11 @@ export const newsType = defineType({
       group: 'details',
     }),
     defineField({
+      name: 'publishedDate',
+      type: 'datetime',
+      group: 'details',
+    }),
+    defineField({
       name: 'content',
       type: 'array',
       of: [{ type: 'block' }, { type: 'image' }],

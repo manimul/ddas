@@ -1,4 +1,3 @@
-import { Link, NavLink, Outlet } from '@remix-run/react';
 import type {
   ActionFunction,
   LoaderFunctionArgs,
@@ -6,16 +5,17 @@ import type {
 } from '@remix-run/node';
 import { json } from '@remix-run/node';
 import { useLoaderData } from '@remix-run/react';
+import { QueryResponseInitial } from '@sanity/react-loader';
+
+import { Event } from '~/components/Event';
 import type { Loader as RootLoader } from '~/root';
 import { OG_IMAGE_HEIGHT, OG_IMAGE_WIDTH } from '~/routes/resource.og';
 import { writeClient } from '~/sanity/client.server';
 import { useQuery } from '~/sanity/loader';
 import { loadQuery } from '~/sanity/loader.server';
-import { PAGE_QUERY } from '~/sanity/queries';
-import type { PageDocument } from '~/types/page';
-import { pageZ } from '~/types/page';
-import { SanityContent } from '~/components/SanityContent';
-import { MemberImage } from '~/components/MemberImage';
+import { EVENT_QUERY } from '~/sanity/queries';
+import type { EventDocument } from '~/types/event';
+import { eventZ } from '~/types/event';
 
 export const meta: MetaFunction<
   typeof loader,
@@ -45,9 +45,8 @@ export const meta: MetaFunction<
 export const loader = async ({ params, request }: LoaderFunctionArgs) => {
   // Params from the loader uses the filename
   // $slug.tsx has the params { slug: 'hello-world' }
-  console.log('params:' + params);
-  const initial = await loadQuery<PageDocument>(PAGE_QUERY, params).then(
-    (res) => ({ ...res, data: res.data ? pageZ.parse(res.data) : null })
+  const initial = await loadQuery<EventDocument>(EVENT_QUERY, params).then(
+    (res) => ({ ...res, data: res.data ? eventZ.parse(res.data) : null })
   );
 
   if (!initial.data) {
@@ -60,33 +59,23 @@ export const loader = async ({ params, request }: LoaderFunctionArgs) => {
 
   return json({
     initial,
-    query: PAGE_QUERY,
+    query: EVENT_QUERY,
     params,
     ogImageUrl,
   });
 };
 
-export default function Page() {
+export default function EventPage() {
   const { initial, query, params } = useLoaderData<typeof loader>();
-
+  const castedInitial: QueryResponseInitial<typeof initial.data> =
+    initial as QueryResponseInitial<typeof initial.data>;
   const { data, loading } = useQuery<typeof initial.data>(query, params, {
-    initial,
+    initial: castedInitial,
   });
 
   if (loading || !data) {
     return <div>Loading...</div>;
   }
 
-  const { _id, title, subtitle, content, image } = data;
-
-  return (
-    <div className='grid border-blue-500 border-2 grid-cols-1 gap-6 lg:gap-12'>
-      <h1 className='text-4xl bold'>{title}</h1>
-      <MemberImage image={image} />
-      <h2>{subtitle}</h2>
-      {content && content?.length > 0 ? (
-        <SanityContent value={content} />
-      ) : null}
-    </div>
-  );
+  return <Event data={data} />;
 }

@@ -1,12 +1,45 @@
-import { Link, Outlet } from '@remix-run/react';
+import { Link, NavLink, Outlet } from '@remix-run/react';
 
 export default function Medlemshjornet() {
   return (
-    <div className='grid grid-cols-1 border-blue-500 border-2  gap-6 lg:gap-12'>
-      <Link to='.'>Medlemshjørnet</Link>{' '}
+    <div className='grid grid-cols-1   gap-6 lg:gap-12'>
       <div className='flex justify-start space-x-4'>
-        <Link to='medlemmer'>Medlemmer</Link>
-        <Link to='corporate-medlemmer'>Corporate Medlemmer</Link>
+        <NavLink
+          to=''
+          className={({ isActive, isPending }) =>
+            isPending
+              ? 'pending'
+              : isActive
+                ? 'active font-bold'
+                : 'font-light text-gray-500 hover:text-gray-700'
+          }
+        >
+          Om Medlemshjørnet
+        </NavLink>
+        <NavLink
+          to='medlemmer'
+          className={({ isActive, isPending }) =>
+            isPending
+              ? 'pending'
+              : isActive
+                ? 'active font-bold'
+                : 'font-light text-gray-500 hover:text-gray-700'
+          }
+        >
+          Medlemmer
+        </NavLink>
+        <NavLink
+          to='corporate-medlemmer'
+          className={({ isActive, isPending }) =>
+            isPending
+              ? 'pending'
+              : isActive
+                ? 'active font-bold'
+                : 'font-light text-gray-500 hover:text-gray-700'
+          }
+        >
+          Corporate Medlemmer
+        </NavLink>
       </div>
       <Outlet />
     </div>

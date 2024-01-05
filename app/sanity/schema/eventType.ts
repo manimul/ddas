@@ -40,6 +40,16 @@ export const eventType = defineType({
       group: 'details',
     }),
     defineField({
+      name: 'date',
+      type: 'datetime',
+      group: 'details',
+    }),
+    defineField({
+      name: 'location',
+      type: 'string',
+      group: 'details',
+    }),
+    defineField({
       name: 'content',
       type: 'array',
       of: [{ type: 'block' }, { type: 'image' }],
