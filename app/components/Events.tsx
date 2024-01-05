@@ -11,18 +11,39 @@ export function Events(props: EventsProps) {
   const { events = [] } = props;
   return events.length > 0 ? (
     <div className=' border-gray-100 '>
-      <ul className='flex flex-col space-y-6 p-4'>
+      <ul className='flex flex-col space-y-6 '>
         {events.map((event) => (
           <li
             key={event._id}
-            className='flex flex-row justify-start space-x-6 w-full '
+            className='flex flex-row flex-wrap  box-border opacity-75 hover:opacity-100  '
           >
-            <div className='w-1/4'>
+            <h2 className=' py-4 basis-full'>
+              {event?.slug ? (
+                <Link
+                  prefetch='intent'
+                  relative='path'
+                  to={
+                    '../../arrangementer/kommende-arrangementer/' + event?.slug
+                  }
+                  className='text-bold pt-4 text-xl tracking-tighter transition-colors duration-100 ease-in-out  lg:text-4xl'
+                >
+                  {event.title}
+                  {/* Makes this entire block clickable */}
+                  {/* <span className="absolute inset-0" /> */}
+                </Link>
+              ) : (
+                <span className='pt-4 text-xl tracking-tighter'>
+                  {event.title}
+                </span>
+              )}
+            </h2>
+            <div className='basis-1/3 '>
               <MemberImage image={event.image} />
+            </div>
+            <div className='basis-1/2 px-6 flex flex-col space-y-4 '>
               {event.date && (
                 <div>
-                  <h2>Event Date</h2>
-                  <span>
+                  <span className='text-xl opacity-40'>
                     {new Date(event.date).toLocaleDateString('en-US', {
                       year: 'numeric',
                       month: 'long',
@@ -33,39 +54,18 @@ export function Events(props: EventsProps) {
                   </span>
                 </div>
               )}
-            </div>
-            <div className=' '>
-              <h2 className='capitalize text-lg '>
-                {event?.slug ? (
-                  <Link
-                    prefetch='intent'
-                    relative='path'
-                    to={'../../arrangementer/' + event?.slug}
-                    className='text-bold pt-4 text-xl font-bold tracking-tighter transition-colors duration-100 ease-in-out hover:bg-cyan-400 hover:text-white lg:text-3xl'
-                  >
-                    {event.title}
-                    {/* Makes this entire block clickable */}
-                    {/* <span className="absolute inset-0" /> */}
-                  </Link>
-                ) : (
-                  <span className='pt-4 text-xl font-bold tracking-tighter'>
-                    {event.title}
-                  </span>
-                )}
-              </h2>
-              <p className='text-sm 	'>
-                {event.content && event.content?.length > 0 ? (
-                  <SanityContent value={event.content} />
-                ) : null}
-              </p>
+              <p className='text-lg prose font-bold 	'>{event.extract}</p>
+
               {event?.slug ? (
                 <Link
                   prefetch='intent'
                   relative='path'
-                  to={'../../arrangementer/' + event?.slug}
-                  className='text-bold pt-4 text-xl font-bold tracking-tighter transition-colors duration-100 ease-in-out hover:bg-cyan-400 hover:text-white lg:text-3xl'
+                  to={
+                    '../../arrangementer/kommende-arrangementer/' + event?.slug
+                  }
+                  className='underline opacity-75 text-orange-500 hover:opacity-100'
                 >
-                  Click to learn more
+                  Lær mere
                   {/* Makes this entire block clickable */}
                   {/* <span className="absolute inset-0" /> */}
                 </Link>

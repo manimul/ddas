@@ -125,7 +125,12 @@ export default function Index() {
   return (
     <div className='grid grid-cols-1 gap-6 lg:gap-12'>
       {/* <Records records={recordsData} /> */}
-      <Events events={eventsData} />
+      <section>
+        <h2 className='uppercase text-sm opacity-60 leading-loose'>
+          Kommende Arrangementer
+        </h2>
+        <Events events={eventsData} />
+      </section>
       <Members members={membersData} />
     </div>
   );
