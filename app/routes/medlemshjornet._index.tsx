@@ -16,6 +16,7 @@ import type { PageDocument } from '~/types/page';
 import { pageZ } from '~/types/page';
 import { SanityContent } from '~/components/SanityContent';
 import { MemberImage } from '~/components/MemberImage';
+import { QueryResponseInitial } from '@sanity/react-loader';
 
 export const meta: MetaFunction<
   typeof loader,
@@ -43,34 +44,49 @@ export const meta: MetaFunction<
 
 // Load the `record` document with this slug
 export const loader = async ({ params, request }: LoaderFunctionArgs) => {
-  // Params from the loader uses the filename
-  // $slug.tsx has the params { slug: 'hello-world' }
-  console.log('params:' + params);
-  const initial = await loadQuery<PageDocument>(PAGE_QUERY, params).then(
-    (res) => ({ ...res, data: res.data ? pageZ.parse(res.data) : null })
-  );
+  // Determine the slug to use
+  const slug = 'medlemshjornet'; // Static identifier for this route
 
-  if (!initial.data) {
+  // Check if the slug is valid
+  if (!slug) {
+    console.error('No slug provided');
     throw new Response('Not found', { status: 404 });
   }
 
-  // Create social share image url
-  const { origin } = new URL(request.url);
-  const ogImageUrl = `${origin}/resource/og?id=${initial.data._id}`;
+  try {
+    const queryParams = { slug: slug }; // Ensure this matches your GROQ query
+    const initial = await loadQuery<PageDocument>(PAGE_QUERY, queryParams).then(
+      (res) => ({ ...res, data: res.data ? pageZ.parse(res.data) : null })
+    );
 
-  return json({
-    initial,
-    query: PAGE_QUERY,
-    params,
-    ogImageUrl,
-  });
+    if (!initial.data) {
+      throw new Response('Not found', { status: 404 });
+    }
+
+    // Create social share image URL
+    const { origin } = new URL(request.url);
+    const ogImageUrl = `${origin}/resource/og?id=${initial.data._id}`;
+
+    return json({
+      initial,
+      query: PAGE_QUERY,
+      params: { ...params, slug }, // Update params with the used slug
+      ogImageUrl,
+    });
+  } catch (error) {
+    console.error('Error loading page:', error);
+    throw new Response('Error loading page', { status: 500 });
+  }
 };
 
-export default function Page() {
+export default function OmArrangementer() {
   const { initial, query, params } = useLoaderData<typeof loader>();
 
+  const castedInitial: QueryResponseInitial<typeof initial.data> =
+    initial as QueryResponseInitial<typeof initial.data>;
+
   const { data, loading } = useQuery<typeof initial.data>(query, params, {
-    initial,
+    initial: castedInitial,
   });
 
   if (loading || !data) {
@@ -80,13 +96,16 @@ export default function Page() {
   const { _id, title, subtitle, content, image } = data;
 
   return (
-    <div className='grid border-blue-500 border-2 grid-cols-1 gap-6 lg:gap-12'>
-      <h1 className='text-4xl bold'>{title}</h1>
-      <MemberImage image={image} />
-      <h2>{subtitle}</h2>
-      {content && content?.length > 0 ? (
-        <SanityContent value={content} />
-      ) : null}
-    </div>
+    <>
+      <div className='flex flex-row justify-start space-x-8 '>
+        <div className='flex-grow '>
+          <h1 className='text-4xl'>{title}</h1>
+          <MemberImage image={image} />
+        </div>
+        {content && content?.length > 0 ? (
+          <SanityContent value={content} />
+        ) : null}
+      </div>
+    </>
   );
 }

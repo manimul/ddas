@@ -1,4 +1,19 @@
 import { Link, NavLink, Outlet } from '@remix-run/react';
+import type {
+  ActionFunction,
+  LoaderFunctionArgs,
+  MetaFunction,
+} from '@remix-run/node';
+import { json } from '@remix-run/node';
+import { useLoaderData } from '@remix-run/react';
+import type { Loader as RootLoader } from '~/root';
+import { OG_IMAGE_HEIGHT, OG_IMAGE_WIDTH } from '~/routes/resource.og';
+import { writeClient } from '~/sanity/client.server';
+import { useQuery } from '~/sanity/loader';
+import { loadQuery } from '~/sanity/loader.server';
+import { PAGE_QUERY } from '~/sanity/queries';
+import type { PageDocument } from '~/types/page';
+import { pageZ } from '~/types/page';
 
 export default function OmOss() {
   return (

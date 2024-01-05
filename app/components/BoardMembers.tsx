@@ -28,11 +28,7 @@ export function BoardMembers(props: BoardMembersProps) {
                 <SanityContent value={boardMember.bio} />
               ) : null}
             </p>
-            {boardMember.phone && (
-              <Link to={boardMember.phone} className='uppercase text-sm'>
-                {boardMember.phone}
-              </Link>
-            )}
+            {boardMember.phone && <span> {boardMember.phone}</span>}
             {boardMember.email && (
               <Link to={boardMember.email} className='uppercase text-sm'>
                 {boardMember.email}

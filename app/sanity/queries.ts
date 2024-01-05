@@ -2,6 +2,16 @@ import groq from 'groq';
 
 export const HOME_QUERY = groq`*[_id == "home"][0]{ title, siteTitle }`;
 
+export const PAGE_QUERY = groq`*[_type == "page" && slug.current == $slug][0]{
+  _id,
+  _type,
+  title,
+  subtitle,
+  "slug": slug.current,
+  image,
+  content
+}`;
+
 export const MEMBERS_QUERY = groq`*[_type == "member"][0...12]|order(name asc){
   _id,
   _type,
@@ -20,6 +30,30 @@ export const MEMBER_QUERY = groq`*[_type == "member" && slug.current == $slug][0
   "slug": slug.current,
   image,
   bio
+}`;
+
+export const EVENTS_QUERY = groq`*[_type == "event" && select($isFuture => dateTime(date) > dateTime($currentDate), dateTime(date) <= dateTime($currentDate)) ][0...12]|order(date asc){
+  _id,
+  _type,
+  title,
+  subtitle,
+  date,
+  location,
+  "slug": slug.current,
+  image,
+ content
+}`;
+
+export const EVENT_QUERY = groq`*[_type == "event" && slug.current == $slug][0]{
+  _id,
+  _type,
+  title,
+  subtitle,
+  date,
+  location,
+  "slug": slug.current,
+  image,
+ content
 }`;
 
 export const BOARD_MEMBERS_QUERY = groq`*[_type == "boardmember"][0...12]|order(name asc){
