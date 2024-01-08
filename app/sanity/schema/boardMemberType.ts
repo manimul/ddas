@@ -50,4 +50,9 @@ export const boardMemberType = defineType({
       title: 'Slug',
     },
   ],
+  preview: {
+    select: {
+      title: 'name',
+    },
+  },
 });

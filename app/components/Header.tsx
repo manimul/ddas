@@ -30,39 +30,29 @@ export function Header(props: LayoutProps) {
       <div className='container mx-auto flex items-center justify-between p-4 lg:px-12'>
         <Logo home={props.home} />
 
-        <Dropdown title='Om' items={omOssItems} />
-        <Dropdown title='Medlemshjørnet' items={medlemItems} />
+        <div className='mx-auto  items-center justify-between p-4 lg:px-4 hidden md:flex grow'>
+          <Dropdown title='Om' items={omOssItems} />
+          <Dropdown title='Medlemshjørnet' items={medlemItems} />
 
-        <Link
-          to='arrangementer'
-          className='text-sm font-bold tracking-tighter dark:text-gray-800'
-        >
-          Arrangementer{' '}
-        </Link>
-        <Link
-          to='nyheder'
-          className='text-sm font-bold tracking-tighter dark:text-gray-800'
-        >
-          Nyheder{' '}
-        </Link>
-        <Link
-          to='kontakt'
-          className='text-sm font-bold tracking-tighter dark:text-gray-800'
-        >
-          Kontakt{' '}
-        </Link>
-        <Link
-          to=''
-          className='text-sm font-bold tracking-tighter dark:text-gray-800'
-        >
-          Mer{' '}
-        </Link>
-        <Link
-          to='ansog-om-medlemskab'
-          className='text-sm font-bold tracking-tighter dark:text-gray-800'
-        >
-          Ansøg om medlemskap{' '}
-        </Link>
+          <Link to='arrangementer' className='text-sm  '>
+            Arrangementer{' '}
+          </Link>
+          <Link to='nyheder' className='text-sm   '>
+            Nyheder{' '}
+          </Link>
+          <Link to='kontakt' className='text-sm   '>
+            Kontakt{' '}
+          </Link>
+          <Link to='' className='text-sm   '>
+            Mer{' '}
+          </Link>
+          <Link
+            to='ansog-om-medlemskab'
+            className='text-sm  border-2 p-2  border-green-500 text-green-500 hover:bg-green-500 hover:text-white transition-all duration-1000 ease-in-out  '
+          >
+            Ansøg om medlemskap{' '}
+          </Link>
+        </div>
 
         <ThemeToggle theme={props.theme} />
       </div>
