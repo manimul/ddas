@@ -16,7 +16,7 @@ export function MemberImage(props: MemberImageProps) {
   const combinedClass = `${defaultClass} ${className || ''}`; // Merge className with default
 
   return (
-    <div className='aspect-square bg-gray-50'>
+    <div className='aspect-square '>
       {image ? (
         <img
           className={combinedClass} // Use the combined class

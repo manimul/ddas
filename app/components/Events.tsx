@@ -10,7 +10,7 @@ type EventsProps = {
 export function Events(props: EventsProps) {
   const { events = [] } = props;
   return events.length > 0 ? (
-    <div className=' border-gray-100 '>
+    <div className=' '>
       <ul className='flex flex-col space-y-6 '>
         {events.map((event) => (
           <li
@@ -54,7 +54,7 @@ export function Events(props: EventsProps) {
                   </span>
                 </div>
               )}
-              <p className='text-lg prose font-bold 	'>{event.extract}</p>
+              <p className='text-lg  font-bold '>{event.extract}</p>
 
               {event?.slug ? (
                 <Link
