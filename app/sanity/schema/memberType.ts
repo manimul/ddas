@@ -38,17 +38,17 @@ export const memberType = defineType({
     },
     {
       type: 'string',
-      name: 'LinkedIn',
+      name: 'linkedin',
       title: 'LinkedIn',
     },
     {
       type: 'string',
-      name: 'Facebook',
+      name: 'facebook',
       title: 'Facebook',
     },
     {
       type: 'string',
-      name: 'Twitter',
+      name: 'twitter',
       title: 'Twitter',
     },
     {
@@ -67,4 +67,9 @@ export const memberType = defineType({
       title: 'Slug',
     },
   ],
+  preview: {
+    select: {
+      title: 'name',
+    },
+  },
 });

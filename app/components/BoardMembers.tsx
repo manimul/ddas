@@ -2,6 +2,9 @@ import { Link } from '@remix-run/react';
 import { MemberImage } from '~/components/MemberImage';
 import type { BoardMemberStub } from '~/types/boardMember';
 import { SanityContent } from './SanityContent';
+import type { SanityImageObjectStub } from '@sanity/asset-utils';
+import urlBuilder from '@sanity/image-url';
+import { dataset, projectId } from '~/sanity/projectDetails';
 
 type BoardMembersProps = {
   boardMembers: BoardMemberStub[];
@@ -10,30 +13,55 @@ type BoardMembersProps = {
 export function BoardMembers(props: BoardMembersProps) {
   const { boardMembers = [] } = props;
   return boardMembers.length > 0 ? (
-    <ul className='flex flex-col space-y-6'>
+    <ul
+      role='list'
+      className='grid gap-x-5 gap-y-8 sm:grid-cols-2 sm:gap-y-16 xl:col-span-2'
+    >
       {boardMembers.map((boardMember) => (
-        <li
-          key={boardMember._id}
-          className='flex flex-row justify-start space-x-6 w-full '
-        >
-          <div className='w-1/4'>
-            <MemberImage image={boardMember.image} />
-          </div>
-          <div className=' '>
-            <h2 className='capitalize text-lg '>
-              {boardMember.name?.toLowerCase()}
-            </h2>
-            <p className='text-sm 	'>
-              {boardMember.bio && boardMember.bio?.length > 0 ? (
-                <SanityContent value={boardMember.bio} />
-              ) : null}
-            </p>
-            {boardMember.phone && <span> {boardMember.phone}</span>}
-            {boardMember.email && (
-              <Link to={boardMember.email} className='uppercase text-sm'>
-                {boardMember.email}
-              </Link>
+        <li key={boardMember._id}>
+          <div className='flex items-start gap-x-4'>
+            {boardMember.image ? (
+              <img
+                className='h-32 w-32 rounded-lg '
+                src={urlBuilder({ projectId, dataset })
+                  // @ts-ignore
+                  .image(boardMember.image.asset._ref)
+                  .height(800)
+                  .width(800)
+                  .fit('max')
+                  .auto('format')
+                  .url()}
+                alt={boardMember.image?.alt ?? ``}
+                loading='lazy'
+              />
+            ) : (
+              <div className='flex aspect-square w-full items-center justify-center bg-gray-100 text-gray-500'>
+                Missing Member image
+              </div>
             )}
+
+            <div>
+              <h3 className='text-base font-semibold leading-7 tracking-tight text-gray-900 dark:text-gray-100 capitalize'>
+                {boardMember.name?.toLowerCase()}
+              </h3>
+              <p className='text-sm font-semibold leading-6 text-indigo-600'>
+                {boardMember.title}
+              </p>
+
+              <p className='text-xs'>
+                {boardMember.bio && boardMember.bio?.length > 0 ? (
+                  <SanityContent value={boardMember.bio} />
+                ) : null}
+              </p>
+              <p>{boardMember.phone && <span> {boardMember.phone}</span>}</p>
+              <p>
+                {boardMember.email && (
+                  <Link to={boardMember.email} className='uppercase text-sm'>
+                    {boardMember.email}
+                  </Link>
+                )}
+              </p>
+            </div>
           </div>
         </li>
       ))}

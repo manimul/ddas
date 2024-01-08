@@ -23,12 +23,9 @@ export default function Dropdown({ items, title }: DropdownProps) {
   return (
     <Menu as='div' className='relative inline-block text-left'>
       <div>
-        <Menu.Button className='inline-flex w-full items-center	 align justify-center gap-x-1.5 rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900  ring-gray-300 hover:bg-gray-50'>
+        <Menu.Button className='inline-flex w-full items-center	 align justify-center gap-x-1.5 rounded-md   py-2 text-sm   ring-gray-300 '>
           {title}
-          <ChevronDownIcon
-            className='-mr-1 h-5 w-5 text-gray-400'
-            aria-hidden='true'
-          />
+          <ChevronDownIcon className='-mr-1 h-5 w-5 ' aria-hidden='true' />
         </Menu.Button>
       </div>
 

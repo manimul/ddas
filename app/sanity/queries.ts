@@ -17,6 +17,11 @@ export const MEMBERS_QUERY = groq`*[_type == "member"][0...12]|order(name asc){
   _type,
   name,
   title,
+  facebook,
+  twitter,
+  linkedin,
+  phone,
+  email,
   "slug": slug.current,
   image,
   bio
@@ -27,6 +32,11 @@ export const MEMBER_QUERY = groq`*[_type == "member" && slug.current == $slug][0
   _type,
   name,
   title,
+  facebook,
+  twitter,
+  linkedin,
+  phone,
+  email,
   "slug": slug.current,
   image,
   bio
@@ -50,6 +60,30 @@ export const EVENT_QUERY = groq`*[_type == "event" && slug.current == $slug][0]{
   title,
   extract,
   date,
+  location,
+  "slug": slug.current,
+  image,
+ content
+}`;
+
+export const NEWSES_QUERY = groq`*[_type == "news" ][0...12]|order(date asc){
+  _id,
+  _type,
+  title,
+  extract,
+  publishedDate,
+  location,
+  "slug": slug.current,
+  image,
+ content
+}`;
+
+export const NEWS_QUERY = groq`*[_type == "news" && slug.current == $slug][0]{
+  _id,
+  _type,
+  title,
+  extract,
+  publishedDate,
   location,
   "slug": slug.current,
   image,

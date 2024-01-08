@@ -5,16 +5,21 @@ import { dataset, projectId } from '~/sanity/projectDetails';
 
 type MemberImageProps = {
   image?: SanityImageObjectStub & { alt: string };
+  className?: string; // Add className as an optional property
 };
 
 export function MemberImage(props: MemberImageProps) {
-  const { image } = props;
+  const { image, className } = props;
+
+  const defaultClass =
+    'h-auto w-full object-cover rounded-lg shadow-black transition-all duration-300 group-hover:shadow-2xl group-hover:shadow-cyan-200';
+  const combinedClass = `${defaultClass} ${className || ''}`; // Merge className with default
 
   return (
     <div className='aspect-square bg-gray-50'>
       {image ? (
         <img
-          className='h-auto w-full object-cover shadow-black transition-all duration-300 group-hover:shadow-2xl group-hover:shadow-cyan-200'
+          className={combinedClass} // Use the combined class
           src={urlBuilder({ projectId, dataset })
             // @ts-ignore
             .image(image.asset._ref)
