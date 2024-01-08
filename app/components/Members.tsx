@@ -23,7 +23,7 @@ export function Members(props: MembersProps) {
                 className='object-center object-cover w-full h-full'
               />
             </div>
-            <div className='w-full md:w-3/5 text-left p-6 md:p-4 space-y-2'>
+            <div className='w-full md:w-3/5 text-left py-4 md:p-4 space-y-2'>
               <h2 className='text-xl text-gray-700 font-bold capitalize'>
                 {member.name?.toLowerCase()}
               </h2>

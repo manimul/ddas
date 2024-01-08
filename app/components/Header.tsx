@@ -27,10 +27,10 @@ export function Header(props: LayoutProps) {
 
   return (
     <header className='border-b border-gray-100 transition-colors duration-1000 ease-in-out dark:border-gray-900'>
-      <div className='container mx-auto flex items-center justify-between p-4 lg:px-12'>
+      <div className='container mx-auto flex flex-col md:flex-row items-center justify-between p-4 lg:px-12'>
         <Logo home={props.home} />
 
-        <div className='mx-auto  items-center justify-between p-4 lg:px-4 hidden md:flex grow'>
+        <div className='mx-auto  items-center justify-between md:p-4 lg:px-4   md:flex grow'>
           <Dropdown title='Om' items={omOssItems} />
           <Dropdown title='Medlemshjørnet' items={medlemItems} />
 

@@ -100,6 +100,7 @@ export default function Arrangementer() {
       <div className='flex justify-start space-x-4'>
         <NavLink
           to=''
+          end
           className={({ isActive, isPending }) =>
             isPending
               ? 'pending'

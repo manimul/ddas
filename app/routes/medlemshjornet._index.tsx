@@ -97,14 +97,16 @@ export default function OmArrangementer() {
 
   return (
     <>
-      <div className='flex flex-row justify-start space-x-8 '>
-        <div className='flex-grow '>
-          <h1 className='text-4xl'>{title}</h1>
+      <div className='grid md:grid-cols-8 gap-6 '>
+        <div className=' col-span-4 space-y-4'>
+          <h1 className='text-4xl '>{title}</h1>
+          {content && content?.length > 0 ? (
+            <SanityContent value={content} />
+          ) : null}
+        </div>
+        <div className='hidden md:block col-span-4'>
           <MemberImage image={image} />
         </div>
-        {content && content?.length > 0 ? (
-          <SanityContent value={content} />
-        ) : null}
       </div>
     </>
   );

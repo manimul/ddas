@@ -41,7 +41,7 @@ export default function CorporateMedlemmer() {
     return <div>Loading...</div>;
   }
   return (
-    <div className=' border-orange-500 border-2  '>
+    <div className='   '>
       <CorporateMembers corporateMembers={data} />
     </div>
   );
