@@ -48,7 +48,7 @@ export function Header(props: LayoutProps) {
           </Link>
           <Link
             to='ansog-om-medlemskab'
-            className='text-sm  border-2 p-2  border-green-500 text-green-500 hover:bg-green-500 hover:text-white transition-all duration-1000 ease-in-out  '
+            className='text-sm  border rounded-sm p-2  border-[#f59e0b]  hover:bg-[#f59e0b] hover:text-white transition-all duration-1000 ease-in-out  '
           >
             Ansøg om medlemskap{' '}
           </Link>

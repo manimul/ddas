@@ -11,7 +11,7 @@ export default function Medlemshjornet() {
             isPending
               ? 'pending'
               : isActive
-                ? 'active font-bold'
+                ? 'active font-bold border-b-2 border-green-500 '
                 : ' font-light text-gray-500 hover:text-gray-700'
           }
         >
@@ -23,7 +23,7 @@ export default function Medlemshjornet() {
             isPending
               ? 'pending'
               : isActive
-                ? 'active font-bold'
+                ? 'active font-bold border-b-2 border-green-500 '
                 : 'font-light text-gray-500 hover:text-gray-700'
           }
         >
@@ -35,7 +35,7 @@ export default function Medlemshjornet() {
             isPending
               ? 'pending'
               : isActive
-                ? 'active font-bold'
+                ? 'active font-bold border-b-2 border-green-500 '
                 : 'font-light text-gray-500 hover:text-gray-700'
           }
         >

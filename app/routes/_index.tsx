@@ -2,19 +2,18 @@ import type { MetaFunction } from '@remix-run/node';
 import { json } from '@remix-run/node';
 import { useLoaderData } from '@remix-run/react';
 import { QueryResponseInitial } from '@sanity/react-loader';
-import { Members } from '~/components/Members';
-import { Records } from '~/components/Records';
 import type { Loader as RootLoader } from '~/root';
 import { useQuery } from '~/sanity/loader';
 import { loadQuery } from '~/sanity/loader.server';
-import { RECORDS_QUERY, MEMBERS_QUERY, EVENTS_QUERY } from '~/sanity/queries';
-import type { MemberStub } from '~/types/member';
-import { memberStubsZ } from '~/types/member';
-import type { RecordStub } from '~/types/record';
-import { recordStubsZ } from '~/types/record';
+import { EVENTS_QUERY, NEWSES_QUERY } from '~/sanity/queries';
+
 import type { EventStub } from '~/types/event';
 import { eventStubsZ } from '~/types/event';
 import { Events } from '~/components/Events';
+
+import type { NewsStub } from '~/types/news';
+import { newsStubsZ } from '~/types/news';
+import { Newses } from '~/components/Newses';
 
 export const meta: MetaFunction<
   typeof loader,
@@ -32,72 +31,45 @@ export const meta: MetaFunction<
 export const loader = async () => {
   const currentDate = new Date().toISOString();
   const isFuture = true;
-  const [membersResult, eventsResult, recordsResult] = await Promise.all([
-    loadQuery<MemberStub[]>(MEMBERS_QUERY),
+  const [eventsResult, newsesResult] = await Promise.all([
     loadQuery<EventStub[]>(EVENTS_QUERY, {
       currentDate: currentDate,
       isFuture: isFuture,
     }),
-    loadQuery<RecordStub[]>(RECORDS_QUERY),
+    loadQuery<NewsStub[]>(NEWSES_QUERY, {
+      currentDate: currentDate,
+      isFuture: isFuture,
+    }),
   ]);
-
-  const members = {
-    ...membersResult,
-    data: membersResult.data ? memberStubsZ.parse(membersResult.data) : null,
-  };
-
-  if (!members.data) {
-    throw new Response('Not found', { status: 404 });
-  }
 
   const events = {
     ...eventsResult,
     data: eventsResult.data ? eventStubsZ.parse(eventsResult.data) : null,
   };
 
-  const records = {
-    ...recordsResult,
-    data: recordsResult.data ? recordStubsZ.parse(recordsResult.data) : null,
+  const newses = {
+    ...newsesResult,
+    data: newsesResult.data ? newsStubsZ.parse(newsesResult.data) : null,
   };
 
-  if (!records.data) {
-    throw new Response('Not found', { status: 404 });
-  }
-
   return json({
-    members,
     events,
-    records,
-    membersQuery: MEMBERS_QUERY,
+    newses,
     eventsQuery: EVENTS_QUERY,
-    recordQuery: RECORDS_QUERY,
+    newsesQuery: NEWSES_QUERY,
     params: { isFuture: true, currentDate: new Date().toISOString() },
   });
 };
 
 export default function Index() {
-  const {
-    members,
-    records,
-    events,
-    membersQuery,
-    eventsQuery,
-    recordQuery,
-    params,
-  } = useLoaderData<typeof loader>();
+  const { events, newses, eventsQuery, newsesQuery, params } =
+    useLoaderData<typeof loader>();
 
-  const castedMembersInitial: QueryResponseInitial<typeof members.data> =
-    members as QueryResponseInitial<typeof members.data>;
-  const castedRecordsInitial: QueryResponseInitial<typeof records.data> =
-    records as QueryResponseInitial<typeof records.data>;
   const castedEventsInitial: QueryResponseInitial<typeof events.data> =
     events as QueryResponseInitial<typeof events.data>;
 
-  const { data: membersData, loading: membersLoading } = useQuery<
-    typeof members.data
-  >(membersQuery, params, {
-    initial: castedMembersInitial,
-  });
+  const castedNewsesInitial: QueryResponseInitial<typeof newses.data> =
+    newses as QueryResponseInitial<typeof newses.data>;
 
   const { data: eventsData, loading: eventsLoading } = useQuery<
     typeof events.data
@@ -105,20 +77,17 @@ export default function Index() {
     initial: castedEventsInitial,
   });
 
-  const { data: recordsData, loading: recordsLoading } = useQuery<
-    typeof records.data
-  >(recordQuery, params, {
-    initial: castedRecordsInitial,
+  if (eventsLoading || !eventsData) {
+    return <div>Loading...</div>;
+  }
+
+  const { data: newsesData, loading: newsesLoading } = useQuery<
+    typeof newses.data
+  >(newsesQuery, params, {
+    initial: castedNewsesInitial,
   });
 
-  if (
-    membersLoading ||
-    !membersData ||
-    recordsLoading ||
-    !recordsData ||
-    eventsLoading ||
-    !eventsData
-  ) {
+  if (eventsLoading || !eventsData || newsesLoading || !newsesData) {
     return <div>Loading...</div>;
   }
 
@@ -127,10 +96,10 @@ export default function Index() {
       <section className=''>
         <div className=' grid   md:max-w-screen-xl py-4  md:py-8 mx-auto lg:gap-8 xl:gap-0 lg:py-10 lg:grid-cols-12'>
           <div className='mr-auto md:order-1 order-2 place-self-center lg:col-span-7'>
-            <h1 className='max-w-2xl mb-4 text-4xl  tracking-tight leading-none md:text-5xl xl:text-6xl dark:text-white'>
+            <h1 className='max-w-2xl mb-4 md:pr-6 text-4xl  tracking-tight leading-none md:text-5xl xl:text-6xl dark:text-white'>
               Udforsk Afrikas mangfoldighed med Det Danske Afrika Selskab
             </h1>
-            <p className='max-w-2xl mb-6 font-light text-gray-500 lg:mb-8 md:text-lg lg:text-xl dark:text-gray-400'>
+            <p className='max-w-2xl  md:pr-6 mb-4 font-light text-gray-500 lg:mb-6 md:text-lg lg:text-xl dark:text-gray-400'>
               Bliv en del af et engageret fællesskab dedikeret til at udforske
               og forstå Afrikas rige kultur, historie og udvikling. Med over 150
               medlemmer, arrangerer vi inspirerende møder og udflugter, der
@@ -156,7 +125,7 @@ export default function Index() {
             </a>
             <a
               href='#'
-              className='inline-flex items-center justify-center px-5 py-3 text-base font-medium text-center text-gray-900 border border-gray-300 rounded-lg hover:bg-gray-100 focus:ring-4 focus:ring-gray-100 dark:text-white dark:border-gray-700 dark:hover:bg-gray-700 dark:focus:ring-gray-800'
+              className='inline-flex items-center justify-center px-5 py-3 text-base font-medium text-center text-gray-900 border border-[#f59e0b] rounded-lg hover:bg-[#f59e0b] focus:ring-4 focus:ring-gray-100 dark:text-white dark:border-gray-700 dark:hover:bg-gray-700 dark:focus:ring-gray-800'
             >
               Bliv medlem{' '}
             </a>
@@ -175,16 +144,14 @@ export default function Index() {
         {/* <Records records={recordsData} /> */}
 
         <section>
-          <h2 className='uppercase text-sm opacity-60 leading-loose'>
+          <h2 className='text-2xl py-4 leading-loose'>
             Kommende Arrangementer
           </h2>
           <Events events={eventsData} />
         </section>
         <section>
-          <h2 className='uppercase text-sm opacity-60 leading-loose'>
-            Nyheder
-          </h2>
-          <Events events={eventsData} />
+          <h2 className=' text-2xl  py-4   leading-loose'>Nyheder</h2>
+          <Newses newses={newsesData} />
         </section>
       </div>
     </>
