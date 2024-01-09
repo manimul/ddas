@@ -79,7 +79,7 @@ export const loader = async ({ params, request }: LoaderFunctionArgs) => {
   }
 };
 
-export default function AnsogOmMedlemskab() {
+export default function AnsogOmMedlemskabIndex() {
   const { initial, query, params } = useLoaderData<typeof loader>();
 
   const castedInitial: QueryResponseInitial<typeof initial.data> =
@@ -97,46 +97,18 @@ export default function AnsogOmMedlemskab() {
 
   return (
     <>
-      <div className='flex justify-start space-x-4 '>
-        <NavLink
-          to=''
-          end
-          className={({ isActive, isPending }) =>
-            isPending
-              ? 'pending'
-              : isActive
-                ? 'active font-bold border-b-2 border-[#f59e0b] decoration-[#f59e0b] duration-100 ease-in transition-all'
-                : 'font-light text-gray-500 hover:text-gray-700'
-          }
-        >
-          Ansog Om Medlemskab
-        </NavLink>
-        <NavLink
-          to='personligt'
-          className={({ isActive, isPending }) =>
-            isPending
-              ? 'pending'
-              : isActive
-                ? 'active font-bold border-b-2 border-[#f59e0b] decoration-[#f59e0b] duration-100 ease-in transition-all'
-                : 'font-light text-gray-500 hover:text-gray-700'
-          }
-        >
-          Personligt
-        </NavLink>
-        <NavLink
-          to='corporate'
-          className={({ isActive, isPending }) =>
-            isPending
-              ? 'pending'
-              : isActive
-                ? 'active font-bold border-b-2 border-[#f59e0b] decoration-[#f59e0b] '
-                : 'font-light text-gray-500 hover:text-gray-700'
-          }
-        >
-          Corporate
-        </NavLink>
+      <div className='grid md:grid-cols-8 gap-6 '>
+        <div className=' col-span-4 space-y-4'>
+          <h1 className='text-4xl '>{title}</h1>
+
+          {content && content?.length > 0 ? (
+            <SanityContent value={content} />
+          ) : null}
+        </div>
+        <div className='hidden md:block col-span-4'>
+          <MemberImage image={image} />
+        </div>
       </div>
-      <Outlet />
     </>
   );
 }
