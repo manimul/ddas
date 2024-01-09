@@ -1,6 +1,6 @@
 import { NewsDocument } from '~/types/news';
 import { SanityContent } from '~/components/SanityContent';
-import { MemberImage } from '~/components/MemberImage';
+import { NewsImage } from '~/components/NewsImage';
 import { Link } from '@remix-run/react';
 import { MoveLeft } from 'lucide-react';
 
@@ -16,26 +16,22 @@ export function News(props: NewsProps) {
         <MoveLeft />
         <span> Nyheder</span>
       </Link>
-      <h1 className='mx-auto text-center max-w-3xl py-4 basis-full text-bold pt-4 text-xl tracking-tighter transition-colors duration-100 ease-in-out  lg:text-4xl'>
+      <h1 className='mx-auto text-center max-w-3xl  basis-full text-bold pt-4 text-xl tracking-tighter transition-colors duration-100 ease-in-out  lg:text-4xl'>
         {title}
       </h1>
+      {publishedDate && (
+        <span className='text-xl text-center opacity-40'>
+          {new Date(publishedDate).toLocaleDateString('da-DK', {
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric',
+          })}
+        </span>
+      )}
       <div className=' '>
-        <MemberImage image={image} />
+        <NewsImage image={image} />
       </div>
       <div className=' max-w-3xl  mx-auto px-6 flex flex-col space-y-4  '>
-        {publishedDate && (
-          <div>
-            <span className='text-xl opacity-40'>
-              {new Date(publishedDate).toLocaleDateString('en-US', {
-                year: 'numeric',
-                month: 'long',
-                day: 'numeric',
-                hour: '2-digit',
-                minute: '2-digit',
-              })}
-            </span>
-          </div>
-        )}
         <p className='text-lg prose font-bold 	'>{extract}</p>
         {content && content?.length > 0 ? (
           <SanityContent value={content} />

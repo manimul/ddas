@@ -97,19 +97,23 @@ export default function OmArrangementer() {
 
   return (
     <>
-      <div className='flex flex-row justify-start '>
-        <div className='flex-grow'>
-          <h1 className='text-4xl'>{title}</h1>
+      <div className='grid md:grid-cols-8 gap-6 '>
+        <div className=' col-span-4 space-y-4'>
+          <h1 className='text-4xl '>{title}</h1>
           <Link
             to='/arrangementer/kommende-arrangementer/'
+            className='hover:underline duration-300 ease-in-out transition-all '
             unstable_viewTransition
           >
             Visa Kommende Arrangementer{' '}
           </Link>
+          {content && content?.length > 0 ? (
+            <SanityContent value={content} />
+          ) : null}
         </div>
-        {content && content?.length > 0 ? (
-          <SanityContent value={content} />
-        ) : null}
+        <div className='hidden md:block col-span-4'>
+          <MemberImage image={image} />
+        </div>
       </div>
     </>
   );

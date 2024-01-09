@@ -1,6 +1,8 @@
 import { EventDocument } from '~/types/event';
 import { SanityContent } from '~/components/SanityContent';
 import { MemberImage } from '~/components/MemberImage';
+import { MoveLeft } from 'lucide-react';
+import { Link } from '@remix-run/react';
 
 type EventProps = {
   data: EventDocument;
@@ -10,12 +12,16 @@ export function Event(props: EventProps) {
   const { _id, title, extract, date, content, image } = props.data;
   return (
     <div className='flex flex-row flex-wrap  box-border'>
+      <Link className=' inline-flex space-x-2' relative='path' to='../'>
+        <MoveLeft />
+        <span> Arrangementer</span>
+      </Link>
       <h1 className=' py-4 basis-full text-bold pt-4 text-xl tracking-tighter transition-colors duration-100 ease-in-out  lg:text-4xl'>
         {title}
       </h1>
       <div className='basis-1/3 space-y-4 '>
         <MemberImage image={image} />
-        <div className='bg-yellow-300 p-4'>
+        <div className='bg-[#f59e0b] p-4'>
           <h2 className='text-lg font-semibold'>PRAKTISKE INFORMATIONER:</h2>
           <p className='mt-2'>
             Deltagelse koster 100 kr. for medlemmer og 200 kr. for gæster.

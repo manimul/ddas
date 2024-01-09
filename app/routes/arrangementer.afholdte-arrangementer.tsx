@@ -2,7 +2,7 @@ import { json } from '@remix-run/node';
 import { useLoaderData } from '@remix-run/react';
 import { QueryResponseInitial } from '@sanity/react-loader';
 import { BoardMembers } from '~/components/BoardMembers';
-import { Events } from '~/components/Events';
+import { PastEvents } from '~/components/PastEvents';
 
 import { useQuery } from '~/sanity/loader';
 import { loadQuery } from '~/sanity/loader.server';
@@ -48,7 +48,7 @@ export default function AfholdteArrangementer() {
   }
   return (
     <div className='grid grid-cols-1 gap-6 lg:gap-12 '>
-      <Events events={data} />
+      <PastEvents events={data} />
     </div>
   );
 }

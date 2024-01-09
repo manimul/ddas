@@ -97,7 +97,7 @@ export default function Arrangementer() {
 
   return (
     <>
-      <div className='flex justify-start space-x-4'>
+      <div className='flex justify-start space-x-4 '>
         <NavLink
           to=''
           end
@@ -105,7 +105,7 @@ export default function Arrangementer() {
             isPending
               ? 'pending'
               : isActive
-                ? 'active font-bold'
+                ? 'active font-bold border-b-2 border-[#f59e0b] decoration-[#f59e0b] duration-100 ease-in transition-all'
                 : 'font-light text-gray-500 hover:text-gray-700'
           }
         >
@@ -117,7 +117,7 @@ export default function Arrangementer() {
             isPending
               ? 'pending'
               : isActive
-                ? 'active font-bold'
+                ? 'active font-bold border-b-2 border-[#f59e0b] decoration-[#f59e0b] duration-100 ease-in transition-all'
                 : 'font-light text-gray-500 hover:text-gray-700'
           }
         >
@@ -129,7 +129,7 @@ export default function Arrangementer() {
             isPending
               ? 'pending'
               : isActive
-                ? 'active font-bold'
+                ? 'active font-bold border-b-2 border-[#f59e0b] decoration-[#f59e0b] '
                 : 'font-light text-gray-500 hover:text-gray-700'
           }
         >
@@ -141,7 +141,7 @@ export default function Arrangementer() {
             isPending
               ? 'pending'
               : isActive
-                ? 'active font-bold'
+                ? 'active font-bold border-b-2 border-[#f59e0b] decoration-[#f59e0b] duration-100 ease-in transition-all'
                 : 'font-light text-gray-500 hover:text-gray-700'
           }
         >
