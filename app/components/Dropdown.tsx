@@ -17,9 +17,10 @@ interface DropdownItem {
 interface DropdownProps {
   title: string;
   items: DropdownItem[];
+  setNavbar?: (value: boolean) => void;
 }
 
-export default function Dropdown({ items, title }: DropdownProps) {
+export default function Dropdown({ items, title, setNavbar }: DropdownProps) {
   return (
     <Menu as='div' className='relative inline-block text-left'>
       <div>
@@ -44,6 +45,7 @@ export default function Dropdown({ items, title }: DropdownProps) {
               <Menu.Item key={item.slug}>
                 {({ active }) => (
                   <NavLink
+                    onClick={setNavbar ? () => setNavbar(false) : undefined}
                     to={item.slug}
                     className={classNames(
                       active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',

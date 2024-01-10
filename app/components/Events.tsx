@@ -15,9 +15,9 @@ export function Events(props: EventsProps) {
         {events.map((event) => (
           <li
             key={event._id}
-            className='flex flex-row flex-wrap rounded-lg  box-border opacity-75 hover:opacity-100 cursor-pointer hover:border-gray-600 border border-gray-200 p-5 hover:shadow-2xl hover:-translate-y-1 ease-in-out duration-300  '
+            className='flex flex-col md:flex-row flex-wrap rounded-lg  box-border md:opacity-75 md:hover:opacity-100 cursor-pointer hover:border-gray-600 border border-gray-200 p-2 md:p-5 hover:shadow-2xl hover:-translate-y-1 ease-in-out duration-300  '
           >
-            <h2 className=' py-4 basis-full'>
+            <h2 className=' pb-2 md:py-4 basis-full'>
               {event?.slug ? (
                 <Link
                   prefetch='intent'
@@ -32,19 +32,19 @@ export function Events(props: EventsProps) {
                   {/* <span className="absolute inset-0" /> */}
                 </Link>
               ) : (
-                <span className='pt-4 text-xl tracking-tighter'>
+                <span className='md:pt-4 text-xl tracking-tighter'>
                   {event.title}
                 </span>
               )}
             </h2>
-            <div className='basis-1/3 '>
+            <div className=' md:basis-1/3 aspect-video overflow-hidden md:aspect-square '>
               <MemberImage image={event.image} />
             </div>
-            <div className='basis-1/2 px-6 flex flex-col space-y-4 '>
+            <div className='mt-2 md:basis-1/2 mb-4 md:px-6 flex flex-col space-y-4 '>
               {event.date && (
                 <div>
-                  <span className='text-xl opacity-40'>
-                    {new Date(event.date).toLocaleDateString('en-US', {
+                  <span className='md:text-xl opacity-40'>
+                    {new Date(event.date).toLocaleDateString('da-DK', {
                       year: 'numeric',
                       month: 'long',
                       day: 'numeric',
@@ -54,7 +54,7 @@ export function Events(props: EventsProps) {
                   </span>
                 </div>
               )}
-              <p className='text-lg  font-bold '>{event.extract}</p>
+              <p className='md:text-lg  font-bold '>{event.extract}</p>
 
               {event?.slug ? (
                 <Link

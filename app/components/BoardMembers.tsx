@@ -15,7 +15,7 @@ export function BoardMembers(props: BoardMembersProps) {
   return boardMembers.length > 0 ? (
     <ul
       role='list'
-      className='grid gap-x-5 gap-y-8 sm:grid-cols-2 sm:gap-y-16 xl:col-span-2'
+      className='grid gap-x-5 gap-y-4 sm:grid-cols-2 sm:gap-y-16 xl:col-span-2'
     >
       {boardMembers.map((boardMember) => (
         <li key={boardMember._id}>
@@ -40,7 +40,7 @@ export function BoardMembers(props: BoardMembersProps) {
               </div>
             )}
 
-            <div>
+            <div className='text-wrap 	 md:break-normal'>
               <h3 className='text-base font-semibold leading-7 tracking-tight text-gray-900 dark:text-gray-100 capitalize'>
                 {boardMember.name?.toLowerCase()}
               </h3>
@@ -56,7 +56,10 @@ export function BoardMembers(props: BoardMembersProps) {
               <p>{boardMember.phone && <span> {boardMember.phone}</span>}</p>
               <p>
                 {boardMember.email && (
-                  <Link to={boardMember.email} className='uppercase text-sm'>
+                  <Link
+                    to={boardMember.email}
+                    className='text-xs break-all	uppercase md:text-sm'
+                  >
                     {boardMember.email}
                   </Link>
                 )}

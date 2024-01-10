@@ -10,17 +10,17 @@ type CorporateMembersProps = {
 export function CorporateMembers(props: CorporateMembersProps) {
   const { corporateMembers = [] } = props;
   return corporateMembers.length > 0 ? (
-    <ul className='flex flex-col space-y-6'>
+    <ul className='flex flex-col '>
       {corporateMembers.map((corporateMember) => (
         <li
           key={corporateMember._id}
-          className='flex flex-row justify-start space-x-6 w-full '
+          className='flex items-center flex-col md:flex-row justify-between  space-y-20 w-full md:odd:flex-row-reverse '
         >
-          <div className='w-1/4'>
+          <div className='md:w-1/4 mx-auto'>
             <CorporateMemberImage image={corporateMember.image} />
           </div>
-          <div className=' '>
-            <h2 className='capitalize text-lg '>
+          <div className='space-y-2 '>
+            <h2 className='capitalize text-4xl '>
               {corporateMember.name?.toLowerCase()}
             </h2>
             <p className='text-sm 	'>
@@ -28,10 +28,17 @@ export function CorporateMembers(props: CorporateMembersProps) {
                 <SanityContent value={corporateMember.bio} />
               ) : null}
             </p>
+
             {corporateMember.website && (
-              <Link to={corporateMember.website} className='uppercase text-sm'>
-                {corporateMember.website}
-              </Link>
+              <span className='flex font-bold text-base py-4'>
+                Hemsida:{' '}
+                <Link
+                  to={corporateMember.website}
+                  className='underline text-green-600'
+                >
+                  {corporateMember.title}
+                </Link>
+              </span>
             )}
           </div>
         </li>

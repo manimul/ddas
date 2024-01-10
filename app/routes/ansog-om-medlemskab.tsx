@@ -97,7 +97,8 @@ export default function AnsogOmMedlemskab() {
 
   return (
     <>
-      <div className='flex justify-start space-x-4 '>
+      <div className='flex flex-col md:flex-row justify-start md:space-x-4  '>
+        {' '}
         <NavLink
           to=''
           end

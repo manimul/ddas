@@ -45,7 +45,7 @@ export default function Bestyrelsen() {
     <div className=' '>
       <div className=' grid  gap-x-4 gap-y-20  xl:grid-cols-3'>
         <div className=''>
-          <h2 className='text-3xl font-bold tracking-tight text-gray-900 dark:text-gray-100 sm:text-4xl'>
+          <h2 className='text-3xl  tracking-tight text-gray-900 dark:text-gray-100 sm:text-4xl'>
             Vores bestyrelse
           </h2>
           <p className='mt-3 text-lg leading-8 text-gray-600'>

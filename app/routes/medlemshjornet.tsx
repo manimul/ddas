@@ -2,7 +2,7 @@ import { Link, NavLink, Outlet } from '@remix-run/react';
 
 export default function Medlemshjornet() {
   return (
-    <div className='grid grid-cols-1   gap-6 lg:gap-12'>
+    <>
       <div className='flex flex-col md:flex-row justify-start md:space-x-4  '>
         <NavLink
           to=''
@@ -43,6 +43,6 @@ export default function Medlemshjornet() {
         </NavLink>
       </div>
       <Outlet />
-    </div>
+    </>
   );
 }

@@ -25,7 +25,7 @@ export function Newses(props: NewsesProps) {
     <div className=' border-gray-100 '>
       <Link
         prefetch='intent'
-        className='grid grid-cols-8 pb-6 gap-4 	'
+        className='grid grid-cols-1 md:grid-cols-8 pb-6 gap-4 	'
         relative='path'
         to={'../../nyheder/' + firstNews?.slug}
       >
@@ -101,14 +101,14 @@ export function Newses(props: NewsesProps) {
                     prefetch='intent'
                     relative='path'
                     to={'../../nyheder/' + news?.slug}
-                    className='text-bold pt-4 text-xl tracking-tighter transition-colors duration-100 ease-in-out  lg:text-xl'
+                    className='text-bold pt-4 text-base md:text-xl tracking-tighter transition-colors duration-100 ease-in-out  lg:text-xl'
                   >
                     {news.title}
                     {/* Makes this entire block clickable */}
                     {/* <span className="absolute inset-0" /> */}
                   </Link>
                 ) : (
-                  <span className='pt-4 text-xl tracking-tighter'>
+                  <span className='pt-4 text-base md:text-xl tracking-tighter'>
                     {news.title}
                   </span>
                 )}
@@ -117,7 +117,7 @@ export function Newses(props: NewsesProps) {
               <div className=' flex flex-col space-y-2 '>
                 {news.publishedDate && (
                   <div>
-                    <span className='text-base opacity-40'>
+                    <span className='text-sm md:text-base opacity-40'>
                       {new Date(news.publishedDate).toLocaleDateString(
                         'da-DK',
                         {
@@ -129,7 +129,9 @@ export function Newses(props: NewsesProps) {
                     </span>
                   </div>
                 )}
-                <p className='text-base prose  	'>{news.extract}</p>
+                <p className='hidden md:block text-base prose  	'>
+                  {news.extract}
+                </p>
 
                 {news?.slug ? (
                   <Link

@@ -12,7 +12,9 @@ export function BoardMember(props: BoardMemberProps) {
     <div className=''>
       <h1>{name}</h1>
       <MemberImage image={image} />
-      {bio && bio?.length > 0 ? <SanityContent value={bio} /> : null}
+      <div className='text-sm'>
+        {bio && bio?.length > 0 ? <SanityContent value={bio} /> : null}
+      </div>
     </div>
   );
 }
