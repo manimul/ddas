@@ -18,5 +18,16 @@ export const africanRegionType = defineType({
         source: 'title',
       },
     }),
+    defineField({
+      name: 'image',
+      type: 'image',
+      options: { hotspot: true },
+      fields: [defineField({ name: 'alt', type: 'string' })],
+    }),
+    defineField({
+      name: 'content',
+      type: 'array',
+      of: [{ type: 'block' }],
+    }),
   ],
 });

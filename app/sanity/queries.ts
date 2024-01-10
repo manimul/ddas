@@ -12,6 +12,24 @@ export const PAGE_QUERY = groq`*[_type == "page" && slug.current == $slug][0]{
   content
 }`;
 
+export const AFRICAN_REGIONS_QUERY = groq`*[_type == "africanregion"][0...12]|order(name asc){
+  _id,
+  _type,
+  title,
+  "slug": slug.current,
+  image,
+ content
+}`;
+
+export const AFRICAN_REGION_QUERY = groq`*[_type == "africanregion" && slug.current == $slug][0]{
+_id,
+  _type,
+  title,
+  "slug": slug.current,
+  image,
+ content
+}`;
+
 export const MEMBERS_QUERY = groq`*[_type == "member"][0...12]|order(name asc){
   _id,
   _type,

@@ -19,6 +19,11 @@ export const africanCountryType = defineType({
       title: 'Editorial',
       icon: ComposeIcon,
     },
+    {
+      name: 'links',
+      title: 'Related Links',
+      icon: ComposeIcon,
+    },
   ],
   fields: [
     defineField({
@@ -31,6 +36,7 @@ export const africanCountryType = defineType({
       type: 'string',
       group: 'details',
     }),
+
     defineField({
       name: 'slug',
       type: 'slug',
@@ -40,17 +46,49 @@ export const africanCountryType = defineType({
       group: 'details',
     }),
     defineField({
-      name: 'content',
-      type: 'array',
-      of: [{ type: 'block' }, { type: 'image' }],
-      group: 'editorial',
-    }),
-    defineField({
       name: 'image',
       type: 'image',
       options: { hotspot: true },
       group: 'editorial',
       fields: [defineField({ name: 'alt', type: 'string' })],
+    }),
+    defineField({
+      name: 'region',
+      type: 'array',
+      of: [{ type: 'reference', to: [{ type: 'africanregion' }] }],
+      group: 'details',
+    }),
+
+    defineField({
+      name: 'content',
+      type: 'array',
+      of: [{ type: 'block' }, { type: 'image' }],
+      group: 'editorial',
+    }),
+
+    defineField({
+      name: 'reglerne',
+      title: 'Reglerne og Viden',
+      type: 'string',
+      group: 'links',
+    }),
+    defineField({
+      name: 'landeprofil',
+      title: 'Landeprofil',
+      type: 'string',
+      group: 'links',
+    }),
+    defineField({
+      name: 'introduktion',
+      title: 'Introduktion - Viden',
+      type: 'string',
+      group: 'links',
+    }),
+    defineField({
+      name: 'opleve',
+      title: 'Opleve - Nyde - Se- Opdage',
+      type: 'string',
+      group: 'links',
     }),
   ],
 });
