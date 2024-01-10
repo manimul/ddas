@@ -17,6 +17,7 @@ import { pageZ } from '~/types/page';
 import { SanityContent } from '~/components/SanityContent';
 import { MemberImage } from '~/components/MemberImage';
 import { QueryResponseInitial } from '@sanity/react-loader';
+import { MemberCTA } from '~/components/MemberCTA';
 
 export const meta: MetaFunction<
   typeof loader,
@@ -151,6 +152,7 @@ export default function Arrangementer() {
       </div>
 
       <Outlet />
+      <MemberCTA />
     </>
   );
 }

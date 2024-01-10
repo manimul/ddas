@@ -2,6 +2,7 @@ import type { MetaFunction } from '@remix-run/node';
 import { json } from '@remix-run/node';
 import { useLoaderData } from '@remix-run/react';
 import { QueryResponseInitial } from '@sanity/react-loader';
+import { CorporateCTA } from '~/components/CorporateCTA';
 import { CorporateMembers } from '~/components/CorporateMembers';
 import type { Loader as RootLoader } from '~/root';
 import { useQuery } from '~/sanity/loader';
@@ -43,6 +44,7 @@ export default function CorporateMedlemmer() {
   return (
     <div className='   '>
       <CorporateMembers corporateMembers={data} />
+      <CorporateCTA />
     </div>
   );
 }

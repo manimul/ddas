@@ -14,6 +14,8 @@ import { Events } from '~/components/Events';
 import type { NewsStub } from '~/types/news';
 import { newsStubsZ } from '~/types/news';
 import { Newses } from '~/components/Newses';
+import { MemberCTA } from '~/components/MemberCTA';
+import { CorporateCTA } from '~/components/CorporateCTA';
 
 export const meta: MetaFunction<
   typeof loader,
@@ -149,10 +151,13 @@ export default function Index() {
           </h2>
           <Events events={eventsData} />
         </section>
+        <MemberCTA />
+
         <section>
           <h2 className=' text-2xl  py-4   leading-loose'>Nyheder</h2>
           <Newses newses={newsesData} />
         </section>
+        <CorporateCTA />
       </div>
     </>
   );

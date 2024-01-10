@@ -2,6 +2,7 @@ import { Link } from '@remix-run/react';
 import { MemberImage } from '~/components/MemberImage';
 import type { MemberStub } from '~/types/member';
 import { SanityContent } from './SanityContent';
+import { MemberCTA } from './MemberCTA';
 
 type MembersProps = {
   members: MemberStub[];
@@ -15,7 +16,7 @@ export function Members(props: MembersProps) {
         {members.map((member) => (
           <li
             key={member._id}
-            className='w-full bg-white rounded-lg  overflow-hidden flex flex-col md:flex-row'
+            className='w-full rounded-lg  overflow-hidden flex flex-col md:flex-row'
           >
             <div className='w-full md:w-2/5 h-80'>
               <MemberImage
@@ -46,6 +47,8 @@ export function Members(props: MembersProps) {
           </li>
         ))}
       </ul>
+      <MemberCTA />
+
       {/*
       <ul className='grid grid-cols-2 gap-4 md:grid-cols-3 lg:gap-12 lg:grid-cols-4'>
         {members.map((member) => (
