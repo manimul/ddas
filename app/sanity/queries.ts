@@ -21,10 +21,48 @@ export const AFRICAN_REGIONS_QUERY = groq`*[_type == "africanregion"][0...12]|or
  content
 }`;
 
+export const REGION_QUERY = groq`*[_type == "africanregion" && slug.current == $slug][0]{
+_id,
+  _type,
+  title,
+  "slug": slug.current,
+  image,
+ content
+}`;
+
+export const REGIONS_QUERY = groq`*[_type == "africanregion"][0...12]|order(name asc){
+  _id,
+  _type,
+  title,
+  "slug": slug.current,
+  image,
+ content
+}`;
+
 export const AFRICAN_REGION_QUERY = groq`*[_type == "africanregion" && slug.current == $slug][0]{
 _id,
   _type,
   title,
+  "slug": slug.current,
+  image,
+ content
+}`;
+
+export const COUNTRIES_QUERY = groq`*[_type == "africancountry"][0...12]|order(name asc){
+  _id,
+  _type,
+  title,
+  region,
+  "slug": slug.current,
+  image,
+ content
+}`;
+
+export const COUNTRY_QUERY = groq`*[_type == "africancountry" && slug.current == $slug][0]{
+_id,
+  _type,
+  title,
+  region,
   "slug": slug.current,
   image,
  content

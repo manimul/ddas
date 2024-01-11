@@ -82,7 +82,7 @@ export function Header(props: LayoutProps) {
           <Link to='kontakt' className='text-sm   '>
             Kontakt{' '}
           </Link>
-          <Link to='' className='text-sm   '>
+          <Link to='lande-i-afrika' className='text-sm   '>
             Mer{' '}
           </Link>
           <Link
@@ -131,7 +131,11 @@ export function Header(props: LayoutProps) {
             >
               Kontakt{' '}
             </Link>
-            <Link to='' className='py-3' onClick={() => setNavbar(!navbar)}>
+            <Link
+              to='lande-i-afrika'
+              className='py-3'
+              onClick={() => setNavbar(!navbar)}
+            >
               Mer{' '}
             </Link>
             <Link
