@@ -39,7 +39,7 @@ export const REGIONS_QUERY = groq`*[_type == "africanregion"][0...12]|order(name
  content
 }`;
 
-export const AFRICAN_REGION_QUERY = groq`*[_type == "africanregion" && slug.current == $slug][0]{
+export const AFRICAN_REGION_QUERY = groq`*[_type == "africanregion" && slug.current == $region][0]{
 _id,
   _type,
   title,
@@ -58,7 +58,7 @@ export const COUNTRIES_QUERY = groq`*[_type == "africancountry"][0...12]|order(n
  content
 }`;
 
-export const COUNTRY_QUERY = groq`*[_type == "africancountry" && slug.current == $slug][0]{
+export const COUNTRY_QUERY = groq`*[_type == "africancountry" && slug.current == $country][0]{
 _id,
   _type,
   title,

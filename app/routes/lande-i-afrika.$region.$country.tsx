@@ -6,19 +6,19 @@ import type {
 import { json } from '@remix-run/node';
 import { useLoaderData } from '@remix-run/react';
 import { QueryResponseInitial } from '@sanity/react-loader';
-import { AfricanRegion } from '~/components/AfricanRegion';
+import { Country } from '~/components/Country';
 import type { Loader as RootLoader } from '~/root';
 import { OG_IMAGE_HEIGHT, OG_IMAGE_WIDTH } from '~/routes/resource.og';
 import { writeClient } from '~/sanity/client.server';
 import { useQuery } from '~/sanity/loader';
 import { loadQuery } from '~/sanity/loader.server';
-import { AFRICAN_REGION_QUERY } from '~/sanity/queries';
+import { COUNTRY_QUERY } from '~/sanity/queries';
 import { COUNTRIES_QUERY } from '~/sanity/queries';
 import { Countries } from '~/components/Countries';
 import { CountryStub } from '~/types/country';
 import { CountryStubsZ } from '~/types/country';
-import type { AfricanRegionDocument } from '~/types/africanRegion';
-import { africanRegionZ } from '~/types/africanRegion';
+import type { CountryDocument } from '~/types/country';
+import { countryZ } from '~/types/country';
 
 export const meta: MetaFunction<
   typeof loader,
@@ -48,13 +48,14 @@ export const meta: MetaFunction<
 export const loader = async ({ params, request }: LoaderFunctionArgs) => {
   // Params from the loader uses the filename
   // $slug.tsx has the params { slug: 'hello-world' }
-  const initial = await loadQuery<AfricanRegionDocument>(
-    AFRICAN_REGION_QUERY,
-    params
-  ).then((res) => ({
-    ...res,
-    data: res.data ? africanRegionZ.parse(res.data) : null,
-  }));
+  const initial = await loadQuery<CountryDocument>(COUNTRY_QUERY, params).then(
+    (res) => ({
+      ...res,
+      data: res.data ? countryZ.parse(res.data) : null,
+    })
+  );
+
+  console.log('country params:', params);
 
   if (!initial.data) {
     throw new Response('Not found', { status: 404 });
@@ -78,16 +79,15 @@ export const loader = async ({ params, request }: LoaderFunctionArgs) => {
   return json({
     initial,
     countries,
-    query: AFRICAN_REGION_QUERY,
+    query: COUNTRY_QUERY,
     countriesQuery: COUNTRIES_QUERY,
     params,
     ogImageUrl,
   });
 };
 
-export default function AfricanRegionPage() {
-  const { initial, countries, query, countriesQuery, params } =
-    useLoaderData<typeof loader>();
+export default function CountryPage() {
+  const { initial, query, params } = useLoaderData<typeof loader>();
 
   const castedInitial: QueryResponseInitial<typeof initial.data> =
     initial as QueryResponseInitial<typeof initial.data>;
@@ -96,39 +96,13 @@ export default function AfricanRegionPage() {
     initial: castedInitial,
   });
 
-  const castedCountries: QueryResponseInitial<typeof countries.data> =
-    countries as QueryResponseInitial<typeof countries.data>;
-
-  const { data: countryData, loading: countryLoading } = useQuery<
-    typeof countries.data
-  >(countriesQuery, params, {
-    initial: castedCountries,
-  });
-
-  console.log('Region Data:', data);
-  console.log('Country Data:', countryData);
-  if (countryData && countryData.length > 0) {
-    console.log('Example Country:', countryData[0]);
-  }
-
-  const filteredCountries = countryData?.filter(
-    (country) =>
-      country.region?.some((regionRef) => regionRef._ref === data?._id)
-  );
-
-  console.log(
-    'Filtered Countries:',
-    JSON.stringify(filteredCountries, null, 2)
-  );
-  console.log('Number of Filtered Countries:', filteredCountries?.length);
-
-  if (loading || !data || countryLoading || !filteredCountries) {
+  if (loading || !data) {
     return <div>Loading...</div>;
   }
 
   return (
     <>
-      <AfricanRegion data={data} countries={filteredCountries} />{' '}
+      <Country data={data} />{' '}
     </>
   );
 }
