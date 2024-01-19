@@ -56,6 +56,18 @@ export const eventType = defineType({
       group: 'editorial',
     }),
     defineField({
+      name: 'generalTags',
+      type: 'array',
+      of: [{ type: 'reference', to: [{ type: 'tag' }] }],
+      group: 'details',
+    }),
+    defineField({
+      name: 'africanTags',
+      type: 'array',
+      of: [{ type: 'reference', to: [{ type: 'africancountry' }] }],
+      group: 'details',
+    }),
+    defineField({
       name: 'image',
       type: 'image',
       options: { hotspot: true },

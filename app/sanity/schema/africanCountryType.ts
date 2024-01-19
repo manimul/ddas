@@ -67,6 +67,13 @@ export const africanCountryType = defineType({
     }),
 
     defineField({
+      name: 'cities',
+      title: 'Cities',
+      type: 'array',
+      of: [{ type: 'reference', to: [{ type: 'city' }] }],
+    }),
+
+    defineField({
       name: 'reglerne',
       title: 'Reglerne og Viden',
       type: 'string',

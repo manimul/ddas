@@ -14,11 +14,13 @@ import { useQuery } from '~/sanity/loader';
 import { loadQuery } from '~/sanity/loader.server';
 import { COUNTRY_QUERY } from '~/sanity/queries';
 import { COUNTRIES_QUERY } from '~/sanity/queries';
+import { FILTERED_NEWSES_QUERY } from '~/sanity/queries';
 import { Countries } from '~/components/Countries';
 import { CountryStub } from '~/types/country';
 import { CountryStubsZ } from '~/types/country';
 import type { CountryDocument } from '~/types/country';
 import { countryZ } from '~/types/country';
+import { NewsDocument, newsesZ } from '~/types/news';
 
 export const meta: MetaFunction<
   typeof loader,
@@ -61,16 +63,15 @@ export const loader = async ({ params, request }: LoaderFunctionArgs) => {
     throw new Response('Not found', { status: 404 });
   }
 
-  const countries = await loadQuery<CountryStub[]>(COUNTRIES_QUERY).then(
-    (res) => ({
-      ...res,
-      data: res.data ? CountryStubsZ.parse(res.data) : null,
-    })
-  );
-
-  if (!countries.data) {
-    throw new Response('Not found', { status: 404 });
-  }
+  // Fetch filtered news items related to this country
+  const countryTag = initial.data._id; // or use another unique identifier
+  const filteredNewsItems = await loadQuery<NewsDocument>(
+    FILTERED_NEWSES_QUERY,
+    { countryTag } // Passing countryTag as a parameter to the query
+  ).then((res) => ({
+    ...res,
+    data: res.data ? newsesZ.parse(res.data) : null,
+  }));
 
   // Create social share image url
   const { origin } = new URL(request.url);
@@ -78,16 +79,18 @@ export const loader = async ({ params, request }: LoaderFunctionArgs) => {
 
   return json({
     initial,
-    countries,
+    filteredNewsItems,
     query: COUNTRY_QUERY,
-    countriesQuery: COUNTRIES_QUERY,
+    query2: FILTERED_NEWSES_QUERY,
+
     params,
     ogImageUrl,
   });
 };
 
 export default function CountryPage() {
-  const { initial, query, params } = useLoaderData<typeof loader>();
+  const { initial, filteredNewsItems, query, query2, params } =
+    useLoaderData<typeof loader>();
 
   const castedInitial: QueryResponseInitial<typeof initial.data> =
     initial as QueryResponseInitial<typeof initial.data>;
@@ -100,9 +103,23 @@ export default function CountryPage() {
     return <div>Loading...</div>;
   }
 
+  const castedFilteredNewsItems: QueryResponseInitial<
+    typeof filteredNewsItems.data
+  > = filteredNewsItems as QueryResponseInitial<typeof filteredNewsItems.data>;
+
+  const { data: newsData, loading: newsLoading } = useQuery<
+    typeof filteredNewsItems.data
+  >(query2, params, {
+    initial: castedFilteredNewsItems,
+  });
+
+  if (newsLoading || !newsData) {
+    return <div>Loading...</div>;
+  }
+
   return (
     <>
-      <Country data={data} />{' '}
+      <Country data={data} newsData={newsData} />{' '}
     </>
   );
 }

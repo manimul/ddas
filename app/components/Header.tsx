@@ -83,7 +83,7 @@ export function Header(props: LayoutProps) {
             Kontakt{' '}
           </Link>
           <Link to='lande-i-afrika' className='text-sm   '>
-            Mer{' '}
+            Lande i Afrika{' '}
           </Link>
           <Link
             to='ansog-om-medlemskab'
@@ -136,7 +136,7 @@ export function Header(props: LayoutProps) {
               className='py-3'
               onClick={() => setNavbar(!navbar)}
             >
-              Mer{' '}
+              Lande i Afrika{' '}
             </Link>
             <Link
               to='ansog-om-medlemskab'

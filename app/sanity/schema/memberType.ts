@@ -57,7 +57,12 @@ export const memberType = defineType({
       title: 'Bio',
       of: [{ type: 'block' }],
     },
-
+    {
+      type: 'array',
+      name: 'africanTags',
+      title: 'African Tags',
+      of: [{ type: 'reference', to: [{ type: 'africancountry' }] }],
+    },
     {
       type: 'slug',
       name: 'slug',

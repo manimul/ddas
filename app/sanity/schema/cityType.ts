@@ -3,9 +3,9 @@ import { ComposeIcon, MenuIcon, ThListIcon } from '@sanity/icons';
 
 import { defineField, defineType } from 'sanity';
 
-export const newsType = defineType({
-  name: 'news',
-  title: 'News',
+export const cityType = defineType({
+  name: 'city',
+  title: 'City',
   type: 'document',
   icon: Tags,
   groups: [
@@ -19,6 +19,11 @@ export const newsType = defineType({
       title: 'Editorial',
       icon: ComposeIcon,
     },
+    {
+      name: 'links',
+      title: 'Related Links',
+      icon: ComposeIcon,
+    },
   ],
   fields: [
     defineField({
@@ -27,10 +32,11 @@ export const newsType = defineType({
       group: 'details',
     }),
     defineField({
-      name: 'extract',
+      name: 'subtitle',
       type: 'string',
       group: 'details',
     }),
+
     defineField({
       name: 'slug',
       type: 'slug',
@@ -40,34 +46,43 @@ export const newsType = defineType({
       group: 'details',
     }),
     defineField({
-      name: 'publishedDate',
-      type: 'datetime',
-      group: 'details',
+      name: 'image',
+      type: 'image',
+      options: { hotspot: true },
+      group: 'editorial',
+      fields: [defineField({ name: 'alt', type: 'string' })],
     }),
+
     defineField({
       name: 'content',
       type: 'array',
       of: [{ type: 'block' }, { type: 'image' }],
       group: 'editorial',
     }),
+
     defineField({
-      name: 'generalTags',
-      type: 'array',
-      of: [{ type: 'reference', to: [{ type: 'tag' }] }],
-      group: 'details',
+      name: 'reglerne',
+      title: 'Reglerne og Viden',
+      type: 'string',
+      group: 'links',
     }),
     defineField({
-      name: 'africanTags',
-      type: 'array',
-      of: [{ type: 'reference', to: [{ type: 'africancountry' }] }],
-      group: 'details',
+      name: 'landeprofil',
+      title: 'Landeprofil',
+      type: 'string',
+      group: 'links',
     }),
     defineField({
-      name: 'image',
-      type: 'image',
-      options: { hotspot: true },
-      group: 'editorial',
-      fields: [defineField({ name: 'alt', type: 'string' })],
+      name: 'introduktion',
+      title: 'Introduktion - Viden',
+      type: 'string',
+      group: 'links',
+    }),
+    defineField({
+      name: 'opleve',
+      title: 'Opleve - Nyde - Se- Opdage',
+      type: 'string',
+      group: 'links',
     }),
   ],
 });

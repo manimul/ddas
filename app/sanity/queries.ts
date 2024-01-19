@@ -55,7 +55,17 @@ export const COUNTRIES_QUERY = groq`*[_type == "africancountry"][0...12]|order(n
   region,
   "slug": slug.current,
   image,
- content
+ content,
+ "cities": cities[]->{
+    _id,
+    title,
+    "slug": slug.current,
+    image,
+  },
+  reglerne,
+  landeprofil,
+  opleve,
+  introduktion
 }`;
 
 export const COUNTRY_QUERY = groq`*[_type == "africancountry" && slug.current == $country][0]{
@@ -65,6 +75,16 @@ _id,
   region,
   "slug": slug.current,
   image,
+  "cities": cities[]->{
+    _id,
+    title,
+    "slug": slug.current,
+    image,
+  },
+  reglerne,
+  landeprofil,
+  opleve,
+  introduktion,
  content
 }`;
 
@@ -144,6 +164,18 @@ export const NEWS_QUERY = groq`*[_type == "news" && slug.current == $slug][0]{
   "slug": slug.current,
   image,
  content
+}`;
+
+export const FILTERED_NEWSES_QUERY = groq`*[_type == "news" && $countryTag in africanTags[]->_id][0...12]|order(publishedDate asc){
+  _id,
+  _type,
+  title,
+  extract,
+  publishedDate,
+  location,
+  "slug": slug.current,
+  image,
+  content
 }`;
 
 export const BOARD_MEMBERS_QUERY = groq`*[_type == "boardmember"][0...12]|order(name asc){

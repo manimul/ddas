@@ -12,12 +12,14 @@ import { newsType } from '~/sanity/schema/newsType';
 import { tagType } from '~/sanity/schema/tagType';
 import { africanCountryType } from '~/sanity/schema/africanCountryType';
 import { africanRegionType } from '~/sanity/schema/africanRegionType';
+import { cityType } from '~/sanity/schema/cityType';
 export default [
   artistType,
   genreType,
   homeType,
   recordType,
   trackType,
+  cityType,
   pageType,
   memberType,
   boardMemberType,

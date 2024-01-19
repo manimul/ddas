@@ -15,6 +15,11 @@ export const countryZ = z.object({
   image: z.any().nullable(),
   content: z.array(z.any()).nullable(),
   region: z.array(z.any()).nullable(),
+  cities: z.array(z.any()).nullable(),
+  reglerne: z.string().nullable(),
+  landeprofil: z.string().nullable(),
+  opleve: z.string().nullable(),
+  introduktion: z.string().nullable(),
 });
 
 export type CountryDocument = z.infer<typeof countryZ>;
@@ -27,6 +32,11 @@ export const countryStubZ = z.object({
   image: z.any().nullable(),
   content: z.array(z.any()).nullable(),
   region: z.array(z.any()).nullable(),
+  cities: z.array(z.any()).nullable(),
+  reglerne: z.string().nullable(),
+  landeprofil: z.string().nullable(),
+  opleve: z.string().nullable(),
+  introduktion: z.string().nullable(),
 });
 
 export const CountryStubsZ = z.array(countryStubZ);
