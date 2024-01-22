@@ -55,7 +55,7 @@ export function AfricanRegions(props: AfricanRegionsProps) {
     </ul>
   ) : (
     <div className='prose prose-xl mx-auto bg-green-50 p-4'>
-      <p>No boardmembers found, yet!</p>
+      <p>No countries found, yet!</p>
     </div>
   );
 }

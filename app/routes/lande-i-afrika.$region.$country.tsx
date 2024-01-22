@@ -15,6 +15,10 @@ import { loadQuery } from '~/sanity/loader.server';
 import { COUNTRY_QUERY } from '~/sanity/queries';
 import { COUNTRIES_QUERY } from '~/sanity/queries';
 import { FILTERED_NEWSES_QUERY } from '~/sanity/queries';
+import { FILTERED_EVENTS_QUERY } from '~/sanity/queries';
+import { EventStub } from '~/types/event';
+import { eventStubsZ } from '~/types/event';
+import { EventDocument, eventsZ } from '~/types/event';
 import { Countries } from '~/components/Countries';
 import { CountryStub } from '~/types/country';
 import { CountryStubsZ } from '~/types/country';
@@ -73,6 +77,17 @@ export const loader = async ({ params, request }: LoaderFunctionArgs) => {
     data: res.data ? newsesZ.parse(res.data) : null,
   }));
 
+  const currentDate = new Date().toISOString();
+  const isFuture = true; // Set to false if you want past events
+
+  const filteredEvents = await loadQuery<EventDocument>(
+    FILTERED_EVENTS_QUERY,
+    { countryTag, currentDate: currentDate, isFuture: isFuture } // Passing countryTag as a parameter to the query
+  ).then((res) => ({
+    ...res,
+    data: res.data ? eventsZ.parse(res.data) : null,
+  }));
+
   // Create social share image url
   const { origin } = new URL(request.url);
   const ogImageUrl = `${origin}/resource/og?id=${initial.data._id}`;
@@ -80,17 +95,25 @@ export const loader = async ({ params, request }: LoaderFunctionArgs) => {
   return json({
     initial,
     filteredNewsItems,
+    filteredEvents,
     query: COUNTRY_QUERY,
     query2: FILTERED_NEWSES_QUERY,
-
-    params,
+    query3: FILTERED_EVENTS_QUERY,
+    params: { currentDate, isFuture },
     ogImageUrl,
   });
 };
 
 export default function CountryPage() {
-  const { initial, filteredNewsItems, query, query2, params } =
-    useLoaderData<typeof loader>();
+  const {
+    initial,
+    filteredNewsItems,
+    filteredEvents,
+    query,
+    query2,
+    query3,
+    params,
+  } = useLoaderData<typeof loader>();
 
   const castedInitial: QueryResponseInitial<typeof initial.data> =
     initial as QueryResponseInitial<typeof initial.data>;
@@ -116,10 +139,22 @@ export default function CountryPage() {
   if (newsLoading || !newsData) {
     return <div>Loading...</div>;
   }
+  const castedFilteredEvents: QueryResponseInitial<typeof filteredEvents.data> =
+    filteredEvents as QueryResponseInitial<typeof filteredEvents.data>;
+
+  const { data: eventsData, loading: eventsLoading } = useQuery<
+    typeof filteredEvents.data
+  >(query3, params, {
+    initial: castedFilteredEvents,
+  });
+
+  if (eventsLoading || !eventsData) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <>
-      <Country data={data} newsData={newsData} />{' '}
+      <Country data={data} newsData={newsData} eventsData={eventsData} />{' '}
     </>
   );
 }

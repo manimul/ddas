@@ -20,6 +20,7 @@ export const memberZ = z.object({
   slug: z.string().nullable(),
   image: z.any().nullable(),
   bio: z.array(z.any()).nullable(),
+  africanTags: z.array(z.any()).nullable(),
 });
 
 export type MemberDocument = z.infer<typeof memberZ>;
@@ -39,6 +40,7 @@ export const memberStubZ = z.object({
   slug: z.string().nullable(),
   image: z.any().nullable(),
   bio: z.array(z.any()).nullable(),
+  africanTags: z.array(z.any()).nullable(),
 });
 
 export const memberStubsZ = z.array(memberStubZ);

@@ -12,7 +12,7 @@ export function MemberImage(props: MemberImageProps) {
   const { image, className } = props;
 
   const defaultClass =
-    'h-auto w-full object-cover rounded-lg shadow-black transition-all duration-300 group-hover:shadow-2xl group-hover:shadow-cyan-200';
+    'h-auto w-full object-cover rounded-lg shadow-black transition-all duration-300  ';
   const combinedClass = `${defaultClass} ${className || ''}`; // Merge className with default
 
   return (
