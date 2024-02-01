@@ -137,18 +137,6 @@ export default function Arrangementer() {
         >
           Afholdte Arrangementer
         </NavLink>
-        <NavLink
-          to='medlemsmote'
-          className={({ isActive, isPending }) =>
-            isPending
-              ? 'pending'
-              : isActive
-                ? 'active font-bold border-b-2 border-[#f59e0b] decoration-[#f59e0b] duration-100 ease-in transition-all'
-                : 'font-light text-gray-500 hover:text-gray-700'
-          }
-        >
-          Medlemsmøte
-        </NavLink>
       </div>
 
       <Outlet />

@@ -1,6 +1,6 @@
 import type { MetaFunction } from '@remix-run/node';
 import { json } from '@remix-run/node';
-import { useLoaderData } from '@remix-run/react';
+import { Link, useLoaderData } from '@remix-run/react';
 import { QueryResponseInitial } from '@sanity/react-loader';
 import type { Loader as RootLoader } from '~/root';
 import { useQuery } from '~/sanity/loader';
@@ -96,7 +96,7 @@ export default function Index() {
   return (
     <>
       <section className=''>
-        <div className=' grid   md:max-w-screen-xl py-4  md:py-8 mx-auto lg:gap-8 xl:gap-0 lg:py-10 lg:grid-cols-12'>
+        <div className=' grid    py-4  md:py-8 mx-auto lg:gap-8 xl:gap-0 lg:py-10 lg:grid-cols-12'>
           <div className='mr-auto md:order-1 order-2 place-self-center lg:col-span-7'>
             <h1 className='max-w-2xl mb-4 md:pr-6 text-4xl  tracking-tight leading-none md:text-5xl xl:text-6xl dark:text-white'>
               Udforsk Afrikas mangfoldighed med Det Danske Afrika Selskab
@@ -107,8 +107,9 @@ export default function Index() {
               medlemmer, arrangerer vi inspirerende møder og udflugter, der
               åbner dørene til Afrikas mangfoldige verden.
             </p>
-            <a
-              href='#'
+            <Link
+              unstable_viewTransition
+              to='#mission'
               className='inline-flex items-center justify-center px-5 py-3 mr-3 text-base font-medium text-center  rounded-lg bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 dark:focus:ring-primary-900'
             >
               Lær mere
@@ -124,13 +125,15 @@ export default function Index() {
                   clipRule='evenodd'
                 />
               </svg>
-            </a>
-            <a
-              href='#'
+            </Link>
+            <Link
+              unstable_viewTransition
+              prefetch='viewport'
+              to='ansog-om-medlemskab'
               className='inline-flex items-center justify-center px-5 py-3 text-base font-medium text-center text-gray-900 border border-[#f59e0b] rounded-lg hover:bg-[#f59e0b] focus:ring-4 focus:ring-gray-100 dark:text-white dark:border-gray-700 dark:hover:bg-gray-700 dark:focus:ring-gray-800'
             >
               Bliv medlem{' '}
-            </a>
+            </Link>
           </div>
           <div className=' lg:mt-0 order-1 md:order-2  lg:col-span-5 lg:flex rounded-2xl pb-4'>
             <img
@@ -141,12 +144,22 @@ export default function Index() {
           </div>
         </div>
       </section>
+      <section id='mission' className='bg-[#101a1d]  p-32 -ml-32 -mr-32  '>
+        <h2 className='text-2xl pb-4 leading-loose text-[#FFB102]'>
+          Vores Mission{' '}
+        </h2>
+        <p className='text-5xl text-white '>
+          Det Danske Afrika Selskab fremmer forståelse og samarbejde mellem
+          Danmark og Afrika gennem dialog, netværk og uddannelsesaktiviteter,
+          styrker kendskabet til Afrikas kulturer, historie og udvikling.
+        </p>
+      </section>
 
       <div className='grid grid-cols-1 gap-6 lg:gap-12'>
         {/* <Records records={recordsData} /> */}
 
         <section>
-          <h2 className='text-2xl py-4 leading-loose'>
+          <h2 className='text-2xl py-4 leading-loose text-[#ff9602]'>
             Kommende Arrangementer
           </h2>
           <Events events={eventsData} />

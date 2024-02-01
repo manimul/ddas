@@ -88,6 +88,20 @@ _id,
  content
 }`;
 
+export const CITY_QUERY = groq`*[_type == "city" && slug.current == $city][0]{
+  _id,
+    _type,
+    title,
+    region,
+    "slug": slug.current,
+    image,
+    reglerne,
+    landeprofil,
+    opleve,
+    introduktion,
+   content
+  }`;
+
 export const MEMBERS_QUERY = groq`*[_type == "member"][0...12]|order(name asc){
   _id,
   _type,
