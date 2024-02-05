@@ -31,8 +31,8 @@ export function News(props: NewsProps) {
       <div className=' '>
         <NewsImage image={image} />
       </div>
-      <div className=' m:max-w-3xl  mx-auto md:px-6 flex flex-col space-y-4  '>
-        <p className='text-lg prose font-bold 	'>{extract}</p>
+      <div className=' md:max-w-3xl  mx-auto md:px-6 flex flex-col space-y-4  '>
+        <p className='text-lg font-bold 	'>{extract}</p>
         {content && content?.length > 0 ? (
           <SanityContent value={content} />
         ) : null}

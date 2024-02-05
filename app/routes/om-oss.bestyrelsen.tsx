@@ -48,7 +48,7 @@ export default function Bestyrelsen() {
           <h2 className='text-3xl  tracking-tight text-gray-900 dark:text-gray-100 sm:text-4xl'>
             Vores bestyrelse
           </h2>
-          <p className='mt-3 text-lg leading-8 text-gray-600'>
+          <p className='mt-3 text-lg leading-8 text-gray-600 dark:text-gray-300'>
             Libero fames augue nisl porttitor nisi, quis. Id ac elit odio vitae
             elementum enim vitae ullamcorper suspendisse.
           </p>

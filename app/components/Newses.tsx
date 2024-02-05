@@ -2,6 +2,7 @@ import { Link } from '@remix-run/react';
 import { NewsImage } from '~/components/NewsImage';
 import type { NewsStub } from '~/types/news';
 import { SanityContent } from './SanityContent';
+import { MoveRight } from 'lucide-react';
 
 type NewsesProps = {
   newses: NewsStub[];
@@ -61,7 +62,7 @@ export function Newses(props: NewsesProps) {
               </span>
             </div>
           )}
-          <p className='text-base opacity-75 pb-4 '>{firstNews.extract}</p>
+          <p className='text-base opacity-75 pb-4   '>{firstNews.extract}</p>
           {firstNews?.slug ? (
             <Link
               prefetch='intent'
@@ -85,7 +86,7 @@ export function Newses(props: NewsesProps) {
         {remainingNews.map((news) => (
           <li
             key={news._id}
-            className='rounded-lg  box-border opacity-75 hover:opacity-100 cursor-pointer hover:border-gray-600 border border-gray-200 p-2 hover:shadow-2xl hover:-translate-y-1 ease-in-out duration-300  '
+            className='rounded-lg  box-border opacity-75 hover:opacity-100 cursor-pointer hover:border-gray-600 border border-gray-200 p-2 hover:shadow-2xl hover:-translate-y-1 ease-in-out duration-300 group  '
           >
             <Link
               prefetch='intent'
@@ -114,7 +115,7 @@ export function Newses(props: NewsesProps) {
                 )}
               </h2>
 
-              <div className=' flex flex-col space-y-2 '>
+              <div className=' flex flex-col space-y-2  '>
                 {news.publishedDate && (
                   <div>
                     <span className='text-sm md:text-base opacity-40'>
@@ -129,7 +130,7 @@ export function Newses(props: NewsesProps) {
                     </span>
                   </div>
                 )}
-                <p className='hidden md:block text-base prose  	'>
+                <p className='hidden md:block  text-base  text-gray-600 dark:text-gray-300  	'>
                   {news.extract}
                 </p>
 
@@ -141,8 +142,7 @@ export function Newses(props: NewsesProps) {
                     className='underline opacity-75 text-orange-500 hover:opacity-100'
                   >
                     Lær mere
-                    {/* Makes this entire block clickable */}
-                    {/* <span className="absolute inset-0" /> */}
+                    <MoveRight className='hidden group-hover:inline-flex space-x-2' />
                   </Link>
                 ) : (
                   <span className='pt-4 text-xl font-bold tracking-tighter'>

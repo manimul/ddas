@@ -1,8 +1,5 @@
 import { Link } from '@remix-run/react';
-import { MemberImage } from '~/components/MemberImage';
 import type { CountryStub } from '~/types/country';
-import { SanityContent } from './SanityContent';
-import type { SanityImageObjectStub } from '@sanity/asset-utils';
 import urlBuilder from '@sanity/image-url';
 import { dataset, projectId } from '~/sanity/projectDetails';
 
@@ -18,16 +15,17 @@ export function Countries(props: CountriesProps) {
       className='grid gap-x-5 gap-y-4 sm:grid-cols-2 md:grid-cols-3 sm:gap-y-16 xl:col-span-2'
     >
       {countries.map((country) => (
-        <li className='hover:-translate-y-3 group' key={country._id}>
+        <li className=' group' key={country._id}>
           {country?.slug && (
             <Link to={country?.slug}>
               <div className='flex items-start gap-x-4'>
                 {country.image ? (
                   <img
+                    className='group-hover:rounded-[30px] duration-150'
                     src={urlBuilder({ projectId, dataset })
                       // @ts-ignore
                       .image(country.image.asset._ref)
-                      .height(600)
+                      .height(500)
                       .width(800)
                       .fit('max')
                       .auto('format')
@@ -41,8 +39,10 @@ export function Countries(props: CountriesProps) {
                   </div>
                 )}
 
-                <div className='absolute  bg-white p-2'>
-                  <h2 className='text-3xl'>{country.title?.toLowerCase()}</h2>
+                <div className='absolute backdrop-blur-sm bg-white/10 text-white p-4 group-hover:rounded-tl-[30px] duration-150 '>
+                  {country.title && (
+                    <h2 className='text-2xl'>{country.title}</h2>
+                  )}
                 </div>
               </div>
             </Link>

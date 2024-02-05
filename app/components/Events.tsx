@@ -2,6 +2,7 @@ import { Link } from '@remix-run/react';
 import { MemberImage } from '~/components/MemberImage';
 import type { EventStub } from '~/types/event';
 import { SanityContent } from './SanityContent';
+import { MoveRight } from 'lucide-react';
 
 type EventsProps = {
   events: EventStub[];
@@ -54,7 +55,9 @@ export function Events(props: EventsProps) {
                   </span>
                 </div>
               )}
-              <p className='md:text-lg  font-bold '>{event.extract}</p>
+              <p className='md:text-lg  text-lg leading-8 text-gray-600 dark:text-gray-300 '>
+                {event.extract}
+              </p>
 
               {event?.slug ? (
                 <Link
@@ -63,11 +66,10 @@ export function Events(props: EventsProps) {
                   to={
                     '../../arrangementer/kommende-arrangementer/' + event?.slug
                   }
-                  className='underline opacity-75 text-orange-500 hover:opacity-100'
+                  className='underline group text-lg opacity-75 text-orange-500 hover:opacity-100'
                 >
                   Lær mere
-                  {/* Makes this entire block clickable */}
-                  {/* <span className="absolute inset-0" /> */}
+                  <MoveRight className='hidden group-hover:inline-flex space-x-2' />
                 </Link>
               ) : (
                 <span className='pt-4 text-xl font-bold tracking-tighter'>

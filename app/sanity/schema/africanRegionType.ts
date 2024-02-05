@@ -12,6 +12,10 @@ export const africanRegionType = defineType({
       type: 'string',
     }),
     defineField({
+      name: 'subtitle',
+      type: 'string',
+    }),
+    defineField({
       name: 'slug',
       type: 'slug',
       options: {
@@ -22,7 +26,10 @@ export const africanRegionType = defineType({
       name: 'image',
       type: 'image',
       options: { hotspot: true },
-      fields: [defineField({ name: 'alt', type: 'string' })],
+      fields: [
+        defineField({ name: 'alt', type: 'string' }),
+        defineField({ name: 'credit', type: 'string' }),
+      ],
     }),
     defineField({
       name: 'content',

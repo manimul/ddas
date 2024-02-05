@@ -8,12 +8,16 @@ import { OG_IMAGE_HEIGHT, OG_IMAGE_WIDTH } from '~/routes/resource.og';
 import { useQuery } from '~/sanity/loader';
 import { loadQuery } from '~/sanity/loader.server';
 import { COUNTRY_QUERY } from '~/sanity/queries';
-import { FILTERED_NEWSES_QUERY } from '~/sanity/queries';
-import { FILTERED_EVENTS_QUERY } from '~/sanity/queries';
+import {
+  FILTERED_NEWSES_QUERY,
+  FILTERED_EVENTS_QUERY,
+  FILTERED_MEMBERS_QUERY,
+} from '~/sanity/queries';
 import { EventDocument, eventsZ } from '~/types/event';
 import type { CountryDocument } from '~/types/country';
 import { countryZ } from '~/types/country';
 import { NewsDocument, newsesZ } from '~/types/news';
+import { MemberDocument, membersZ } from '~/types/member';
 
 export const meta: MetaFunction<
   typeof loader,
@@ -58,12 +62,21 @@ export const loader = async ({ params, request }: LoaderFunctionArgs) => {
 
   // Fetch filtered news items related to this country
   const countryTag = initial.data._id; // or use another unique identifier
+
   const filteredNewsItems = await loadQuery<NewsDocument>(
     FILTERED_NEWSES_QUERY,
     { countryTag } // Passing countryTag as a parameter to the query
   ).then((res) => ({
     ...res,
     data: res.data ? newsesZ.parse(res.data) : null,
+  }));
+
+  const filteredMembers = await loadQuery<MemberDocument>(
+    FILTERED_MEMBERS_QUERY,
+    { countryTag } // Passing countryTag as a parameter to the query
+  ).then((res) => ({
+    ...res,
+    data: res.data ? membersZ.parse(res.data) : null,
   }));
 
   const currentDate = new Date().toISOString();
@@ -85,9 +98,11 @@ export const loader = async ({ params, request }: LoaderFunctionArgs) => {
     initial,
     filteredNewsItems,
     filteredEvents,
+    filteredMembers,
     query: COUNTRY_QUERY,
     query2: FILTERED_NEWSES_QUERY,
     query3: FILTERED_EVENTS_QUERY,
+    query4: FILTERED_MEMBERS_QUERY,
     params: { currentDate, isFuture },
     ogImageUrl,
   });
@@ -98,9 +113,11 @@ export default function CountryIndexPage() {
     initial,
     filteredNewsItems,
     filteredEvents,
+    filteredMembers,
     query,
     query2,
     query3,
+    query4,
     params,
   } = useLoaderData<typeof loader>();
 
@@ -141,9 +158,31 @@ export default function CountryIndexPage() {
     return <div>Loading...</div>;
   }
 
+  const castedFilteredMembers: QueryResponseInitial<
+    typeof filteredMembers.data
+  > = filteredMembers as QueryResponseInitial<typeof filteredMembers.data>;
+
+  const { data: membersData, loading: membersLoading } = useQuery<
+    typeof filteredMembers.data
+  >(query4, params, {
+    initial: castedFilteredMembers,
+  });
+
+  if (membersLoading || !membersData) {
+    return <div>Loading...</div>;
+  }
+
   return (
     <>
-      <Country data={data} newsData={newsData} eventsData={eventsData} />{' '}
+      <Country
+        data={data}
+        newsData={newsData}
+        eventsData={eventsData}
+        membersData={membersData.map((member) => ({
+          ...member,
+          _type: 'member',
+        }))}
+      />
     </>
   );
 }

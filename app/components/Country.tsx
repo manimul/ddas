@@ -8,9 +8,11 @@ import { Link } from '@remix-run/react';
 import { Countries } from '~/components/Countries';
 import { NewsStub } from '~/types/news';
 import { EventStub } from '~/types/event';
+import { MemberStub } from '~/types/member';
 
 type CountryProps = {
   data: CountryDocument;
+  membersData: MemberStub[];
   newsData: NewsStub[];
   eventsData: EventStub[];
 };
@@ -38,10 +40,10 @@ export function Country(props: CountryProps) {
       <h1 className=' py-4 basis-full text-bold pt-4 text-xl tracking-tighter transition-colors duration-100 ease-in-out  lg:text-4xl'>
         {title}
       </h1>
-      <div className='basis-1/4 space-y-4 '>
+      <div className='basis-1/4 space-y-2 '>
         <MemberImage image={image} />
-        <h2 className=' uppercase opacity-50 tracking-widest text-sm '>
-          {title} Related Links
+        <h2 className='text-large leading-loose text-[#FFB102]'>
+          {title} relaterede links
         </h2>
         <ul>
           {landeprofil && (
@@ -75,6 +77,45 @@ export function Country(props: CountryProps) {
             </li>
           )}
         </ul>
+
+        {props.membersData && props.membersData.length > 0 ? (
+          <>
+            <h2 className='text-large  col-span-3 leading-loose text-[#FFB102] '>
+              Medlemmer med interesse/ekspertise i {title}
+            </h2>
+            <ul className='grid grid-cols-3 gap-3 text-center'>
+              {props.membersData.map((member) => (
+                <li key={member._id}>
+                  <Link
+                    relative='route'
+                    to={'../../../medlemshjornet/medlemmer/' + member.slug}
+                  >
+                    <MemberImage
+                      className='rounded-[100px] pb-2'
+                      image={member.image}
+                    />
+                    <h3 className='text-xs'> {member.name}</h3>
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </>
+        ) : (
+          <div className=' p-4 flex flex-col bg-black text-white border-green-500 border  '>
+            <p className=' text-xl my-2'>
+              Det ser ud til, at ingen af vores medlemmer er eksperter på{' '}
+              {title}. Hvis du er interesseret eller har ekspertise inden for{' '}
+              {title}, hvorfor så ikke blive medlem?
+            </p>
+            <Link
+              to='../../../ansog-om-medlemskab/personligt'
+              relative='route'
+              className='inline-flex uppercase text-sm   rounded-md p-4 tracking-wide opacity-75    bg-white text-black hover:opacity-100 hover:rounded-[30px]  duration-500     '
+            >
+              Bliv Personligt medlem
+            </Link>
+          </div>
+        )}
       </div>
       <div className='basis-1/2 px-6 flex flex-col space-y-4 '>
         {content && content?.length > 0 ? (
@@ -85,7 +126,7 @@ export function Country(props: CountryProps) {
         <div className='space-y-2'>
           {cities && cities.length > 0 ? (
             <>
-              <h2 className='uppercase opacity-50 tracking-widest text-sm '>
+              <h2 className='text-large pb-2 leading-loose text-[#FFB102]'>
                 Cities of {title}
               </h2>
               <ul className=''>
@@ -115,8 +156,8 @@ export function Country(props: CountryProps) {
           <ul>
             {props.eventsData && props.eventsData.length > 0 ? (
               <>
-                <h2 className=' uppercase opacity-50 tracking-widest text-sm '>
-                  {title} Events
+                <h2 className='text-large pb-2 leading-loose text-[#FFB102]'>
+                  {title} Arrangementer
                 </h2>
                 {props.eventsData.map((event) => (
                   <li key={event._id}>
@@ -140,8 +181,8 @@ export function Country(props: CountryProps) {
           <ul>
             {props.newsData && props.newsData.length > 0 ? (
               <>
-                <h2 className=' uppercase opacity-50 tracking-widest text-sm '>
-                  {title} Related News
+                <h2 className='text-large pb-2 leading-loose text-[#FFB102]'>
+                  {title} Nyheder
                 </h2>
                 {props.newsData.map((news) => (
                   <li key={news._id}>

@@ -43,15 +43,24 @@ export default function LandeIAfrikaIndex() {
     return <div>Loading...</div>;
   }
   return (
-    <div className=' '>
-      <h2 className='text-3xl mb-4  tracking-tight text-gray-900 dark:text-gray-100 sm:text-4xl'>
-        Lande i Afrika
-      </h2>
-      <div className=' '>
-        <div className=''></div>
-        <AfricanRegions africanRegions={data} />
+    <div className='grid grid-cols-2 gap-12'>
+      <div className='col-span-1 md:pr-16'>
+        <h1 className='text-3xl mb-4  tracking-tight text-gray-900 dark:text-gray-100 sm:text-4xl'>
+          Lande i Afrika:{' '}
+          <span className='text-[#ff9602]'>
+            Oplev Mangfoldigheden af et Kontinent
+          </span>
+        </h1>
+        <p className='mt-3 text-lg leading-8 text-gray-600 dark:text-gray-300'>
+          Velkommen til vores fortegnelse over Afrika, et kontinent uden
+          sidestykke med hensyn til mangfoldighed og skønhed. Begiv dig ud på en
+          rejse gennem dets regioner, hver med sine egne unikke landskaber,
+          kulturer og historier. Fra de vidstrakte savanner i syd til de
+          dynamiske byer i vest, Afrika er en verden, der venter på at blive
+          udforsket. Dyk ned for at lære, forbinde og blive inspireret.
+        </p>
       </div>
-      <Outlet />
+      <AfricanRegions africanRegions={data} />
     </div>
   );
 }

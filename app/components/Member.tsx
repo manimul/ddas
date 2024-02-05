@@ -29,7 +29,7 @@ export function Member(props: MemberProps) {
         <MoveLeft />
         <span> Medlemmer</span>
       </Link>
-      <div className='grid grid-flow-row grid-cols-4 gap-3'>
+      <div className='grid grid-flow-row grid-cols-4 gap-4'>
         <div className='col-span-1'>
           <MemberImage image={image} />
         </div>
@@ -62,14 +62,14 @@ export function Member(props: MemberProps) {
           </p>
           {africanTags && (
             <div className='flex-col'>
-              <h2 className='uppercase opacity-50 tracking-widest text-xs '>
+              <h2 className='text-large leading-loose text-[#FFB102]'>
                 Lande af interesse/ekspertise
               </h2>
               {africanTags.map((tag) => (
                 <Link
                   key={tag._id}
                   to={`../../../lande-i-afrika/${tag.region[0].slug}/${tag.slug}`}
-                  className='bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full dark:bg-blue-900 dark:text-blue-300'
+                  className=' text-black text-base font-medium me-2 px-2.5 py-0.5 rounded-full bg-[#FFB102]'
                 >
                   {tag.title}
                 </Link>

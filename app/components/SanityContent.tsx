@@ -16,7 +16,7 @@ export function SanityContent(props: ContentProps) {
   const { value } = props;
 
   return (
-    <div className='prose-sm md:prose font-serif dark:prose-invert lg:prose-lg  prose-a:text-cyan-600 dark:prose-a:text-cyan-200'>
+    <div className='prose-sm md:prose font-serif dark:prose-invert lg:prose-lg text-gray-600 dark:text-gray-300  prose-a:text-cyan-600 dark:prose-a:text-cyan-200'>
       <PortableText value={value} components={components} />
     </div>
   );

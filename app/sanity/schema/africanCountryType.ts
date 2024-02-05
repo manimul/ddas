@@ -50,7 +50,10 @@ export const africanCountryType = defineType({
       type: 'image',
       options: { hotspot: true },
       group: 'editorial',
-      fields: [defineField({ name: 'alt', type: 'string' })],
+      fields: [
+        defineField({ name: 'alt', type: 'string' }),
+        defineField({ name: 'credit', type: 'string' }),
+      ],
     }),
     defineField({
       name: 'region',

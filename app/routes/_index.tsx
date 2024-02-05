@@ -110,11 +110,11 @@ export default function Index() {
             <Link
               unstable_viewTransition
               to='#mission'
-              className='inline-flex items-center justify-center px-5 py-3 mr-3 text-base font-medium text-center  rounded-lg bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 dark:focus:ring-primary-900'
+              className='group inline-flex items-center justify-center px-5 py-3 mr-3 uppercase text-sm  rounded-md p-4 tracking-wide  text-center   bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 dark:focus:ring-primary-900'
             >
               Lær mere
               <svg
-                className='w-5 h-5 ml-2 -mr-1'
+                className='w-5 h-5 ml-2 -mr-1 rotate-90 group-hover:translate-y-3 transition-all duration-300'
                 fill='currentColor'
                 viewBox='0 0 20 20'
                 xmlns='http://www.w3.org/2000/svg'
@@ -130,7 +130,7 @@ export default function Index() {
               unstable_viewTransition
               prefetch='viewport'
               to='ansog-om-medlemskab'
-              className='inline-flex items-center justify-center px-5 py-3 text-base font-medium text-center text-gray-900 border border-[#f59e0b] rounded-lg hover:bg-[#f59e0b] focus:ring-4 focus:ring-gray-100 dark:text-white dark:border-gray-700 dark:hover:bg-gray-700 dark:focus:ring-gray-800'
+              className=' uppercase text-sm  rounded-md p-4 tracking-wide opacity-75    bg-[#ffae22] text-black hover:opacity-100 hover:rounded-[30px]  duration-500     '
             >
               Bliv medlem{' '}
             </Link>
@@ -167,7 +167,9 @@ export default function Index() {
         <MemberCTA />
 
         <section>
-          <h2 className=' text-2xl  py-4   leading-loose'>Nyheder</h2>
+          <h2 className='text-2xl pb-4 leading-loose text-[#FFB102]'>
+            Nyheder
+          </h2>
           <Newses newses={newsesData} />
         </section>
         <CorporateCTA />

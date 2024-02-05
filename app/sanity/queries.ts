@@ -12,10 +12,11 @@ export const PAGE_QUERY = groq`*[_type == "page" && slug.current == $slug][0]{
   content
 }`;
 
-export const AFRICAN_REGIONS_QUERY = groq`*[_type == "africanregion"][0...12]|order(name asc){
+export const AFRICAN_REGIONS_QUERY = groq`*[_type == "africanregion"][0...12]|order(title asc){
   _id,
   _type,
   title,
+  subtitle,
   "slug": slug.current,
   image,
  content
@@ -25,15 +26,19 @@ export const REGION_QUERY = groq`*[_type == "africanregion" && slug.current == $
 _id,
   _type,
   title,
+  subtitle,
+
   "slug": slug.current,
   image,
  content
 }`;
 
-export const REGIONS_QUERY = groq`*[_type == "africanregion"][0...12]|order(name asc){
+export const REGIONS_QUERY = groq`*[_type == "africanregion"][0...12]|order(title asc){
   _id,
   _type,
   title,
+  subtitle,
+
   "slug": slug.current,
   image,
  content
@@ -43,12 +48,14 @@ export const AFRICAN_REGION_QUERY = groq`*[_type == "africanregion" && slug.curr
 _id,
   _type,
   title,
+  subtitle,
+
   "slug": slug.current,
   image,
  content
 }`;
 
-export const COUNTRIES_QUERY = groq`*[_type == "africancountry"][0...12]|order(name asc){
+export const COUNTRIES_QUERY = groq`*[_type == "africancountry"][0...12]|order(title asc){
   _id,
   _type,
   title,
@@ -144,6 +151,27 @@ export const MEMBER_QUERY = groq`*[_type == "member" && slug.current == $slug][0
     "slug": slug.current,
 
   },
+    "slug": slug.current,
+  }
+
+}`;
+
+export const FILTERED_MEMBERS_QUERY = groq`*[_type == "member" && $countryTag in africanTags[]->_id][0...12]|order(name asc){
+   _id,
+  _type,
+  name,
+  title,
+  facebook,
+  twitter,
+  linkedin,
+  phone,
+  email,
+  "slug": slug.current,
+  image,
+  bio,
+  "africanTags": africanTags[]->{
+    _id,
+    title,
     "slug": slug.current,
   }
 

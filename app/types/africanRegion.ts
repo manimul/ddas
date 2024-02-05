@@ -11,6 +11,7 @@ import { z } from 'zod';
 export const africanRegionZ = z.object({
   _id: z.string(),
   title: z.string().nullable(),
+  subtitle: z.string().nullable(),
   slug: z.string().nullable(),
   image: z.any().nullable(),
   content: z.array(z.any()).nullable(),
@@ -22,6 +23,7 @@ export const africanRegionsZ = z.array(africanRegionZ);
 export const africanRegionStubZ = z.object({
   _id: z.string(),
   title: z.string().nullable(),
+  subtitle: z.string().nullable(),
   slug: z.string().nullable(),
   image: z.any().nullable(),
   content: z.array(z.any()).nullable(),

@@ -1,11 +1,8 @@
 import { Link } from '@remix-run/react';
-import { MemberImage } from '~/components/MemberImage';
 import type { AfricanRegionStub } from '~/types/africanRegion';
-import type { CountryStub } from '~/types/country';
-import { SanityContent } from './SanityContent';
-import type { SanityImageObjectStub } from '@sanity/asset-utils';
 import urlBuilder from '@sanity/image-url';
 import { dataset, projectId } from '~/sanity/projectDetails';
+import { MoveRight } from 'lucide-react';
 
 type AfricanRegionsProps = {
   africanRegions: AfricanRegionStub[];
@@ -14,39 +11,42 @@ type AfricanRegionsProps = {
 export function AfricanRegions(props: AfricanRegionsProps) {
   const { africanRegions = [] } = props;
   return africanRegions.length > 0 ? (
-    <ul
-      role='list'
-      className='grid gap-x-5 gap-y-4 sm:grid-cols-2 md:grid-cols-3 sm:gap-y-16 xl:col-span-2'
-    >
+    <ul role='list' className=''>
       {africanRegions.map((africanRegion) => (
-        <li className='hover:-translate-y-3 group' key={africanRegion._id}>
+        <li className='group' key={africanRegion._id}>
           {africanRegion?.slug && (
             <Link to={africanRegion?.slug}>
-              <div className='flex items-start gap-x-4'>
+              <div className='grid group grid-cols-2 gap-3 py-1 items-end '>
                 {africanRegion.image ? (
-                  <img
-                    src={urlBuilder({ projectId, dataset })
-                      // @ts-ignore
-                      .image(africanRegion.image.asset._ref)
-                      .height(600)
-                      .width(800)
-                      .fit('max')
-                      .auto('format')
-                      .url()}
-                    alt={africanRegion.image?.alt ?? ``}
-                    loading='lazy'
-                  />
+                  <>
+                    <img
+                      src={urlBuilder({ projectId, dataset })
+                        // @ts-ignore
+                        .image(africanRegion.image.asset._ref)
+                        .height(150)
+                        .width(400)
+                        .fit('max')
+                        .auto('format')
+                        .url()}
+                      alt={africanRegion.image?.alt ?? ``}
+                      className=' duration-200 w-full object-cover rounded-md group-hover:rounded-l-[100px] overflow-hidden '
+                      loading='lazy'
+                    />
+                  </>
                 ) : (
                   <div className='flex aspect-square w-full items-center justify-center bg-gray-100 text-gray-500'>
                     Missing Region image
                   </div>
                 )}
 
-                <div className='absolute  bg-white p-2'>
-                  <h2 className='text-3xl'>
-                    {africanRegion.title?.toLowerCase()}
-                  </h2>
-                </div>
+                <h2 className='text-3xl group-hover:translate-x-3 duration-200 align-bottom'>
+                  {africanRegion.title}{' '}
+                  <MoveRight className='hidden group-hover:inline-flex space-x-2' />
+                  <h3 className='hidden opacity-0 group-hover:inline-flex group-hover:opacity-100 duration-150  text-green-500'>
+                    {' '}
+                    {africanRegion.subtitle}
+                  </h3>
+                </h2>
               </div>
             </Link>
           )}

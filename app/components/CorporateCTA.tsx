@@ -1,3 +1,5 @@
+import { Link } from '@remix-run/react';
+
 export function CorporateCTA() {
   return (
     <div className='mx-auto w-full py-32'>
@@ -12,15 +14,12 @@ export function CorporateCTA() {
             Malesuada adipiscing sagittis vel nulla.
           </p>
           <div className='mt-10 flex items-center justify-center gap-x-6 lg:justify-start'>
-            <a
-              href='#'
-              className='rounded-md bg-white px-3.5 py-2.5 text-sm font-semibold text-gray-900 shadow-sm hover:bg-gray-100 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white'
+            <Link
+              to='ansog-om-medlemskab/corporate'
+              className=' uppercase text-sm  rounded-md p-4 tracking-wide opacity-75    bg-white text-black hover:opacity-100 hover:rounded-[30px]  duration-500     '
             >
-              Bliv medlem
-            </a>
-            <a href='#' className='text-sm font-semibold leading-6 text-white'>
-              Learn more <span aria-hidden='true'>→</span>
-            </a>
+              Bliv Corporate medlem
+            </Link>
           </div>
         </div>
         <div className='relative  h-80 '>
