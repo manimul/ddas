@@ -12,13 +12,13 @@ export function Countries(props: CountriesProps) {
   return countries.length > 0 ? (
     <ul
       role='list'
-      className='grid gap-x-5 gap-y-4 sm:grid-cols-2 md:grid-cols-3 sm:gap-y-16 xl:col-span-2'
+      className='grid gap-1 sm:grid-cols-2 md:grid-cols-3  xl:col-span-2'
     >
       {countries.map((country) => (
         <li className=' group' key={country._id}>
           {country?.slug && (
             <Link to={country?.slug}>
-              <div className='flex items-start gap-x-4'>
+              <div className='flex items-start '>
                 {country.image ? (
                   <img
                     className='group-hover:rounded-[30px] duration-150'
@@ -39,9 +39,9 @@ export function Countries(props: CountriesProps) {
                   </div>
                 )}
 
-                <div className='absolute backdrop-blur-sm bg-white/10 text-white p-4 group-hover:rounded-tl-[30px] duration-150 '>
+                <div className='absolute backdrop-blur-sm bg-white/10 text-white p-2 group-hover:rounded-tl-[30px] duration-150 '>
                   {country.title && (
-                    <h2 className='text-2xl'>{country.title}</h2>
+                    <h2 className='text-xl w-min '>{country.title}</h2>
                   )}
                 </div>
               </div>
