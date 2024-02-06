@@ -144,11 +144,14 @@ export default function Index() {
           </div>
         </div>
       </section>
-      <section id='mission' className='bg-[#101a1d]  p-32 -ml-32 -mr-32  '>
+      <section
+        id='mission'
+        className='bg-[#101a1d] p-4 -ml-4 -mr-4  md:p-32 md:-ml-32 md:-mr-32  '
+      >
         <h2 className='text-2xl pb-4 leading-loose text-[#FFB102]'>
           Vores Mission{' '}
         </h2>
-        <p className='text-5xl text-white '>
+        <p className='text-2xl md:text-5xl text-white '>
           Det Danske Afrika Selskab fremmer forståelse og samarbejde mellem
           Danmark og Afrika gennem dialog, netværk og uddannelsesaktiviteter,
           styrker kendskabet til Afrikas kulturer, historie og udvikling.

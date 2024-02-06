@@ -16,7 +16,7 @@ export function AfricanRegions(props: AfricanRegionsProps) {
         <li className='group' key={africanRegion._id}>
           {africanRegion?.slug && (
             <Link to={africanRegion?.slug}>
-              <div className='grid group grid-cols-2 gap-3 py-1 items-end '>
+              <div className='grid group grid-cols-2 gap-3 py-1 md:items-end '>
                 {africanRegion.image ? (
                   <>
                     <img
@@ -29,7 +29,7 @@ export function AfricanRegions(props: AfricanRegionsProps) {
                         .auto('format')
                         .url()}
                       alt={africanRegion.image?.alt ?? ``}
-                      className=' duration-200 w-full object-cover rounded-md group-hover:rounded-l-[100px] overflow-hidden '
+                      className=' duration-200 w-full object-cover rounded-md md:group-hover:rounded-l-[100px] overflow-hidden '
                       loading='lazy'
                     />
                   </>
@@ -39,10 +39,10 @@ export function AfricanRegions(props: AfricanRegionsProps) {
                   </div>
                 )}
 
-                <h2 className='text-3xl group-hover:translate-x-3 duration-200 align-bottom'>
+                <h2 className='text-lg md:text-3xl md:group-hover:translate-x-3 duration-200 align-bottom'>
                   {africanRegion.title}{' '}
-                  <MoveRight className='hidden group-hover:inline-flex space-x-2' />
-                  <h3 className='hidden opacity-0 group-hover:inline-flex group-hover:opacity-100 duration-150  text-green-500'>
+                  <MoveRight className='hidden md:group-hover:inline-flex space-x-2' />
+                  <h3 className='text-sm md:text-3xl md:hidden md:opacity-0 md:group-hover:inline-flex group-hover:opacity-100 duration-150  text-green-500'>
                     {' '}
                     {africanRegion.subtitle}
                   </h3>

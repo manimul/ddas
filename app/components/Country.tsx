@@ -32,20 +32,21 @@ export function Country(props: CountryProps) {
   } = props.data;
 
   return (
-    <div className='flex flex-row flex-wrap  box-border'>
+    <div className='flex flex-col md:flex-row flex-wrap  box-border space-y-4'>
       <Link className=' inline-flex space-x-2' relative='path' to='../'>
         <MoveLeft />
         <span>Lande i Afrika</span>
       </Link>
-      <h1 className=' py-4 basis-full text-bold pt-4 text-xl tracking-tighter transition-colors duration-100 ease-in-out  lg:text-4xl'>
+      <h1 className=' md:py-4 md:basis-full text-bold pt-4 text-2xl lg:text-4xl tracking-tighter transition-colors duration-100 ease-in-out  '>
         {title}
       </h1>
-      <div className='basis-1/4 space-y-2 '>
+      <div className=' md:basis-1/4 space-y-4 '>
         <MemberImage image={image} />
-        <h2 className='text-large leading-loose text-[#FFB102]'>
-          {title} relaterede links
-        </h2>
         <ul>
+          <h2 className='text-base pb-2  text-gray-500  '>
+            {title} relaterede links
+          </h2>
+
           {landeprofil && (
             <li>
               {' '}
@@ -79,30 +80,34 @@ export function Country(props: CountryProps) {
         </ul>
 
         {props.membersData && props.membersData.length > 0 ? (
-          <>
-            <h2 className='text-large  col-span-3 leading-loose text-[#FFB102] '>
-              Medlemmer med interesse/ekspertise i {title}
+          <div>
+            <h2 className='text-base pb-2   text-gray-500  '>
+              Medlemmer med ekspertise i {title}
             </h2>
             <ul className='grid grid-cols-3 gap-3 text-center'>
               {props.membersData.map((member) => (
                 <li key={member._id}>
                   <Link
                     relative='route'
+                    className='pointer'
                     to={'../../../medlemshjornet/medlemmer/' + member.slug}
                   >
                     <MemberImage
-                      className='rounded-[100px] pb-2'
+                      className='rounded-[20px] '
                       image={member.image}
                     />
-                    <h3 className='text-xs'> {member.name}</h3>
+                    <h3 className='text-xs capitalize'>
+                      {' '}
+                      {member.name?.toLowerCase()}
+                    </h3>
                   </Link>
                 </li>
               ))}
             </ul>
-          </>
+          </div>
         ) : (
           <div className=' p-4 flex flex-col bg-black text-white border-green-500 border  '>
-            <p className=' text-xl my-2'>
+            <p className=' md:text-xl my-2'>
               Det ser ud til, at ingen af vores medlemmer er eksperter på{' '}
               {title}. Hvis du er interesseret eller har ekspertise inden for{' '}
               {title}, hvorfor så ikke blive medlem?
@@ -117,46 +122,45 @@ export function Country(props: CountryProps) {
           </div>
         )}
       </div>
-      <div className='basis-1/2 px-6 flex flex-col space-y-4 '>
+      <div className='md:basis-1/2 md:px-6 flex flex-col space-y-4 '>
         {content && content?.length > 0 ? (
           <SanityContent value={content} />
         ) : null}
       </div>
-      <div className='basis-1/4 px-6 flex flex-col space-y-4  border-b-gray-100 sticky top-0  '>
-        <div className='space-y-2'>
-          {cities && cities.length > 0 ? (
-            <>
-              <h2 className='text-large pb-2 leading-loose text-[#FFB102]'>
-                Cities of {title}
-              </h2>
-              <ul className=''>
-                {cities.map((city) => (
-                  <li className='border-gray-100 border p-1' key={city._id}>
-                    <Link
-                      className='flex flex-row items-center space-x-2'
-                      to={city.slug}
-                    >
-                      <div className='w-1/4'>
-                        <MemberImage
-                          className='rounded-none'
-                          image={city.image}
-                        />
-                      </div>
+      <div className='md:basis-1/4 md:px-6 flex flex-col space-y-4  border-b-gray-100 sticky top-0  '>
+        {cities && cities.length > 0 ? (
+          <div>
+            <h2 className='text-base pb-2   text-gray-500  '>
+              Cities of {title}
+            </h2>
+            <ul className=''>
+              {cities.map((city) => (
+                <li className='border-gray-100 border p-1' key={city._id}>
+                  <Link
+                    className='flex flex-row items-center space-x-2'
+                    to={city.slug}
+                  >
+                    <div className='w-1/4'>
+                      <MemberImage
+                        className='rounded-none'
+                        image={city.image}
+                      />
+                    </div>
 
-                      <span className='pl-2'>{city.title}</span>
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </>
-          ) : null}
-        </div>
+                    <span className='pl-2'>{city.title}</span>
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+        ) : null}
+
         <div>
           {' '}
           <ul>
             {props.eventsData && props.eventsData.length > 0 ? (
               <>
-                <h2 className='text-large pb-2 leading-loose text-[#FFB102]'>
+                <h2 className='text-base  pb-2   text-gray-500  '>
                   {title} Arrangementer
                 </h2>
                 {props.eventsData.map((event) => (
@@ -181,7 +185,7 @@ export function Country(props: CountryProps) {
           <ul>
             {props.newsData && props.newsData.length > 0 ? (
               <>
-                <h2 className='text-large pb-2 leading-loose text-[#FFB102]'>
+                <h2 className='text-base pb-2   text-gray-500  '>
                   {title} Nyheder
                 </h2>
                 {props.newsData.map((news) => (

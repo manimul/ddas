@@ -86,7 +86,7 @@ export function Newses(props: NewsesProps) {
         {remainingNews.map((news) => (
           <li
             key={news._id}
-            className='rounded-lg  box-border opacity-75 hover:opacity-100 cursor-pointer hover:border-gray-600 border border-gray-200 p-2 hover:shadow-2xl hover:-translate-y-1 ease-in-out duration-300 group  '
+            className='rounded-lg  box-border opacity-75 hover:opacity-100 cursor-pointer hover:border-gray-600 border border-gray-200 p-2 hover:shadow-2xl hover:-translate-y-1 ease-in-out duration-300   '
           >
             <Link
               prefetch='intent'

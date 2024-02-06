@@ -3,17 +3,17 @@ import { Link } from '@remix-run/react';
 export function MemberCTA() {
   return (
     <div className='mx-auto  w-full py-12'>
-      <div className='relative isolate overflow-hidden bg-green-500 px-6 pt-16 shadow-2xl sm:rounded-3xl sm:px-16 md:pt-12 lg:flex lg:gap-x-20 lg:px-24 lg:pt-0'>
+      <div className='relative isolate overflow-hidden bg-green-500 px-2 md:px-6 pt-16 shadow-2xl sm:rounded-3xl sm:px-16 md:pt-12 lg:flex lg:gap-x-20 lg:px-24 lg:pt-0'>
         <div className='mx-auto text-center lg:mx-0 lg:flex-auto lg:py-16 lg:text-left'>
-          <h2 className='text-3xl font-bold tracking-tight text-white sm:text-4xl'>
+          <h2 className='md:text-3xl font-bold md:tracking-tight text-white sm:text-4xl'>
             Bliv Personlig Medlem i Dag. Styrk jeres virksomheds globale
             engagement og netværk
           </h2>
-          <p className='mt-6 text-lg leading-8 text-gray-100'>
+          <p className='md:mt-6 md:text-lg md:leading-8 text-gray-100'>
             Ac euismod vel sit maecenas id pellentesque eu sed consectetur.
             Malesuada adipiscing sagittis vel nulla.
           </p>
-          <div className='mt-10 flex items-center justify-center gap-x-6 lg:justify-start'>
+          <div className='mt-10 md:flex items-center justify-center gap-x-6 lg:justify-start space-y-4'>
             <Link
               to='ansog-om-medlemskab/personligt'
               className=' uppercase text-sm  rounded-md p-4 tracking-wide opacity-75    bg-white text-black hover:opacity-100 hover:rounded-[30px]  duration-500     '
@@ -23,7 +23,7 @@ export function MemberCTA() {
             <Link
               unstable_viewTransition
               to='ansog-om-medlemskab'
-              className='group inline-flex items-center justify-center px-5 py-3 mr-3 uppercase text-sm  rounded-md p-4 tracking-wide  text-center   bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 dark:focus:ring-primary-900'
+              className=' group inline-flex items-center justify-center px-5 py-3 mr-3 uppercase text-sm  rounded-md p-4 tracking-wide  text-center   bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 dark:focus:ring-primary-900'
             >
               Lær mere
               <svg
@@ -41,9 +41,9 @@ export function MemberCTA() {
             </Link>
           </div>
         </div>
-        <div className='relative  h-80 '>
+        <div className='relative h-20   md:h-80 '>
           <img
-            className='absolute left-0 top-0 w-[57rem] max-w-none rounded-md bg-white/5 ring-1 ring-white/10'
+            className='absolute left-0 top-0 w-[57rem] max-w-none md:rounded-md bg-white/5 ring-1 ring-white/10'
             src='https://cdn.midjourney.com/7f1b20ca-c243-4a2c-8feb-998de0488f14/0_2.webp'
             alt='App screenshot'
             width={1824}

@@ -43,7 +43,7 @@ export default function LandeIAfrikaIndex() {
     return <div>Loading...</div>;
   }
   return (
-    <div className='grid grid-cols-2 gap-12'>
+    <div className='grid md:grid-cols-2 gap-12'>
       <div className='col-span-1 md:pr-16'>
         <h1 className='text-3xl mb-4  tracking-tight text-gray-900 dark:text-gray-100 sm:text-4xl'>
           Lande i Afrika:{' '}
@@ -51,7 +51,7 @@ export default function LandeIAfrikaIndex() {
             Oplev Mangfoldigheden af et Kontinent
           </span>
         </h1>
-        <p className='mt-3 text-lg leading-8 text-gray-600 dark:text-gray-300'>
+        <p className='mt-3 md:text-lg md:leading-8 text-gray-600 dark:text-gray-300'>
           Velkommen til vores fortegnelse over Afrika, et kontinent uden
           sidestykke med hensyn til mangfoldighed og skønhed. Begiv dig ud på en
           rejse gennem dets regioner, hver med sine egne unikke landskaber,

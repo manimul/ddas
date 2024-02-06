@@ -6,7 +6,7 @@ export function getBodyClassNames(themePreference?: string): string {
       : themePreference === `dark`;
   return [
     `transition-colors duration-1000 ease-in-out min-h-screen`,
-    isDarkMode ? `dark bg-black text-white` : `bg-white text-black`,
+    isDarkMode ? `dark bg-black text-white` : `bg-[#f4f4f5] text-black`,
   ]
     .join(' ')
     .trim();

@@ -16,7 +16,7 @@ export function Events(props: EventsProps) {
         {events.map((event) => (
           <li
             key={event._id}
-            className='flex flex-col md:flex-row flex-wrap rounded-lg  box-border md:opacity-75 md:hover:opacity-100 cursor-pointer hover:border-gray-600 border border-gray-200 p-2 md:p-5 hover:shadow-2xl hover:-translate-y-1 ease-in-out duration-300  '
+            className='flex flex-col md:flex-row flex-wrap rounded-lg  box-border md:opacity-75 md:hover:opacity-100 cursor-pointer hover:border-gray-600 border border-gray-200 p-2 md:p-5  hover:shadow-2xl hover:-translate-y-1 ease-in-out duration-300  '
           >
             <h2 className=' pb-2 md:py-4 basis-full'>
               {event?.slug ? (
