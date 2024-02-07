@@ -62,18 +62,21 @@ export function Member(props: MemberProps) {
           </p>
           {africanTags && (
             <div className='flex-col'>
-              <h2 className='text-large leading-loose text-[#FFB102]'>
+              <h2 className='text-base pb-2  text-gray-500  '>
                 Lande af interesse/ekspertise
               </h2>
-              {africanTags.map((tag) => (
-                <Link
-                  key={tag._id}
-                  to={`../../../lande-i-afrika/${tag.region[0].slug}/${tag.slug}`}
-                  className=' text-black text-base font-medium me-2 px-2.5 py-0.5 rounded-full bg-[#FFB102]'
-                >
-                  {tag.title}
-                </Link>
-              ))}
+              {africanTags.map(
+                (tag) =>
+                  tag.region && tag.region[0]?.slug ? ( // Check if region exists and has at least one item
+                    <Link
+                      key={tag._id}
+                      to={`../../../lande-i-afrika/${tag.region[0].slug}/${tag.slug}`}
+                      className='text-black text-sm font-medium me-2 px-2.5 py-0.5 rounded-full bg-[#FFB102]'
+                    >
+                      {tag.title}
+                    </Link>
+                  ) : null // Render null or some fallback if region is not as expected
+              )}
             </div>
           )}
         </div>

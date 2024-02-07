@@ -55,7 +55,7 @@ _id,
  content
 }`;
 
-export const COUNTRIES_QUERY = groq`*[_type == "africancountry"][0...12]|order(title asc){
+export const COUNTRIES_QUERY = groq`*[_type == "africancountry"][0...100]|order(title asc){
   _id,
   _type,
   title,
@@ -109,7 +109,7 @@ export const CITY_QUERY = groq`*[_type == "city" && slug.current == $city][0]{
    content
   }`;
 
-export const MEMBERS_QUERY = groq`*[_type == "member"][0...12]|order(name asc){
+export const MEMBERS_QUERY = groq`*[_type == "member"][0...150]|order(name asc){
   _id,
   _type,
   name,
@@ -156,7 +156,7 @@ export const MEMBER_QUERY = groq`*[_type == "member" && slug.current == $slug][0
 
 }`;
 
-export const FILTERED_MEMBERS_QUERY = groq`*[_type == "member" && $countryTag in africanTags[]->_id][0...12]|order(name asc){
+export const FILTERED_MEMBERS_QUERY = groq`*[_type == "member" && $countryTag in africanTags[]->_id][0...150]|order(name asc){
    _id,
   _type,
   name,

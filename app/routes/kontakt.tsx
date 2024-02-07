@@ -1,14 +1,16 @@
-import { Link } from '@remix-run/react';
-import { useState } from 'react';
+import { ActionFunctionArgs } from '@remix-run/node';
 import { Form } from '@remix-run/react';
 
-function classNames(...classes: string[]) {
-  return classes.filter(Boolean).join(' ');
+export async function action({ request }: ActionFunctionArgs) {
+  let formData = await request.formData();
+  console.log(formData.get('name'));
+  console.log(formData.get('email'));
+  console.log(formData.get('besked'));
+
+  return null;
 }
 
 export default function Example() {
-  const [agreed, setAgreed] = useState(false);
-
   return (
     <section className=''>
       <div className=' grid  py-4  md:py-8 mx-auto md:gap-8 xl:gap-0 lg:py-10 lg:grid-cols-12'>
@@ -30,7 +32,7 @@ export default function Example() {
             at høre fra dig!
           </p>
 
-          <Form action='#' method='post' className=' max-w-md '>
+          <Form className=' max-w-md ' method='post'>
             <fieldset className='space-y-4'>
               <div>
                 <label htmlFor='name' className='sr-only'>
@@ -55,19 +57,22 @@ export default function Example() {
                 />
               </div>
               <div>
-                <label htmlFor='besked' className='sr-only'>
+                <label htmlFor='message' className='sr-only'>
                   Besked
                 </label>
                 <textarea
                   rows={5}
-                  id='besked'
-                  name='besked'
+                  id='message'
+                  name='message'
                   className='w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm'
                   placeholder='Indtast besked'
                 />
               </div>
 
-              <button className=' uppercase text-sm  rounded-md p-4 tracking-wide opacity-75    bg-[#ffae22] text-black hover:opacity-100 hover:rounded-[30px]  duration-500     '>
+              <button
+                type='submit'
+                className=' uppercase text-sm  rounded-md p-4 tracking-wide opacity-75    bg-[#ffae22] text-black hover:opacity-100 hover:rounded-[30px]  duration-500     '
+              >
                 Send Besked
               </button>
             </fieldset>

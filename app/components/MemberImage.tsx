@@ -12,7 +12,7 @@ export function MemberImage(props: MemberImageProps) {
   const { image, className } = props;
 
   const defaultClass =
-    'h-auto w-full object-cover rounded-lg shadow-black transition-all duration-300  ';
+    'h-auto w-full object-cover rounded-lg shadow-black  transition-all duration-300  ';
   const combinedClass = `${defaultClass} ${className || ''}`; // Merge className with default
 
   return (
@@ -35,9 +35,7 @@ export function MemberImage(props: MemberImageProps) {
           <span className='opacity-50 text-sm mt-3'>{image?.credit ?? ``}</span>
         </>
       ) : (
-        <div className='flex aspect-square w-full items-center justify-center bg-gray-100 text-gray-500'>
-          Missing Member image
-        </div>
+        <div className='flex aspect-square w-full items-center justify-center bg-gray-100 text-gray-500'></div>
       )}
     </div>
   );

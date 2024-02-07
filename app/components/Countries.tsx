@@ -34,14 +34,14 @@ export function Countries(props: CountriesProps) {
                     loading='lazy'
                   />
                 ) : (
-                  <div className='flex aspect-square w-full items-center justify-center bg-gray-100 text-gray-500'>
+                  <div className='flex aspect-video w-full items-center justify-center bg-gray-100 text-gray-500'>
                     Missing country image
                   </div>
                 )}
 
                 <div className='absolute backdrop-blur-sm bg-white/10 text-white p-2 group-hover:rounded-tl-[30px] duration-150 '>
                   {country.title && (
-                    <h2 className='text-xl w-min '>{country.title}</h2>
+                    <h2 className='text-xl w-min    '>{country.title}</h2>
                   )}
                 </div>
               </div>
