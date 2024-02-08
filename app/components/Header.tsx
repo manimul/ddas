@@ -31,7 +31,7 @@ export function Header(props: LayoutProps) {
   return (
     <header className='border-b border-gray-100 transition-colors duration-1000 ease-in-out dark:border-gray-900 sticky top-0 w-full backdrop-blur-lg bg-white/80 dark:bg-black/60 z-50 '>
       <div
-        className={`container mx-auto flex  md:flex-row items-center justify-between p-4 lg:px-12 duration-150 py-4 `}
+        className={`container mx-auto flex  md:flex-row items-center justify-between p-4 lg:px-12 duration-150 py-4 md:py-0 `}
       >
         <div className='md:hidden mx-auto  items-center justify-between md:p-4 lg:px-4   flex grow'>
           <button
@@ -127,7 +127,7 @@ export function Header(props: LayoutProps) {
             to='ansog-om-medlemskab'
             className=' uppercase text-sm  rounded-md p-4 tracking-wide opacity-75    bg-[#ffae22] text-black hover:opacity-100 hover:rounded-[30px]  duration-500     '
           >
-            Tilslutte
+            Bliv Medlem
           </NavLink>
           <ThemeToggle theme={props.theme} />
         </div>

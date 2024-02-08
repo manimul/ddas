@@ -21,6 +21,11 @@ export const homeType = defineType({
       of: [{ type: 'block' }, { type: 'image' }],
     }),
     defineField({
+      name: 'logo',
+      type: 'image',
+      fields: [defineField({ name: 'alt', type: 'string' })],
+    }),
+    defineField({
       name: 'heroImage',
       type: 'image',
       options: { hotspot: true },

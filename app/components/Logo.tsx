@@ -1,9 +1,11 @@
 import { Link } from '@remix-run/react';
+import urlBuilder from '@sanity/image-url';
 
 import type { LogoProps } from '~/types/home';
+import { dataset, projectId } from '~/sanity/projectDetails';
 
 export function Logo(props: LogoProps) {
-  const { siteTitle } = props.home ?? {};
+  const { siteTitle, logo } = props.home ?? {};
 
   if (!siteTitle && typeof document !== `undefined`) {
     console.info(
@@ -13,7 +15,27 @@ export function Logo(props: LogoProps) {
 
   return (
     <p className='text-lg font-bold tracking-tighter text-black pr-6 dark:text-white lg:text-2xl'>
-      <Link to='/'>{siteTitle ?? `Det Dansk Afrika Selskab`}</Link>
+      <Link className='flex flex-row items-center' to='/'>
+        {logo && (
+          <>
+            <img
+              className={'h-12 p-2 md:p-2  md:h-24 md:w-24    '} // Use the combined class
+              src={urlBuilder({ projectId, dataset })
+                // @ts-ignore
+                .image(logo.asset._ref)
+                .height(50)
+                .width(50)
+                .fit('max')
+                .auto('format')
+                .url()}
+              alt={logo?.alt ?? ``}
+              loading='lazy'
+            />
+          </>
+        )}
+
+        {siteTitle ?? `Det Dansk Afrika Selskab`}
+      </Link>
     </p>
   );
 }

@@ -39,7 +39,7 @@ export function EventInformation() {
         </p>
       </div>
       <Link
-        to='ansog-om-medlemskab'
+        to='../../ansog-om-medlemskab'
         className='inline-flex uppercase text-sm  rounded-md p-4 tracking-wide opacity-75    bg-[#ffae22] text-black hover:opacity-100 hover:rounded-[30px]  duration-500     '
       >
         Ansog Om Medlemskab

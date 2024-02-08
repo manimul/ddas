@@ -1,6 +1,6 @@
 import groq from 'groq';
 
-export const HOME_QUERY = groq`*[_id == "home"][0]{ title, siteTitle }`;
+export const HOME_QUERY = groq`*[_id == "home"][0]{ title, siteTitle, logo }`;
 
 export const PAGE_QUERY = groq`*[_type == "page" && slug.current == $slug][0]{
   _id,

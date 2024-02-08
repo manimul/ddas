@@ -16,6 +16,7 @@ import { newsStubsZ } from '~/types/news';
 import { Newses } from '~/components/Newses';
 import { MemberCTA } from '~/components/MemberCTA';
 import { CorporateCTA } from '~/components/CorporateCTA';
+import { Medlem } from '~/components/Medlem';
 
 export const meta: MetaFunction<
   typeof loader,
@@ -153,8 +154,9 @@ export default function Index() {
         </h2>
         <p className='text-2xl md:text-5xl text-white '>
           Det Danske Afrika Selskab fremmer forståelse og samarbejde mellem
-          Danmark og Afrika gennem dialog, netværk og uddannelsesaktiviteter,
-          styrker kendskabet til Afrikas kulturer, historie og udvikling.
+          Danmark og Afrika gennem dialog, netværk og uddannelsesaktiviteter.
+          Selskapet styrker kendskabet til Afrikas kulturer, historie,
+          udvikling, økonomi, politik og erhvervslivet.
         </p>
       </section>
 
@@ -168,6 +170,9 @@ export default function Index() {
           <Events events={eventsData} limit={1} />
         </section>
         <MemberCTA />
+        <section>
+          <Medlem></Medlem>
+        </section>
 
         <section>
           <h2 className='text-2xl pb-4 leading-loose text-[#FFB102]'>

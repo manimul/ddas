@@ -103,7 +103,7 @@ export default function Virksomhed() {
             <input
               type='text'
               name='name'
-              className='w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm'
+              className='w-full rounded-lg border-gray-200 bg-white dark:bg-black  p-4 pe-12 text-sm shadow-sm'
               placeholder='Indtast navn'
             />
           </div>
@@ -114,7 +114,7 @@ export default function Virksomhed() {
             <input
               type='text'
               name='adresse'
-              className='w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm'
+              className='w-full rounded-lg border-gray-200 bg-white dark:bg-black  p-4 pe-12 text-sm shadow-sm'
               placeholder='Indtast Adresse'
             />
           </div>
@@ -125,7 +125,7 @@ export default function Virksomhed() {
             <input
               type='number'
               name='telefonnummer'
-              className='w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm'
+              className='w-full rounded-lg border-gray-200 bg-white dark:bg-black  p-4 pe-12 text-sm shadow-sm'
               placeholder='Indtast Telefonnummer'
             />
           </div>
@@ -136,7 +136,7 @@ export default function Virksomhed() {
             <input
               type='text'
               name='postnummer'
-              className='w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm'
+              className='w-full rounded-lg border-gray-200  bg-white dark:bg-black  p-4 pe-12 text-sm shadow-sm'
               placeholder='Indtast Postnummer o By'
             />
           </div>
@@ -147,7 +147,7 @@ export default function Virksomhed() {
             <input
               type='email'
               name='email'
-              className='w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm'
+              className='w-full rounded-lg border-gray-200 bg-white dark:bg-black  p-4 pe-12 text-sm shadow-sm'
               placeholder='Indtast e-mail'
             />
           </div>
@@ -156,7 +156,7 @@ export default function Virksomhed() {
               Fødselsår
             </label>
             <select
-              className='w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm'
+              className='w-full rounded-lg border-gray-200 bg-white dark:bg-black  p-4 pe-12 text-sm shadow-sm'
               id='year-select'
             >
               {getYears().map((year) => (
@@ -174,7 +174,7 @@ export default function Virksomhed() {
               rows={5}
               id='message'
               name='message'
-              className='w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm'
+              className='w-full rounded-lg border-gray-200 bg-white dark:bg-black  p-4 pe-12 text-sm shadow-sm'
               placeholder='Beskrivelse af din afrikaerfaring'
             />
           </div>

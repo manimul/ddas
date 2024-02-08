@@ -2,7 +2,7 @@ import { Link } from '@remix-run/react';
 
 export function MemberCTA() {
   return (
-    <div className='mx-auto  w-full py-12'>
+    <div className='mx-auto  w-full md:py-12'>
       <div className='relative isolate overflow-hidden bg-green-500 px-2 md:px-6 pt-16 shadow-2xl sm:rounded-3xl sm:px-16 md:pt-12 lg:flex lg:gap-x-20 lg:px-24 lg:pt-0'>
         <div className='mx-auto text-center lg:mx-0 lg:flex-auto lg:py-16 lg:text-left'>
           <h2 className='md:text-3xl font-bold md:tracking-tight text-white sm:text-4xl'>
