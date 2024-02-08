@@ -6,14 +6,17 @@ import { MoveRight } from 'lucide-react';
 
 type EventsProps = {
   events: EventStub[];
+  limit?: number;
 };
 
 export function Events(props: EventsProps) {
-  const { events = [] } = props;
-  return events.length > 0 ? (
+  const { events = [], limit } = props;
+  const displayedEvents = limit ? events.slice(0, limit) : events;
+
+  return displayedEvents.length > 0 ? (
     <div className=' '>
       <ul className='flex flex-col space-y-6 '>
-        {events.map((event) => (
+        {displayedEvents.map((event) => (
           <li
             key={event._id}
             className='flex flex-col md:flex-row flex-wrap rounded-lg  box-border md:opacity-75 md:hover:opacity-100 cursor-pointer hover:border-gray-600 border border-gray-200 p-2 md:p-5  hover:shadow-2xl hover:-translate-y-1 ease-in-out duration-300  '

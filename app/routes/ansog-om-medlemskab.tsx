@@ -125,7 +125,7 @@ export default function AnsogOmMedlemskab() {
           Personligt
         </NavLink>
         <NavLink
-          to='corporate'
+          to='virksomhed'
           className={({ isActive, isPending }) =>
             isPending
               ? 'pending'
@@ -134,7 +134,7 @@ export default function AnsogOmMedlemskab() {
                 : 'font-light text-gray-500 hover:text-gray-700'
           }
         >
-          Corporate
+          Virksomhed
         </NavLink>
       </div>
       <Outlet />

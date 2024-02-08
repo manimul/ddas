@@ -1,16 +1,23 @@
-import { ActionFunctionArgs } from '@remix-run/node';
-import { Form } from '@remix-run/react';
+import { ActionFunctionArgs, json } from '@remix-run/node';
+import { Form, useActionData } from '@remix-run/react';
 
 export async function action({ request }: ActionFunctionArgs) {
   let formData = await request.formData();
+
   console.log(formData.get('name'));
   console.log(formData.get('email'));
   console.log(formData.get('besked'));
 
-  return null;
+  return json({ success: true, message: 'Tak for din besked!' });
+}
+
+interface ActionData {
+  message: string;
 }
 
 export default function Example() {
+  let actionData = useActionData<ActionData>();
+
   return (
     <section className=''>
       <div className=' grid  py-4  md:py-8 mx-auto md:gap-8 xl:gap-0 lg:py-10 lg:grid-cols-12'>
@@ -76,6 +83,7 @@ export default function Example() {
                 Send Besked
               </button>
             </fieldset>
+            {actionData?.message && <p>{actionData.message}</p>}
           </Form>
         </div>
       </div>

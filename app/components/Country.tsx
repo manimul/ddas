@@ -44,7 +44,7 @@ export function Country(props: CountryProps) {
         {title}
       </h1>
       <div className=' md:basis-1/4 space-y-4 '>
-        <MemberImage image={image} />
+        <MemberImage className='rounded-[0px] ' image={image} />
         <div className=' space-y-4 bg-white dark:bg-black py-4 h-min md:sticky top-8 border border-gray-100 dark:border-gray-800 rounded-md   -ml-6 px-6'>
           <ul>
             <h2 className='text-base pb-2  text-gray-500  '>
@@ -134,102 +134,110 @@ export function Country(props: CountryProps) {
           <SanityContent value={content} />
         ) : null}
       </div>
-      <div className='md:basis-1/4 md:px-6 flex flex-col space-y-4 bg-white dark:bg-black py-4 border border-gray-100 dark:border-gray-800 rounded-md h-min md:sticky top-8    '>
-        {cities && cities.length > 0 ? (
-          <div>
-            <h2 className='text-base pb-2   text-gray-500  '>
-              Cities of {title}
-            </h2>
-            <ul className=''>
-              {cities.map((city) => (
-                <li className='border-gray-100 border p-1 group' key={city._id}>
-                  <Link
-                    className='flex flex-row items-center space-x-2'
-                    to={city.slug}
-                  >
-                    <div className='w-1/4'>
-                      <CityImage
-                        className='rounded-none'
-                        image={city.image}
-                        nocredit
-                      />
-                    </div>
 
-                    <span className='pl-2 group-hover:translate-x-2 duration-200'>
-                      {city.title}{' '}
-                      <MoveRight className='hidden group-hover:inline-flex space-x-2' />
-                    </span>
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-        ) : null}
-
-        <div>
-          {' '}
-          {props.eventsData && props.eventsData.length > 0 ? (
-            <>
-              <hr className='py-3 opacity-50'></hr>
-              <h2 className='text-base  pb-2   text-gray-500  '>
-                {title} Arrangementer
+      {((cities && cities.length > 0) ||
+        (props.eventsData && props.eventsData.length > 0) ||
+        (props.newsData && props.newsData.length > 0)) && (
+        <div className='md:basis-1/4 md:px-6 flex flex-col space-y-4 bg-white dark:bg-black py-4 border border-gray-100 dark:border-gray-800 rounded-md h-min md:sticky top-8    '>
+          {cities && cities.length > 0 ? (
+            <div>
+              <h2 className='text-base pb-2   text-gray-500  '>
+                Cities of {title}
               </h2>
-              <ul className='space-y-2'>
-                {props.eventsData.map((event) => (
+              <ul className=''>
+                {cities.map((city) => (
                   <li
-                    className='opacity-75 hover:opacity-100  group hover:underline duration-100 pointer '
-                    key={event._id}
+                    className='border-gray-100 border p-1 group'
+                    key={city._id}
                   >
                     <Link
-                      className='flex flex-row justify-between'
-                      to={
-                        '../../../arrangementer/kommende-arrangementer/' +
-                        event.slug
-                      }
+                      className='flex flex-row items-center space-x-2'
+                      to={city.slug}
                     >
-                      {event.date && (
-                        <span className='text-left'>
-                          {new Date(event.date).toLocaleDateString('da-DK', {
-                            month: 'short',
-                            day: 'numeric',
-                          })}
-                        </span>
-                      )}
-                      <span className='pl-4 group-hover:text-orange-500 group-hover:translate-x-2 duration-200'>
-                        {event.title}
+                      <div className='w-1/4'>
+                        <CityImage
+                          className='rounded-none'
+                          image={city.image}
+                          nocredit
+                        />
+                      </div>
+
+                      <span className='pl-2 group-hover:translate-x-2 duration-200'>
+                        {city.title}{' '}
+                        <MoveRight className='hidden group-hover:inline-flex space-x-2' />
                       </span>
                     </Link>
                   </li>
                 ))}
               </ul>
-            </>
+            </div>
           ) : null}
-        </div>
-        <div>
-          {props.newsData && props.newsData.length > 0 ? (
-            <>
-              <hr className='py-3 opacity-50'></hr>
-              <h2 className='text-base pb-2   text-gray-500  '>
-                {title} Nyheder
-              </h2>
-              <ul className='space-y-4 '>
-                {props.newsData.map((news) => (
-                  <li className='group' key={news._id}>
-                    <Link to={'../../../nyheder/' + news.slug}>
-                      <NewsImage image={news.image} />
 
-                      <span className='opacity-75 group-hover:underline  group-hover:opacity-100'>
-                        {' '}
-                        {news.title}
-                      </span>
-                    </Link>
-                  </li>
-                ))}
-              </ul>{' '}
-            </>
-          ) : null}
+          <div>
+            {' '}
+            {props.eventsData && props.eventsData.length > 0 ? (
+              <>
+                <hr className='py-3 opacity-50'></hr>
+                <h2 className='text-base  pb-2   text-gray-500  '>
+                  {title} Arrangementer
+                </h2>
+                <ul className='space-y-2'>
+                  {props.eventsData.map((event) => (
+                    <li
+                      className='opacity-75 hover:opacity-100  group hover:underline duration-100 pointer '
+                      key={event._id}
+                    >
+                      <Link
+                        className='flex flex-row justify-between'
+                        to={
+                          '../../../arrangementer/kommende-arrangementer/' +
+                          event.slug
+                        }
+                      >
+                        {event.date && (
+                          <span className='text-left'>
+                            {new Date(event.date).toLocaleDateString('da-DK', {
+                              month: 'short',
+                              day: 'numeric',
+                            })}
+                          </span>
+                        )}
+                        <span className='pl-4 group-hover:text-orange-500 group-hover:translate-x-2 duration-200'>
+                          {event.title}
+                        </span>
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </>
+            ) : null}
+          </div>
+          <div>
+            {props.newsData && props.newsData.length > 0 ? (
+              <>
+                <hr className='py-3 opacity-50'></hr>
+                <h2 className='text-base pb-2   text-gray-500  '>
+                  {title} Nyheder
+                </h2>
+                <ul className='space-y-4 '>
+                  {props.newsData.map((news) => (
+                    <li className='group' key={news._id}>
+                      <Link to={'../../../nyheder/' + news.slug}>
+                        <NewsImage image={news.image} />
+
+                        <span className='opacity-75 group-hover:underline  group-hover:opacity-100'>
+                          {' '}
+                          {news.title}
+                        </span>
+                      </Link>
+                    </li>
+                  ))}
+                </ul>{' '}
+              </>
+            ) : null}
+          </div>
         </div>
-      </div>
+      )}
     </div>
   );
 }

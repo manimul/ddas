@@ -98,11 +98,17 @@ export default function OmArrangementer() {
   return (
     <>
       <div className='grid md:grid-cols-8 gap-6 '>
-        <div className=' col-span-4 space-y-4'>
+        <div className=' col-span-4 space-y-3'>
           <h1 className='text-4xl '>{title}</h1>
           {content && content?.length > 0 ? (
             <SanityContent value={content} />
           ) : null}
+          <Link
+            className='text-2xl hover:underline hover:text-orange-500'
+            to='../ansog-om-medlemskab'
+          >
+            Er du interesseret i at blive medlem?
+          </Link>
         </div>
         <div className='hidden md:block col-span-4'>
           <MemberImage image={image} />

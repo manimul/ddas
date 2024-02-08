@@ -165,7 +165,7 @@ export default function Index() {
           <h2 className='text-2xl py-4 leading-loose text-[#ff9602]'>
             Kommende Arrangementer
           </h2>
-          <Events events={eventsData} />
+          <Events events={eventsData} limit={1} />
         </section>
         <MemberCTA />
 

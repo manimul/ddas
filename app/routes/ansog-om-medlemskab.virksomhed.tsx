@@ -24,58 +24,62 @@ interface ActionData {
   message: string;
 }
 
-export default function Personligt() {
+export default function Virksomhed() {
   const getYears = () => {
     const currentYear = new Date().getFullYear();
     return Array.from({ length: 100 }, (v, i) => currentYear - i);
   };
-
   let actionData = useActionData<ActionData>();
 
   return (
     <div className='grid md:grid-cols-8 gap-6 '>
-      <div className=' col-span-4 space-y-4'>
-        <div className='membership-page space-y-2'>
-          <h1 className='text-lg text-orange-400'>Personligt Medlem</h1>
+      <div className=' col-span-4 space-y-4 md:pr-12'>
+        <div className='corporate-membership-page space-y-2'>
+          <h1 className='text-lg text-orange-400'>Virksomhedsmedlem</h1>
+
           <h2 className='text-4xl [membership-title]'>
-            Bliv medlem af Det Danske Afrika Selskab i dag
+            Bliv virksomhedsmedlem af Det Danske Afrika Selskab i dag
           </h2>
           <p className='md:text-lg md:leading-8 text-gray-600 dark:text-gray-300'>
-            Påbegynd din rejse med os i Det Danske Afrika Selskab ved at blive
-            personligt medlem. Det er en enkel proces – udfyld blot og indsend
-            formularen nedenfor. Sørg for at udfylde hver sektion, og glem ikke
-            at dele dine unikke oplevelser med og passion for Afrika. Din
-            ansøgning vil blive gennemgået af vores bestyrelse, og vi vil give
-            dig besked, når den er godkendt.
+            Påbegynd jeres rejse med os i Det Danske Afrika Selskab ved at blive
+            virksomhedsmedlem. Processen er enkel – udfyld blot og indsend
+            formularen nedenfor. Sørg for at udfylde alle felter, og del de
+            unikke erfaringer eller interesser, jeres firma har i Afrika. Jeres
+            ansøgning vil blive gennemgået af vores bestyrelse, og I vil få
+            besked, når den er godkendt.
           </p>
           <h3 className='text-2xl font-bold'>Hvorfor blive medlem?</h3>
           <p className='md:text-lg md:leading-8 text-gray-600 dark:text-gray-300'>
-            At være en del af vores selskab betyder, at du tilslutter dig et
-            fællesskab af individer, der deler din interesse for Afrika. Uanset
-            om det er kulturen, menneskene, landskaberne eller specifikke
-            oplevelser, der trækker dig, er vi her for at udforske det sammen.
+            At blive en del af vores selskab betyder, at jeres firma tilslutter
+            sig et netværk af virksomheder og individer, der deler jeres passion
+            for Afrika. Uanset om det er kulturen, menneskene, landskaberne
+            eller specifikke forretningsmuligheder, der tiltrækker jer, er vi
+            her for at udforske og vokse sammen.
           </p>
           <h3 className='text-2xl font-bold'>Møder og sammenkomster</h3>
           <p className='md:text-lg md:leading-8 text-gray-600 dark:text-gray-300'>
-            Vi arrangerer møder og sammenkomster til meget rimelige priser.
-            Detaljer og omkostninger vil blive oplyst med hver eventinvitation,
-            så du altid ved, hvad du kan forvente.
+            Vi arrangerer møder og sammenkomster til meget rimelige priser,
+            under de samme fordelagtige vilkår og priser som for vores
+            individuelle medlemmer. Detaljer og omkostninger vil blive oplyst
+            med hver eventinvitation, så I altid ved, hvad I kan forvente.
           </p>
           <h3 className='text-2xl font-bold'>Medlemsgebyr</h3>
           <p className='md:text-lg md:leading-8 text-gray-600 dark:text-gray-300'>
-            Det årlige medlemsgebyr er kun 250 DKK per medlem. Dette nominelle
-            gebyr hjælper os med at dække omkostningerne ved vores arrangementer
-            og initiativer, så vi kan fortsætte med at tilbyde stor værdi til
-            vores fællesskab.
+            Det årlige medlemsgebyr for virksomhedsmedlemmer er tilpasset
+            således, at op til fire medarbejdere fra jeres firma kan deltage i
+            hvert af selskabets arrangementer. Dette gebyr muliggør vores
+            bestræbelser på at organisere arrangementer og initiativer, hvilket
+            tillader os at fortsætte med at tilbyde stor værdi til vores
+            fællesskab.
           </p>
           <p className='md:text-lg md:leading-8 text-gray-600 dark:text-gray-300'>
-            Bliv medlem i dag og vær en del af et selskab, der fejrer og lærer
-            fra det diverse og rige tæppe, som er Afrika. Vi glæder os til at
-            byde dig velkommen!
+            Bliv medlem i dag og bliv en del af et selskab, der fejrer og lærer
+            fra det diverse og rige tæppe, som er Afrika. Vi ser frem til at
+            byde jer velkommen!
           </p>
         </div>
 
-        <p className='text-2xl'> Det årlige kontingent er kr. 250 per medlem</p>
+        <p className='text-2xl'>Det årlige medlemskab er 5000 kr.</p>
       </div>
 
       <Form
@@ -83,7 +87,7 @@ export default function Personligt() {
         method='post'
         style={{
           backgroundImage:
-            "url('https://cdn.midjourney.com/7f1b20ca-c243-4a2c-8feb-998de0488f14/0_2.webp')",
+            "url('https://cdn.midjourney.com/3aa676ab-27e9-4b9c-abcd-0e0ab8768ecb/0_0.webp')",
           width: 'auto',
           height: '100%',
         }}
@@ -99,7 +103,7 @@ export default function Personligt() {
             <input
               type='text'
               name='name'
-              className='w-full rounded-lg border-gray-200 bg-white dark:bg-black p-4 pe-12 text-sm shadow-sm'
+              className='w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm'
               placeholder='Indtast navn'
             />
           </div>
@@ -110,7 +114,7 @@ export default function Personligt() {
             <input
               type='text'
               name='adresse'
-              className='w-full rounded-lg border-gray-200 bg-white dark:bg-black p-4 pe-12 text-sm shadow-sm'
+              className='w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm'
               placeholder='Indtast Adresse'
             />
           </div>
@@ -121,7 +125,7 @@ export default function Personligt() {
             <input
               type='number'
               name='telefonnummer'
-              className='w-full rounded-lg border-gray-200 bg-white dark:bg-black p-4 pe-12 text-sm shadow-sm'
+              className='w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm'
               placeholder='Indtast Telefonnummer'
             />
           </div>
@@ -132,7 +136,7 @@ export default function Personligt() {
             <input
               type='text'
               name='postnummer'
-              className='w-full rounded-lg border-gray-200 bg-white dark:bg-black p-4 pe-12 text-sm shadow-sm'
+              className='w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm'
               placeholder='Indtast Postnummer o By'
             />
           </div>
@@ -143,7 +147,7 @@ export default function Personligt() {
             <input
               type='email'
               name='email'
-              className='w-full rounded-lg border-gray-200 bg-white dark:bg-black p-4 pe-12 text-sm shadow-sm'
+              className='w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm'
               placeholder='Indtast e-mail'
             />
           </div>
@@ -152,7 +156,7 @@ export default function Personligt() {
               Fødselsår
             </label>
             <select
-              className='w-full rounded-lg border-gray-200 bg-white dark:bg-black p-4 pe-12 text-sm shadow-sm'
+              className='w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm'
               id='year-select'
             >
               {getYears().map((year) => (
@@ -170,7 +174,7 @@ export default function Personligt() {
               rows={5}
               id='message'
               name='message'
-              className='w-full rounded-lg border-gray-200 bg-white dark:bg-black p-4 pe-12 text-sm shadow-sm'
+              className='w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm'
               placeholder='Beskrivelse af din afrikaerfaring'
             />
           </div>
@@ -186,24 +190,4 @@ export default function Personligt() {
       </Form>
     </div>
   );
-
-  {
-    /* 
-    <Form className='bg-gray-200' schema={schema}>
-      {({ Field, Errors, Button }) => (
-        <>
-          <Field
-            className='border border-black'
-            name='firstName'
-            label='First name'
-          />
-          <Field className='border border-black' name='email' label='E-mail' />
-          <em>You'll hear from us at this address 👆🏽</em>
-          <Errors />
-          <Button />
-        </>
-      )}
-    </Form>
-  */
-  }
 }

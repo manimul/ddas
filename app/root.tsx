@@ -43,6 +43,10 @@ export const links: LinksFunction = () => {
       href: 'https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@500;700&family=Inter:wght@500;700;800&family=PT+Serif:ital,wght@0,400;0,700;1,400;1,700&display=swap',
       rel: 'stylesheet',
     },
+    {
+      href: 'https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap',
+      rel: 'stylesheet',
+    },
   ];
 };
 
