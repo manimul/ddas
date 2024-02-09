@@ -34,7 +34,7 @@ export default function Personligt() {
 
   return (
     <div className='grid md:grid-cols-8 gap-6 '>
-      <div className=' col-span-4 space-y-4'>
+      <div className=' col-span-4 space-y-4 md:pr-12'>
         <div className='membership-page space-y-2'>
           <h1 className='text-lg text-orange-400'>Personligt Medlem</h1>
           <h2 className='text-4xl [membership-title]'>
