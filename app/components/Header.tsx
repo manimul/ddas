@@ -97,7 +97,7 @@ export function Header(props: LayoutProps) {
                   : 'font-light text-gray-500 hover:text-gray-700'
             }
           >
-            Nyheder{' '}
+            Media
           </NavLink>
           <NavLink
             to='kontakt'
@@ -160,7 +160,7 @@ export function Header(props: LayoutProps) {
               className='py-3'
               onClick={() => setNavbar(!navbar)}
             >
-              Nyheder{' '}
+              Media
             </Link>
             <Link
               to='kontakt'

@@ -23,34 +23,21 @@ export function Newses(props: NewsesProps) {
   const remainingNews = newses.slice(1);
 
   return (
-    <div className=' border-gray-100 '>
+    <>
       <Link
         prefetch='intent'
         className='grid grid-cols-1 md:grid-cols-8 pb-6 gap-4 	'
         relative='path'
         to={'../../nyheder/' + firstNews?.slug}
       >
-        <div className='col-span-3'>
-          <NewsImage image={firstNews.image} />
-        </div>
-        <div className='col-span-4 space-y-2'>
+        <NewsImage className='col-span-3' image={firstNews.image} />
+
+        <div className='col-span-4 space-y-1'>
           <h1>Fremhævede nyheder</h1>
-          <h2>
-            {firstNews?.slug ? (
-              <Link
-                prefetch='intent'
-                relative='path'
-                to={'../../nyheder/' + firstNews?.slug}
-                className=' text-bold pt-4 text-xl tracking-tighter transition-colors duration-100 ease-in-out  lg:text-4xl'
-              >
-                {firstNews.title}
-              </Link>
-            ) : (
-              <span className='pt-4 text-xl tracking-tighter'>
-                {firstNews.title}
-              </span>
-            )}
+          <h2 className='text-bold pt-4 text-xl tracking-tighter transition-colors duration-100 ease-in-out  lg:text-4xl'>
+            {firstNews.title}
           </h2>
+
           {firstNews.publishedDate && (
             <div>
               <span className='text-base opacity-40'>
@@ -62,23 +49,12 @@ export function Newses(props: NewsesProps) {
               </span>
             </div>
           )}
-          <p className='text-base opacity-75 pb-4   '>{firstNews.extract}</p>
-          {firstNews?.slug ? (
-            <Link
-              prefetch='intent'
-              relative='path'
-              to={'../../nyheder/' + firstNews?.slug}
-              className='underline opacity-75 text-orange-500 hover:opacity-100'
-            >
-              Lær mere
-              {/* Makes this entire block clickable */}
-              {/* <span className="absolute inset-0" /> */}
-            </Link>
-          ) : (
-            <span className='pt-4 text-xl font-bold tracking-tighter'>
-              {firstNews.title}
-            </span>
-          )}
+
+          <p className='text-base opacity-75 pb-4'>{firstNews.extract}</p>
+
+          <span className='underline opacity-75 text-orange-500 hover:opacity-100'>
+            Lær mere
+          </span>
         </div>
       </Link>
 
@@ -93,26 +69,10 @@ export function Newses(props: NewsesProps) {
               relative='path'
               to={'../../nyheder/' + news?.slug}
             >
-              <div className=' '>
-                <NewsImage image={news.image} />
-              </div>
-              <h2 className=' '>
-                {news?.slug ? (
-                  <Link
-                    prefetch='intent'
-                    relative='path'
-                    to={'../../nyheder/' + news?.slug}
-                    className='text-bold pt-4 text-base md:text-xl tracking-tighter transition-colors duration-100 ease-in-out  lg:text-xl'
-                  >
-                    {news.title}
-                    {/* Makes this entire block clickable */}
-                    {/* <span className="absolute inset-0" /> */}
-                  </Link>
-                ) : (
-                  <span className='pt-4 text-base md:text-xl tracking-tighter'>
-                    {news.title}
-                  </span>
-                )}
+              <NewsImage image={news.image} />
+
+              <h2 className='text-bold pt-4 text-base md:text-xl tracking-tighter transition-colors duration-100 ease-in-out  lg:text-xl'>
+                {news.title}
               </h2>
 
               <div className=' flex flex-col space-y-2  '>
@@ -130,30 +90,20 @@ export function Newses(props: NewsesProps) {
                     </span>
                   </div>
                 )}
+
                 <p className='hidden md:block  text-base  text-gray-600 dark:text-gray-300  	'>
                   {news.extract}
                 </p>
 
-                {news?.slug ? (
-                  <Link
-                    prefetch='intent'
-                    relative='path'
-                    to={'../../nyheder/' + news?.slug}
-                    className='underline opacity-75 text-orange-500 hover:opacity-100'
-                  >
-                    Lær mere
-                    <MoveRight className='hidden group-hover:inline-flex space-x-2' />
-                  </Link>
-                ) : (
-                  <span className='pt-4 text-xl font-bold tracking-tighter'>
-                    {news.title}
-                  </span>
-                )}
+                <span className='underline opacity-75 text-orange-500 hover:opacity-100'>
+                  Lær mere
+                  <MoveRight className='hidden group-hover:inline-flex space-x-2' />
+                </span>
               </div>
             </Link>
           </li>
         ))}
       </ul>
-    </div>
+    </>
   );
 }

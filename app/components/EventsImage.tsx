@@ -16,7 +16,7 @@ export function EventsImage(props: MemberImageProps) {
   const combinedClass = `${defaultClass} ${className || ''}`; // Merge className with default
 
   return (
-    <div className=' '>
+    <>
       {image ? (
         <>
           <img
@@ -37,6 +37,6 @@ export function EventsImage(props: MemberImageProps) {
       ) : (
         <div className='flex aspect-square w-full items-center justify-center bg-gray-100 text-gray-500'></div>
       )}
-    </div>
+    </>
   );
 }

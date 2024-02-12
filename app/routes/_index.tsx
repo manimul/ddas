@@ -160,28 +160,29 @@ export default function Index() {
         </p>
       </section>
 
-      <div className='grid grid-cols-1 gap-6 lg:gap-12'>
-        {/* <Records records={recordsData} /> */}
+      <section id='arrangementer'>
+        <h2 className='text-2xl py-4 leading-loose text-[#ff9602]'>
+          Kommende Arrangementer
+        </h2>
+        <Events events={eventsData} limit={1} />
+      </section>
 
-        <section>
-          <h2 className='text-2xl py-4 leading-loose text-[#ff9602]'>
-            Kommende Arrangementer
-          </h2>
-          <Events events={eventsData} limit={1} />
-        </section>
+      <section id='personligt-medlem-cta'>
         <MemberCTA />
-        <section>
-          <Medlem></Medlem>
-        </section>
+      </section>
 
-        <section>
-          <h2 className='text-2xl pb-4 leading-loose text-[#FFB102]'>
-            Nyheder
-          </h2>
-          <Newses newses={newsesData} />
-        </section>
+      <section id='bliv-medlem'>
+        <Medlem></Medlem>
+      </section>
+
+      <section id='nyheder'>
+        <h2 className='text-2xl pb-4 leading-loose text-[#FFB102]'>Nyheder</h2>
+        <Newses newses={newsesData} />
+      </section>
+
+      <section id='corporate-medlem-cta'>
         <CorporateCTA />
-      </div>
+      </section>
     </>
   );
 }

@@ -13,13 +13,15 @@ export function NewsImage(props: NewsImageProps) {
 
   const defaultClass =
     'h-auto w-full object-cover rounded-lg shadow-black transition-all duration-300 group-hover:shadow-2xl group-hover:shadow-gray-300 dark:group-hover:shadow-gray-600 ';
-  const combinedClass = `${defaultClass} ${className || ''}`; // Merge className with default
+
+  const containerClass = 'aspect-video';
+  const combinedClass = `${containerClass} ${className || ''}`; // Merge className with default
 
   return (
-    <div className=' aspect-video '>
+    <div className={combinedClass}>
       {image ? (
         <img
-          className={combinedClass} // Use the combined class
+          className={defaultClass} // Use the combined class
           src={urlBuilder({ projectId, dataset })
             // @ts-ignore
             .image(image.asset._ref)
