@@ -26,6 +26,8 @@ export function EventsImage(props: MemberImageProps) {
               .image(image.asset._ref)
               .height(500)
               .width(600)
+              .maxHeight(500)
+              .maxWidth(600)
               .fit('max')
               .auto('format')
               .url()}

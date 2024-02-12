@@ -1,5 +1,5 @@
 import { Link } from '@remix-run/react';
-import { NewsImage } from '~/components/NewsImage';
+import { NewsThumb } from '~/components/NewsThumb';
 import type { NewsStub } from '~/types/news';
 import { SanityContent } from './SanityContent';
 import { MoveRight } from 'lucide-react';
@@ -30,7 +30,7 @@ export function Newses(props: NewsesProps) {
         relative='path'
         to={'../../nyheder/' + firstNews?.slug}
       >
-        <NewsImage className='col-span-3' image={firstNews.image} />
+        <NewsThumb className='col-span-3' image={firstNews.image} />
 
         <div className='col-span-4 space-y-1'>
           <h1>Fremhævede nyheder</h1>
@@ -69,7 +69,7 @@ export function Newses(props: NewsesProps) {
               relative='path'
               to={'../../nyheder/' + news?.slug}
             >
-              <NewsImage image={news.image} />
+              <NewsThumb image={news.image} />
 
               <h2 className='text-bold pt-4 text-base md:text-xl tracking-tighter transition-colors duration-100 ease-in-out  lg:text-xl'>
                 {news.title}
