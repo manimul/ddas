@@ -11,6 +11,7 @@ declare global {
       SANITY_STUDIO_API_VERSION: string;
       SANITY_FRONTEND_URL: string;
       SANITY_STUDIO_URL: string;
+      POSTMARK_SERVER_TOKEN: string;
     };
   }
 }
@@ -19,6 +20,7 @@ const {
   SANITY_STUDIO_PROJECT_ID,
   SANITY_STUDIO_DATASET,
   SANITY_STUDIO_API_VERSION,
+  POSTMARK_SERVER_TOKEN,
 } = typeof document === 'undefined' ? process.env : window.ENV;
 
 export const projectId = SANITY_STUDIO_PROJECT_ID!;
