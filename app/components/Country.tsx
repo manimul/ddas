@@ -2,7 +2,16 @@ import { CountryDocument } from '~/types/country';
 import { CountryStub } from '~/types/country';
 import { SanityContent } from '~/components/SanityContent';
 import { MemberImage } from '~/components/MemberImage';
-import { Move, MoveLeft } from 'lucide-react';
+import {
+  CalendarCheck2,
+  Link2,
+  LocateIcon,
+  MapPin,
+  Move,
+  MoveLeft,
+  Newspaper,
+  Users,
+} from 'lucide-react';
 import { MoveRight } from 'lucide-react';
 import { ExternalLink } from 'lucide-react';
 import { Link } from '@remix-run/react';
@@ -47,8 +56,9 @@ export function Country(props: CountryProps) {
         <MemberImage className='rounded-[0px] ' image={image} />
         <div className=' space-y-4 bg-white dark:bg-black py-4 h-min md:sticky top-8 border border-gray-100 dark:border-gray-800 rounded-md   -ml-6 px-6'>
           <ul>
-            <h2 className='text-base pb-2  text-gray-500  '>
-              {title} relaterede links
+            <h2 className='text-base pb-2 inline-flex  text-gray-500 space-x-2  '>
+              <Link2 />
+              {` `} <span>{title} links</span>
             </h2>
 
             {landeprofil && (
@@ -87,8 +97,9 @@ export function Country(props: CountryProps) {
             <div>
               <hr className='py-3 opacity-50'></hr>
 
-              <h2 className='text-base pb-2   text-gray-500  '>
-                Medlemmer med ekspertise i {title}
+              <h2 className='text-base pb-2 inline-flex space-x-2  text-gray-500  '>
+                <Users />
+                <span>Medlemmer med ekspertise i {title}</span>
               </h2>
               <ul className='grid grid-cols-3 gap-3 text-center'>
                 {props.membersData.map((member) => (
@@ -141,8 +152,8 @@ export function Country(props: CountryProps) {
         <div className='md:basis-1/4 md:px-6 flex flex-col space-y-4 bg-white dark:bg-black py-4 border border-gray-100 dark:border-gray-800 rounded-md h-min md:sticky top-8    '>
           {cities && cities.length > 0 ? (
             <div>
-              <h2 className='text-base pb-2   text-gray-500  '>
-                Cities of {title}
+              <h2 className='text-base pb-2 inline-flex space-x-2   text-gray-500  '>
+                <MapPin /> Cities of {title}
               </h2>
               <ul className=''>
                 {cities.map((city) => (
@@ -178,8 +189,9 @@ export function Country(props: CountryProps) {
             {props.eventsData && props.eventsData.length > 0 ? (
               <>
                 <hr className='py-3 opacity-50'></hr>
-                <h2 className='text-base  pb-2   text-gray-500  '>
-                  {title} Arrangementer
+                <h2 className='text-base  pb-2 inline-flex space-x-2  text-gray-500  '>
+                  <CalendarCheck2 />
+                  <span> {title} Arrangementer</span>
                 </h2>
                 <ul className='space-y-2'>
                   {props.eventsData.map((event) => (
@@ -216,8 +228,8 @@ export function Country(props: CountryProps) {
             {props.newsData && props.newsData.length > 0 ? (
               <>
                 <hr className='py-3 opacity-50'></hr>
-                <h2 className='text-base pb-2   text-gray-500  '>
-                  {title} Nyheder
+                <h2 className='text-base pb-2 inline-flex space-x-2   text-gray-500  '>
+                  <Newspaper /> <span>{title} Nyheder</span>
                 </h2>
                 <ul className='space-y-4 '>
                   {props.newsData.map((news) => (

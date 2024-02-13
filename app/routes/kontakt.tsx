@@ -1,6 +1,70 @@
-import { ActionFunctionArgs, json } from '@remix-run/node';
+import { ActionFunctionArgs, ActionFunction, json } from '@remix-run/node';
 import { Form, useActionData } from '@remix-run/react';
 
+// Function to send an email using Postmark
+async function sendEmail({
+  name,
+  email,
+  message,
+}: {
+  name: string;
+  email: string;
+  message: string;
+}) {
+  const serverToken = process.env.POSTMARK_SERVER_TOKEN;
+
+  // Check if the server token is not undefined
+  if (typeof serverToken !== 'string') {
+    throw new Error(
+      'Postmark server token is not set in environment variables.'
+    );
+  }
+
+  const response = await fetch('https://api.postmarkapp.com/email', {
+    method: 'POST',
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+      'X-Postmark-Server-Token': serverToken,
+    },
+    body: JSON.stringify({
+      From: 'mark@bambwa.com', // Replace with your sender signature
+      To: 'mark@bambwa.com', // Replace with your target email address
+      Subject: 'New contact form submission',
+      HtmlBody: `<html><body><p>Name: ${name}</p><p>Email: ${email}</p><p>Message: ${message}</p></body></html>`,
+      TextBody: `Name: ${name}\nEmail: ${email}\nMessage: ${message}`,
+    }),
+  });
+
+  return response.json();
+}
+
+export const action: ActionFunction = async ({ request }) => {
+  let formData = await request.formData();
+
+  const name = formData.get('name');
+  const email = formData.get('email');
+  const message = formData.get('besked'); // Ensure this matches your form's field name
+
+  try {
+    const emailResponse = await sendEmail({
+      name: name?.toString() || '',
+      email: email?.toString() || '',
+      message: message?.toString() || '',
+    });
+    console.log(emailResponse); // Log response for debugging
+
+    return json({ success: true, message: 'Tak for din besked!' });
+  } catch (error) {
+    console.error('Email sending error:', error);
+    return json({
+      success: false,
+      message: 'Der opstod en fejl under afsendelsen af din besked.',
+    });
+  }
+};
+
+/*
 export async function action({ request }: ActionFunctionArgs) {
   let formData = await request.formData();
 
@@ -10,6 +74,9 @@ export async function action({ request }: ActionFunctionArgs) {
 
   return json({ success: true, message: 'Tak for din besked!' });
 }
+
+
+*/
 
 interface ActionData {
   message: string;
