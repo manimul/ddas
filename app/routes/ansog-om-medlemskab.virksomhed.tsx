@@ -1,24 +1,63 @@
 import { Form } from '@remix-run/react';
-import { ActionFunctionArgs, json } from '@remix-run/node';
+import { ActionFunctionArgs, ActionFunction, json } from '@remix-run/node';
 import { useActionData } from '@remix-run/react';
 import { z } from 'zod';
+import { medlemFormZ, MedlemFormDocument } from '~/types/medlemForm';
 //import { Form } from '~/components/Form';
 
-const schema = z.object({
-  firstName: z.string().min(1),
-  email: z.string().min(1).email(),
-  //howYouFoundOutAboutUs: z.enum(['fromAFriend', 'google']),
-});
+async function sendEmail(params: MedlemFormDocument) {
+  const { navn, adresse, telefonnummer, postnummer, email, fodelsar, besked } =
+    params;
+  const serverToken = process.env.POSTMARK_SERVER_TOKEN;
 
-export async function action({ request }: ActionFunctionArgs) {
+  if (typeof serverToken !== 'string') {
+    throw new Error(
+      'Postmark server token is not set in environment variables.'
+    );
+  }
+
+  const response = await fetch('https://api.postmarkapp.com/email', {
+    method: 'POST',
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+      'X-Postmark-Server-Token': serverToken,
+    },
+    body: JSON.stringify({
+      From: 'mark@bambwa.com',
+      To: 'mark@bambwa.com',
+      Subject: 'New contact form submission from Corporate',
+      HtmlBody: `<html><body><p>Navn: ${navn}</p><p>Email: ${email}</p><p>Besked: ${besked}</p><p>Adresse: ${adresse}</p><p>Postnummber och By: ${postnummer} </p><p>fodelsar: ${fodelsar} </p><p>Telefon: ${telefonnummer} </p></body></html>`,
+      TextBody: `Navn: ${navn}\nEmail: ${email}\nBesked: ${besked} \nAdress: ${adresse} \nPostnummer och By: ${postnummer} \nFodelsar: ${fodelsar} \nTelefon: ${telefonnummer}`,
+    }),
+  });
+  return response.json();
+}
+
+export const action: ActionFunction = async ({ request }) => {
   let formData = await request.formData();
 
-  console.log(formData.get('name'));
-  console.log(formData.get('email'));
-  console.log(formData.get('besked'));
+  const emailParams: MedlemFormDocument = {
+    navn: formData.get('name')?.toString() || '',
+    adresse: formData.get('adresse')?.toString() || '',
+    telefonnummer: formData.get('telefonnummer')?.toString() || '',
+    postnummer: formData.get('postnummer')?.toString() || '',
+    email: formData.get('email')?.toString() || '',
+    fodelsar: parseInt(formData.get('fodelsar')?.toString() || '') || 0,
+    besked: formData.get('message')?.toString() || '',
+  };
 
-  return json({ success: true, message: 'Tak for din besked!' });
-}
+  const validatedParams = medlemFormZ.parse(emailParams);
+
+  try {
+    const emailResponse = await sendEmail(validatedParams);
+    console.log(emailResponse);
+    return json({ success: true, message: 'Tak for din besked!' });
+  } catch (error) {
+    console.error('Email sending error:', error);
+    return json({ success: false, message: 'Der skete en fejl' });
+  }
+};
 
 interface ActionData {
   message: string;
