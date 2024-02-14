@@ -1,16 +1,12 @@
 import { ActionFunctionArgs, ActionFunction, json } from '@remix-run/node';
 import { Form, useActionData } from '@remix-run/react';
+import { z } from 'zod';
+import { BasicContactDocument, basicContactZ } from '~/types/basicContact';
 
 // Function to send an email using Postmark
-async function sendEmail({
-  name,
-  email,
-  message,
-}: {
-  name: string;
-  email: string;
-  message: string;
-}) {
+// This function is asynchronous and returns a Promise
+async function sendEmail(params: BasicContactDocument) {
+  const { navn, email, besked } = params;
   const serverToken = process.env.POSTMARK_SERVER_TOKEN;
 
   // Check if the server token is not undefined
@@ -19,7 +15,7 @@ async function sendEmail({
       'Postmark server token is not set in environment variables.'
     );
   }
-
+  // Send an email using the Postmark API
   const response = await fetch('https://api.postmarkapp.com/email', {
     method: 'POST',
     headers: {
@@ -27,33 +23,38 @@ async function sendEmail({
       'Content-Type': 'application/json',
       'X-Postmark-Server-Token': serverToken,
     },
+    // Convert the email parameters to a JSON string
     body: JSON.stringify({
       From: 'mark@bambwa.com', // Replace with your sender signature
       To: 'mark@bambwa.com', // Replace with your target email address
       Subject: 'New contact form submission',
-      HtmlBody: `<html><body><p>Name: ${name}</p><p>Email: ${email}</p><p>Message: ${message}</p></body></html>`,
-      TextBody: `Name: ${name}\nEmail: ${email}\nMessage: ${message}`,
+      HtmlBody: `<html><body><p>Name: ${navn}</p><p>Email: ${email}</p><p>Message: ${besked}</p></body></html>`,
+      TextBody: `Navn: ${navn}\nEmail: ${email}\nBesked: ${besked}`,
     }),
   });
-
+  // Return the response as JSON
   return response.json();
 }
 
+// Define the action function
 export const action: ActionFunction = async ({ request }) => {
   let formData = await request.formData();
 
-  const name = formData.get('name');
-  const email = formData.get('email');
-  const message = formData.get('besked'); // Ensure this matches your form's field name
+  // Create an object from the form data
+  const emailParams: BasicContactDocument = {
+    navn: formData.get('navn')?.toString() || '',
+    email: formData.get('email')?.toString() || '',
+    besked: formData.get('besked')?.toString() || '',
+  };
 
+  // Validate the form data
+  const validatedParams = basicContactZ.parse(emailParams);
+
+  // Send the email using the validated parameters
   try {
-    const emailResponse = await sendEmail({
-      name: name?.toString() || '',
-      email: email?.toString() || '',
-      message: message?.toString() || '',
-    });
+    const emailResponse = await sendEmail(validatedParams);
     console.log(emailResponse); // Log response for debugging
-
+    // Return a JSON response to the client
     return json({ success: true, message: 'Tak for din besked!' });
   } catch (error) {
     console.error('Email sending error:', error);
@@ -64,25 +65,12 @@ export const action: ActionFunction = async ({ request }) => {
   }
 };
 
-/*
-export async function action({ request }: ActionFunctionArgs) {
-  let formData = await request.formData();
-
-  console.log(formData.get('name'));
-  console.log(formData.get('email'));
-  console.log(formData.get('besked'));
-
-  return json({ success: true, message: 'Tak for din besked!' });
-}
-
-
-*/
-
+// Define the action data type
 interface ActionData {
   message: string;
 }
 
-export default function Example() {
+export default function Kontakt() {
   let actionData = useActionData<ActionData>();
 
   return (
@@ -114,7 +102,7 @@ export default function Example() {
                 </label>
                 <input
                   type='text'
-                  name='name'
+                  name='navn'
                   className='w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm'
                   placeholder='Indtast navn'
                 />
@@ -131,13 +119,13 @@ export default function Example() {
                 />
               </div>
               <div>
-                <label htmlFor='message' className='sr-only'>
+                <label htmlFor='besked' className='sr-only'>
                   Besked
                 </label>
                 <textarea
                   rows={5}
-                  id='message'
-                  name='message'
+                  id='besked'
+                  name='besked'
                   className='w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm'
                   placeholder='Indtast besked'
                 />

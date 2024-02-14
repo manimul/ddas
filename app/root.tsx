@@ -85,7 +85,6 @@ export const loader = async ({ request }: LoaderFunctionArgs) => {
       SANITY_FRONTEND_URL: frontendUrl,
       // URL of the Studio to allow requests from Presentation
       SANITY_STUDIO_URL: studioUrl,
-      POSTMARK_SERVER_TOKEN: process.env.POSTMARK_SERVER_TOKEN!,
     },
   });
 };
