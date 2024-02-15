@@ -1,12 +1,17 @@
-import { Form } from '@remix-run/react';
-import { ActionFunctionArgs, ActionFunction, json } from '@remix-run/node';
+import { Form, Outlet } from '@remix-run/react';
+import {
+  ActionFunctionArgs,
+  ActionFunction,
+  json,
+  redirect,
+} from '@remix-run/node';
 import { useActionData } from '@remix-run/react';
 import { z } from 'zod';
 import { medlemFormZ, MedlemFormDocument } from '~/types/medlemForm';
 //import { Form } from '~/components/Form';
 
 async function sendEmail(params: MedlemFormDocument) {
-  const { navn, adresse, telefonnummer, postnummer, email, fodelsar, besked } =
+  const { navn, adresse, telefonnummer, postnummer, email, fodselsar, besked } =
     params;
   const serverToken = process.env.POSTMARK_SERVER_TOKEN;
 
@@ -26,9 +31,9 @@ async function sendEmail(params: MedlemFormDocument) {
     body: JSON.stringify({
       From: 'mark@bambwa.com',
       To: 'mark@bambwa.com',
-      Subject: 'New contact form submission from Personal',
-      HtmlBody: `<html><body><p>Navn: ${navn}</p><p>Email: ${email}</p><p>Besked: ${besked}</p><p>Adresse: ${adresse}</p><p>Postnummber och By: ${postnummer} </p><p>fodelsar: ${fodelsar} </p><p>Telefon: ${telefonnummer} </p></body></html>`,
-      TextBody: `Navn: ${navn}\nEmail: ${email}\nBesked: ${besked} \nAdress: ${adresse} \nPostnummer och By: ${postnummer} \nFodelsar: ${fodelsar} \nTelefon: ${telefonnummer}`,
+      Subject: 'Ny ansøgning om personligt medlemskab',
+      HtmlBody: `<html><body><p>Navn: ${navn}</p><p>Email: ${email}</p><p>Besked: ${besked}</p><p>Adresse: ${adresse}</p><p>Postnummber och By: ${postnummer} </p><p>Fødselsår: ${fodselsar} </p><p>Telefon: ${telefonnummer} </p></body></html>`,
+      TextBody: `Navn: ${navn}\nEmail: ${email}\nBesked: ${besked} \nAdresse: ${adresse} \nPostnummer och By: ${postnummer} \nFødselsår: ${fodselsar} \nTelefon: ${telefonnummer}`,
     }),
   });
   return response.json();
@@ -37,14 +42,17 @@ async function sendEmail(params: MedlemFormDocument) {
 export const action: ActionFunction = async ({ request }) => {
   let formData = await request.formData();
 
+  console.log(formData.get('fodselsar')); // Check the actual value
+  console.log(formData.get('navn')); // Check the actual value
+
   const emailParams: MedlemFormDocument = {
-    navn: formData.get('name')?.toString() || '',
+    navn: formData.get('navn')?.toString() || '',
     adresse: formData.get('adresse')?.toString() || '',
-    telefonnummer: formData.get('telefonnummer')?.toString() || '',
+    telefonnummer: Number(formData.get('telefonnummer')) || 0,
     postnummer: formData.get('postnummer')?.toString() || '',
     email: formData.get('email')?.toString() || '',
-    fodelsar: parseInt(formData.get('fodelsar')?.toString() || '') || 0,
-    besked: formData.get('message')?.toString() || '',
+    fodselsar: Number(formData.get('fodselsar')) || 0,
+    besked: formData.get('besked')?.toString() || '',
   };
 
   const validatedParams = medlemFormZ.parse(emailParams);
@@ -52,7 +60,8 @@ export const action: ActionFunction = async ({ request }) => {
   try {
     const emailResponse = await sendEmail(validatedParams);
     console.log(emailResponse);
-    return json({ success: true, message: 'Tak for din besked!' });
+    //return json({ success: true, message: 'Tak for din besked!' });
+    return redirect('success');
   } catch (error) {
     console.error('Email sending error:', error);
     return json({ success: false, message: 'Der skete en fejl' });
@@ -116,7 +125,18 @@ export default function Personligt() {
 
         <p className='text-2xl'> Det årlige kontingent er kr. 250 per medlem</p>
       </div>
-
+      <div
+        className=' col-span-4 -mt-32  pt-32  pr-32 -mr-32 h-min bg-fixed  '
+        style={{
+          backgroundImage:
+            "url('https://cdn.midjourney.com/7f1b20ca-c243-4a2c-8feb-998de0488f14/0_2.webp')",
+          width: 'auto',
+          height: '100%',
+        }}
+      >
+        <Outlet />
+      </div>
+      {/*  
       <Form
         className=' col-span-4 -mt-32  pt-32  pr-32 -mr-32 h-min bg-fixed  '
         method='post'
@@ -132,12 +152,13 @@ export default function Personligt() {
         '
         >
           <div>
-            <label htmlFor='name' className='sr-only'>
+            <label htmlFor='navn' className='sr-only'>
               Navn
             </label>
             <input
               type='text'
-              name='name'
+              required
+              name='navn'
               className='w-full rounded-lg border-gray-200 bg-white dark:bg-black p-4 pe-12 text-sm shadow-sm'
               placeholder='Indtast navn'
             />
@@ -148,6 +169,7 @@ export default function Personligt() {
             </label>
             <input
               type='text'
+              required
               name='adresse'
               className='w-full rounded-lg border-gray-200 bg-white dark:bg-black p-4 pe-12 text-sm shadow-sm'
               placeholder='Indtast Adresse'
@@ -158,7 +180,8 @@ export default function Personligt() {
               Telefonnummer
             </label>
             <input
-              type='number'
+              type='tel'
+              required
               name='telefonnummer'
               className='w-full rounded-lg border-gray-200 bg-white dark:bg-black p-4 pe-12 text-sm shadow-sm'
               placeholder='Indtast Telefonnummer'
@@ -170,6 +193,7 @@ export default function Personligt() {
             </label>
             <input
               type='text'
+              required
               name='postnummer'
               className='w-full rounded-lg border-gray-200 bg-white dark:bg-black p-4 pe-12 text-sm shadow-sm'
               placeholder='Indtast Postnummer o By'
@@ -181,19 +205,26 @@ export default function Personligt() {
             </label>
             <input
               type='email'
+              required
               name='email'
               className='w-full rounded-lg border-gray-200 bg-white dark:bg-black p-4 pe-12 text-sm shadow-sm'
               placeholder='Indtast e-mail'
             />
           </div>
           <div>
-            <label htmlFor='fodelsar' className='opacity-50'>
+            <label htmlFor='fodselsar' className='sr-only'>
               Fødselsår
             </label>
             <select
-              className='w-full rounded-lg border-gray-200 bg-white dark:bg-black p-4 pe-12 text-sm shadow-sm'
-              id='year-select'
+              className='w-full pr-3 rounded-lg border-gray-200 bg-white dark:bg-black p-4 pe-12 text-sm shadow-sm'
+              name='fodselsar'
+              id='fodselsar'
+              required
             >
+              <option value='' disabled selected className='opacity-50'>
+                Vælg dit fødselsår
+              </option>
+
               {getYears().map((year) => (
                 <option key={year} value={year}>
                   {year}
@@ -202,13 +233,14 @@ export default function Personligt() {
             </select>
           </div>
           <div>
-            <label htmlFor='message' className='sr-only'>
+            <label htmlFor='besked' className='sr-only'>
               Besked
             </label>
             <textarea
               rows={5}
-              id='message'
-              name='message'
+              id='besked'
+              required
+              name='besked'
               className='w-full rounded-lg border-gray-200 bg-white dark:bg-black p-4 pe-12 text-sm shadow-sm'
               placeholder='Beskrivelse af din afrikaerfaring'
             />
@@ -222,7 +254,7 @@ export default function Personligt() {
           </button>
         </fieldset>
         {actionData?.message && <p>{actionData.message}</p>}
-      </Form>
+      </Form> */}
     </div>
   );
 

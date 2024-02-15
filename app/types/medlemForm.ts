@@ -8,13 +8,15 @@ import { z } from 'zod';
 // And the safety of Typescript
 // without being limited to the shape of your Sanity Schema
 export const medlemFormZ = z.object({
-  navn: z.string().nullable(),
+  navn: z.string().nullable().optional(),
+  firmanavn: z.string().nullable().optional(),
   email: z.string().nullable(),
   adresse: z.string().nullable(),
   postnummer: z.string().nullable(),
-  telefonnummer: z.string().nullable(),
-  fodelsar: z.number().nullable(),
+  telefonnummer: z.number().nullable(),
+  fodselsar: z.number().nullable().optional(),
   besked: z.string().nullable(),
+  kontaktperson: z.string().nullable().optional(),
 });
 
 export type MedlemFormDocument = z.infer<typeof medlemFormZ>;

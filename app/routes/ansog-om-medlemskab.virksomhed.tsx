@@ -1,4 +1,4 @@
-import { Form } from '@remix-run/react';
+import { Form, Outlet } from '@remix-run/react';
 import { ActionFunctionArgs, ActionFunction, json } from '@remix-run/node';
 import { useActionData } from '@remix-run/react';
 import { z } from 'zod';
@@ -6,8 +6,15 @@ import { medlemFormZ, MedlemFormDocument } from '~/types/medlemForm';
 //import { Form } from '~/components/Form';
 
 async function sendEmail(params: MedlemFormDocument) {
-  const { navn, adresse, telefonnummer, postnummer, email, fodelsar, besked } =
-    params;
+  const {
+    firmanavn,
+    adresse,
+    telefonnummer,
+    postnummer,
+    kontaktperson,
+    email,
+    besked,
+  } = params;
   const serverToken = process.env.POSTMARK_SERVER_TOKEN;
 
   if (typeof serverToken !== 'string') {
@@ -26,9 +33,9 @@ async function sendEmail(params: MedlemFormDocument) {
     body: JSON.stringify({
       From: 'mark@bambwa.com',
       To: 'mark@bambwa.com',
-      Subject: 'New contact form submission from Corporate',
-      HtmlBody: `<html><body><p>Navn: ${navn}</p><p>Email: ${email}</p><p>Besked: ${besked}</p><p>Adresse: ${adresse}</p><p>Postnummber och By: ${postnummer} </p><p>fodelsar: ${fodelsar} </p><p>Telefon: ${telefonnummer} </p></body></html>`,
-      TextBody: `Navn: ${navn}\nEmail: ${email}\nBesked: ${besked} \nAdress: ${adresse} \nPostnummer och By: ${postnummer} \nFodelsar: ${fodelsar} \nTelefon: ${telefonnummer}`,
+      Subject: 'Ny ansøgning om virksomhed medlemskab',
+      HtmlBody: `<html><body><p>Navn: ${firmanavn}</p><p>Email: ${email}</p><p>Besked: ${besked}</p><p>Adresse: ${adresse}</p><p>Postnummber och By: ${postnummer} </p><p>Kontaktperson: ${kontaktperson} </p><p>Telefon: ${telefonnummer} </p></body></html>`,
+      TextBody: `Firmanavn: ${firmanavn}\nEmail: ${email}\nBesked: ${besked} \nAdress: ${adresse} \nPostnummer och By: ${postnummer}  \nTelefon: ${telefonnummer}`,
     }),
   });
   return response.json();
@@ -38,13 +45,13 @@ export const action: ActionFunction = async ({ request }) => {
   let formData = await request.formData();
 
   const emailParams: MedlemFormDocument = {
-    navn: formData.get('name')?.toString() || '',
+    firmanavn: formData.get('firmanavn')?.toString() || '',
     adresse: formData.get('adresse')?.toString() || '',
-    telefonnummer: formData.get('telefonnummer')?.toString() || '',
+    telefonnummer: Number(formData.get('telefonnummer')) || 0,
     postnummer: formData.get('postnummer')?.toString() || '',
+    kontaktperson: formData.get('kontaktperson')?.toString() || '',
     email: formData.get('email')?.toString() || '',
-    fodelsar: parseInt(formData.get('fodelsar')?.toString() || '') || 0,
-    besked: formData.get('message')?.toString() || '',
+    besked: formData.get('besked')?.toString() || '',
   };
 
   const validatedParams = medlemFormZ.parse(emailParams);
@@ -64,10 +71,6 @@ interface ActionData {
 }
 
 export default function Virksomhed() {
-  const getYears = () => {
-    const currentYear = new Date().getFullYear();
-    return Array.from({ length: 100 }, (v, i) => currentYear - i);
-  };
   let actionData = useActionData<ActionData>();
 
   return (
@@ -121,9 +124,8 @@ export default function Virksomhed() {
         <p className='text-2xl'>Det årlige medlemskab er 5000 kr.</p>
       </div>
 
-      <Form
+      <div
         className=' col-span-4 -mt-32  pt-32  pr-32 -mr-32 h-min bg-fixed  '
-        method='post'
         style={{
           backgroundImage:
             "url('https://cdn.midjourney.com/3aa676ab-27e9-4b9c-abcd-0e0ab8768ecb/0_0.webp')",
@@ -131,102 +133,8 @@ export default function Virksomhed() {
           height: '100%',
         }}
       >
-        <fieldset
-          className=' space-y-4 shadow-2xl -ml-12 p-6 bg-[#f4f4f5] dark:bg-black dark:bg-opacity-50 bg-opacity-75 backdrop-blur-2xl
-        '
-        >
-          <div>
-            <label htmlFor='name' className='sr-only'>
-              Navn
-            </label>
-            <input
-              type='text'
-              name='name'
-              className='w-full rounded-lg border-gray-200 bg-white dark:bg-black  p-4 pe-12 text-sm shadow-sm'
-              placeholder='Indtast navn'
-            />
-          </div>
-          <div>
-            <label htmlFor='adresse' className='sr-only'>
-              Adresse
-            </label>
-            <input
-              type='text'
-              name='adresse'
-              className='w-full rounded-lg border-gray-200 bg-white dark:bg-black  p-4 pe-12 text-sm shadow-sm'
-              placeholder='Indtast Adresse'
-            />
-          </div>
-          <div>
-            <label htmlFor='telefonnummer' className='sr-only'>
-              Telefonnummer
-            </label>
-            <input
-              type='number'
-              name='telefonnummer'
-              className='w-full rounded-lg border-gray-200 bg-white dark:bg-black  p-4 pe-12 text-sm shadow-sm'
-              placeholder='Indtast Telefonnummer'
-            />
-          </div>
-          <div>
-            <label htmlFor='postnummer' className='sr-only'>
-              Postnummer Og By
-            </label>
-            <input
-              type='text'
-              name='postnummer'
-              className='w-full rounded-lg border-gray-200  bg-white dark:bg-black  p-4 pe-12 text-sm shadow-sm'
-              placeholder='Indtast Postnummer o By'
-            />
-          </div>
-          <div>
-            <label htmlFor='email' className='sr-only'>
-              E-mail
-            </label>
-            <input
-              type='email'
-              name='email'
-              className='w-full rounded-lg border-gray-200 bg-white dark:bg-black  p-4 pe-12 text-sm shadow-sm'
-              placeholder='Indtast e-mail'
-            />
-          </div>
-          <div>
-            <label htmlFor='fodelsar' className='opacity-50'>
-              Fødselsår
-            </label>
-            <select
-              className='w-full rounded-lg border-gray-200 bg-white dark:bg-black  p-4 pe-12 text-sm shadow-sm'
-              id='year-select'
-            >
-              {getYears().map((year) => (
-                <option key={year} value={year}>
-                  {year}
-                </option>
-              ))}
-            </select>
-          </div>
-          <div>
-            <label htmlFor='message' className='sr-only'>
-              Besked
-            </label>
-            <textarea
-              rows={5}
-              id='message'
-              name='message'
-              className='w-full rounded-lg border-gray-200 bg-white dark:bg-black  p-4 pe-12 text-sm shadow-sm'
-              placeholder='Beskrivelse af din afrikaerfaring'
-            />
-          </div>
-
-          <button
-            type='submit'
-            className=' uppercase text-sm  rounded-md p-4 tracking-wide opacity-75    bg-[#ffae22] text-black hover:opacity-100 hover:rounded-[30px]  duration-500     '
-          >
-            Send Besked
-          </button>
-        </fieldset>
-        {actionData?.message && <p>{actionData.message}</p>}
-      </Form>
+        <Outlet />
+      </div>
     </div>
   );
 }
