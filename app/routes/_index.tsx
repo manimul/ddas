@@ -6,6 +6,7 @@ import type { Loader as RootLoader } from '~/root';
 import { useQuery } from '~/sanity/loader';
 import { loadQuery } from '~/sanity/loader.server';
 import { EVENTS_QUERY, NEWSES_QUERY } from '~/sanity/queries';
+import { OG_IMAGE_HEIGHT, OG_IMAGE_WIDTH } from '~/routes/resource.og';
 
 import type { EventStub } from '~/types/event';
 import { eventStubsZ } from '~/types/event';
@@ -27,8 +28,31 @@ export const meta: MetaFunction<
   const rootData = matches.find((match) => match.id === `root`)?.data;
   const home = rootData ? rootData.initial.data : null;
   const title = [home?.title, home?.siteTitle].filter(Boolean).join(' | ');
+  //const ogImageUrl = home ? home.ogImageUrl : null;
 
-  return [{ title }];
+  return [
+    { title },
+    {
+      property: 'twitter:card',
+      content:
+        'https://cdn.midjourney.com/1e96445f-bcbc-4cc0-b961-d97c7402d9be/0_0.webp',
+    },
+    { property: 'twitter:title', content: title },
+    { property: 'og:title', content: title },
+    {
+      property: 'description',
+      content:
+        'Bliv en del af et engageret fællesskab dedikeret til at udforske og forstå Afrikas rige kultur, historie og udvikling. Med over 150 medlemmer arrangerer vi inspirerende møder og udflugter, der åbner dørene til Afrikas mangfoldige verden.',
+    },
+
+    { property: 'og:image:width', content: String(OG_IMAGE_WIDTH) },
+    { property: 'og:image:height', content: String(OG_IMAGE_HEIGHT) },
+    {
+      property: 'og:image',
+      content:
+        'https://cdn.midjourney.com/1e96445f-bcbc-4cc0-b961-d97c7402d9be/0_0.webp',
+    },
+  ];
 };
 
 export const loader = async () => {
@@ -105,8 +129,8 @@ export default function Index() {
             <p className='max-w-2xl  md:pr-6 mb-4 font-light text-gray-500 lg:mb-6 md:text-lg lg:text-xl dark:text-gray-400'>
               Bliv en del af et engageret fællesskab dedikeret til at udforske
               og forstå Afrikas rige kultur, historie og udvikling. Med over 150
-              medlemmer, arrangerer vi inspirerende møder og udflugter, der
-              åbner dørene til Afrikas mangfoldige verden.
+              medlemmer arrangerer vi inspirerende møder og udflugter, der åbner
+              dørene til Afrikas mangfoldige verden.
             </p>
             <Link
               unstable_viewTransition

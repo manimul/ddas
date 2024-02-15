@@ -49,8 +49,8 @@ export default function Bestyrelsen() {
             Vores bestyrelse
           </h2>
           <p className='mt-3 text-lg leading-8 text-gray-600 dark:text-gray-300'>
-            Libero fames augue nisl porttitor nisi, quis. Id ac elit odio vitae
-            elementum enim vitae ullamcorper suspendisse.
+            Vores bestyrelse forener en dyb passion for Afrika med enestående
+            ekspertise.
           </p>
         </div>
         <BoardMembers boardMembers={data} />

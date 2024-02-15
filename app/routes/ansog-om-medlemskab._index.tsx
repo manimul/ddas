@@ -25,6 +25,7 @@ import {
   Mails,
   Waypoints,
 } from 'lucide-react';
+import { Medlem } from '~/components/Medlem';
 
 export const meta: MetaFunction<
   typeof loader,
@@ -105,6 +106,8 @@ export default function AnsogOmMedlemskabIndex() {
 
   return (
     <>
+      <Medlem />
+      {/*
       <section>
         <div className=''>
           <div className='grid grid-cols-1 gap-y-8 lg:grid-cols-3  lg:gap-x-16'>
@@ -270,7 +273,7 @@ export default function AnsogOmMedlemskabIndex() {
             Virksomhedsmedlemskab
           </span>
         </Link>
-      </div>
+      </div>* */}
     </>
   );
 }

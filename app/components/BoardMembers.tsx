@@ -48,7 +48,7 @@ export function BoardMembers(props: BoardMembersProps) {
                 {boardMember.title}
               </p>
 
-              <p className='text-xs'>
+              <p className='md:text-lg md:leading-8 text-gray-600 dark:text-gray-300'>
                 {boardMember.bio && boardMember.bio?.length > 0 ? (
                   <SanityContent value={boardMember.bio} />
                 ) : null}

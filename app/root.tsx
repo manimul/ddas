@@ -9,6 +9,7 @@ import {
   ScrollRestoration,
   useLoaderData,
 } from '@remix-run/react';
+import { QueryResponseInitial } from '@sanity/react-loader';
 import { lazy, Suspense } from 'react';
 
 import { Layout } from '~/components/Layout';
@@ -92,8 +93,11 @@ export const loader = async ({ request }: LoaderFunctionArgs) => {
 export default function App() {
   const { initial, query, params, theme, bodyClassNames, sanity, ENV } =
     useLoaderData<typeof loader>();
+  const castedInitial: QueryResponseInitial<typeof initial.data> =
+    initial as QueryResponseInitial<typeof initial.data>;
+
   const { data, loading } = useQuery<typeof initial.data>(query, params, {
-    initial,
+    initial: castedInitial,
   });
 
   return (

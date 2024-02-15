@@ -177,7 +177,7 @@ export const FILTERED_MEMBERS_QUERY = groq`*[_type == "member" && $countryTag in
 
 }`;
 
-export const EVENTS_QUERY = groq`*[_type == "event" && select($isFuture => dateTime(date) > dateTime($currentDate), dateTime(date) <= dateTime($currentDate)) ][0...12]|order(date asc){
+export const EVENTS_QUERY = groq`*[_type == "event" && select($isFuture => dateTime(date) > dateTime($currentDate), dateTime(date) <= dateTime($currentDate)) ][0...12]|order(date desc){
   _id,
   _type,
   title,
@@ -201,7 +201,7 @@ export const EVENT_QUERY = groq`*[_type == "event" && slug.current == $slug][0]{
  content
 }`;
 
-export const FILTERED_EVENTS_QUERY = groq`*[_type == "event" && select($isFuture => dateTime(date) > dateTime($currentDate), dateTime(date) <= dateTime($currentDate)) && $countryTag in africanTags[]->_id][0...12]|order(date asc){
+export const FILTERED_EVENTS_QUERY = groq`*[_type == "event" && select($isFuture => dateTime(date) > dateTime($currentDate), dateTime(date) <= dateTime($currentDate)) && $countryTag in africanTags[]->_id][0...12]|order(date desc){
   _id,
   _type,
   title,
