@@ -33,7 +33,9 @@ export function Newses(props: NewsesProps) {
         <NewsThumb className='col-span-3' image={firstNews.image} />
 
         <div className='col-span-4 space-y-1'>
-          <h1>Fremhævede nyheder</h1>
+          <h2 className='text-sm tracking-widest opacity-50 uppercase'>
+            Fremhævede nyheder
+          </h2>
           <h2 className='text-bold pt-4 text-xl tracking-tighter transition-colors duration-100 ease-in-out  lg:text-4xl'>
             {firstNews.title}
           </h2>
@@ -50,9 +52,11 @@ export function Newses(props: NewsesProps) {
             </div>
           )}
 
-          <p className='text-base opacity-75 pb-4'>{firstNews.extract}</p>
+          <p className='text-gray-800 lg:mb-6 md:text-lg lg:text-xl dark:text-gray-400 pb-4'>
+            {firstNews.extract}
+          </p>
 
-          <span className='underline opacity-75 text-orange-500 hover:opacity-100'>
+          <span className='underline md:text-lg lg:text-xl opacity-75 text-orange-500 hover:opacity-100'>
             Lær mere
           </span>
         </div>
@@ -71,11 +75,11 @@ export function Newses(props: NewsesProps) {
             >
               <NewsThumb image={news.image} />
 
-              <h2 className='text-bold pt-4 text-base md:text-xl tracking-tighter transition-colors duration-100 ease-in-out  lg:text-xl'>
+              <h2 className='md:px-3 text-bold pt-4 text-base md:text-xl tracking-tighter transition-colors duration-100 ease-in-out  lg:text-2xl'>
                 {news.title}
               </h2>
 
-              <div className=' flex flex-col space-y-2  '>
+              <div className='md:px-3 flex flex-col space-y-2  '>
                 {news.publishedDate && (
                   <div>
                     <span className='text-sm md:text-base opacity-40'>
@@ -91,11 +95,11 @@ export function Newses(props: NewsesProps) {
                   </div>
                 )}
 
-                <p className='hidden md:block  text-base  text-gray-600 dark:text-gray-300  	'>
+                <p className='hidden md:block  text-gray-800 lg:mb-6 md:text-base lg:text-lg dark:text-gray-400  	'>
                   {news.extract}
                 </p>
 
-                <span className='underline opacity-75 text-orange-500 hover:opacity-100'>
+                <span className='underline md:text-lg lg:text-xl opacity-75 text-orange-500 hover:opacity-100'>
                   Lær mere
                   <MoveRight className='hidden group-hover:inline-flex space-x-2' />
                 </span>

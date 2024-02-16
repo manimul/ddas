@@ -51,7 +51,7 @@ export default function LandeIAfrikaIndex() {
             Oplev Mangfoldigheden af et Kontinent
           </span>
         </h1>
-        <p className='mt-3 md:text-lg md:leading-8 text-gray-600 dark:text-gray-300'>
+        <p className='mt-3 text-gray-800 lg:mb-6 md:text-lg lg:text-xl dark:text-gray-400'>
           Velkommen til vores fortegnelse over Afrika, et kontinent uden
           sidestykke med hensyn til mangfoldighed og skønhed. Begiv dig ud på en
           rejse gennem dets regioner, hver med sine egne unikke landskaber,

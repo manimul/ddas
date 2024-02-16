@@ -31,9 +31,9 @@ export function Header(props: LayoutProps) {
   return (
     <header className='border-b border-gray-100 transition-colors duration-1000 ease-in-out dark:border-gray-900 sticky top-0 w-full backdrop-blur-lg bg-white/80 dark:bg-black/60 z-50 '>
       <div
-        className={`container mx-auto flex  md:flex-row items-center justify-between p-4 lg:px-12 duration-150 py-4 md:py-0 `}
+        className={`container mx-auto flex  md:flex-row items-center md:justify-between p-4 lg:px-12 duration-150 py-4 md:py-0 `}
       >
-        <div className='md:hidden mx-auto  items-center justify-between md:p-4 lg:px-4   flex grow'>
+        <div className='md:hidden md:mx-auto  items-center md:justify-between md:p-4 lg:px-4   flex md:grow'>
           <button
             className='p-2 text-gray-700 rounded-md outline-none focus:border-gray-400 focus:border'
             onClick={() => setNavbar(!navbar)}

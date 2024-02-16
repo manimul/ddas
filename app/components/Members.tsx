@@ -13,16 +13,16 @@ export function Members(props: MembersProps) {
   const { members = [] } = props;
   return members.length > 0 ? (
     <>
-      <ul className='grid grid-cols-1 lg:grid-cols-4 gap-2'>
+      <ul className='grid grid-cols-2 lg:grid-cols-4 gap-2'>
         {members.map((member) => (
           <li
             key={member._id}
-            className='w-full   group  space-x-3  overflow-hidden flex flex-col md:flex-row p-2  hover:bg-white dark:hover:bg-gray-900  duration-150 '
+            className='w-full   group  md:space-x-3  overflow-hidden flex flex-col md:flex-row p-2  hover:bg-white dark:hover:bg-gray-900  duration-150 '
           >
             <div className='w-full md:w-2/5 overflow-hidden '>
               <MemberImage
                 image={member.image}
-                className='group-hover:scale-110   rounded-[0px]'
+                className='md:group-hover:scale-110   rounded-[0px]'
               />
             </div>
             <div className='w-full md:w-3/5 text-left  flex-col flex '>

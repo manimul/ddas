@@ -20,12 +20,12 @@ export function Events(props: EventsProps) {
     <ul className='flex flex-col space-y-6 '>
       {displayedEvents.map((event) => (
         <li
-          className='max-w-6xl mx-auto flex  flex-col md:flex-row  flex-wrap rounded-lg group box-border md:opacity-75 md:hover:opacity-100  hover:border-orange-500 dark:hover:border-orange-500 border border-black  p-2 md:p-5 dark:border-white  hover:shadow-2xl hover:-translate-y-1 ease-in-out duration-300  '
+          className='max-w-6xl mx-auto flex  flex-col md:flex-row  flex-wrap rounded-lg group box-border    hover:border-orange-500 dark:hover:border-orange-500 border border-black  p-2 md:p-5 dark:border-white  hover:shadow-2xl hover:-translate-y-1 ease-in-out duration-300  '
           key={event._id}
         >
-          <div className='[title-section] md:-mt-12'>
-            <span className='dark:text-orange-500 font-bold italic text-orange-500  bg-white  text-xs dark:bg-black rounded-md p-2'>
-              Arrangementer
+          <div className='[title-section]  md:-mt-12'>
+            <span className=' bg-[#f4f4f5]  dark:bg-[#0b1213] rounded-md p-2  text-gray-800 text-opacity-50 text-sm tracking-widest uppercase'>
+              Kommende
             </span>
             <h2 className='text-bold pt-4 text-xl tracking-tighter transition-colors duration-100 ease-in-out  lg:text-4xl pb-2 md:py-4 basis-full'>
               {event.title}
@@ -48,7 +48,7 @@ export function Events(props: EventsProps) {
                 })}
               </span>
             )}
-            <p className='md:text-lg  text-lg leading-8 text-gray-600 dark:text-gray-300 '>
+            <p className=' text-gray-800 lg:mb-6 md:text-lg lg:text-xl dark:text-gray-400'>
               {event.extract}
             </p>
 

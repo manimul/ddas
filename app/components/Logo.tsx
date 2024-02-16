@@ -14,12 +14,12 @@ export function Logo(props: LogoProps) {
   }
 
   return (
-    <p className='text-lg font-bold tracking-tighter text-black pr-6 dark:text-white lg:text-2xl'>
+    <p className='text-lg font-bold tracking-tighter text-black  dark:text-white lg:text-2xl'>
       <Link className='flex flex-row items-center' to='/'>
         {logo && (
           <>
             <img
-              className={'h-12 p-2 md:p-2  md:h-24 md:w-24    '} // Use the combined class
+              className={'h-14 p-2 md:p-2  md:h-24 md:w-24    '} // Use the combined class
               src={urlBuilder({ projectId, dataset })
                 // @ts-ignore
                 .image(logo.asset._ref)
@@ -33,8 +33,7 @@ export function Logo(props: LogoProps) {
             />
           </>
         )}
-
-        {siteTitle ?? `Det Dansk Afrika Selskab`}
+        <span>{siteTitle ?? `Det Dansk Afrika Selskab`}</span>
       </Link>
     </p>
   );

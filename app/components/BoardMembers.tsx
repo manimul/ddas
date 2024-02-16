@@ -15,11 +15,11 @@ export function BoardMembers(props: BoardMembersProps) {
   return boardMembers.length > 0 ? (
     <ul
       role='list'
-      className='grid gap-x-5 gap-y-4 sm:grid-cols-2 sm:gap-y-16 xl:col-span-2'
+      className='grid gap-x-5 md:gap-y-4 sm:grid-cols-2 sm:gap-y-16 xl:col-span-2'
     >
       {boardMembers.map((boardMember) => (
         <li key={boardMember._id}>
-          <div className='flex items-start gap-x-4'>
+          <div className='flex flex-col   md:flex-row items-start gap-x-4'>
             {boardMember.image ? (
               <img
                 className='h-32 w-32 rounded-lg '
@@ -48,7 +48,7 @@ export function BoardMembers(props: BoardMembersProps) {
                 {boardMember.title}
               </p>
 
-              <p className='md:text-lg md:leading-8 text-gray-600 dark:text-gray-300'>
+              <p className='text-gray-800 lg:mb-6 md:text-lg lg:text-xl dark:text-gray-400'>
                 {boardMember.bio && boardMember.bio?.length > 0 ? (
                   <SanityContent value={boardMember.bio} />
                 ) : null}

@@ -87,7 +87,7 @@ export default function Kontakt() {
           <h1 className='max-w-2xl mb-4 md:pr-6 text-4xl  tracking-tight leading-none md:text-5xl xl:text-6xl dark:text-white'>
             Kontakt Det Danske Afrika Selskab
           </h1>
-          <p className='max-w-2xl  md:pr-6 mb-4 font-light text-gray-500 lg:mb-6 md:text-lg lg:text-xl dark:text-gray-400'>
+          <p className='max-w-2xl  md:pr-6 mb-4 font-light text-gray-800 lg:mb-6 md:text-lg lg:text-xl dark:text-gray-400'>
             Har du spørgsmål, eller ønsker du yderligere information om Det
             Danske Afrika Selskab? Udfyld venligst kontaktformularen på denne
             side, så vender vi tilbage til dig hurtigst muligt. Vi ser frem til

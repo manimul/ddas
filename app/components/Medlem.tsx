@@ -19,7 +19,7 @@ export function Medlem() {
                 Bliv Medlem af Det Danske Afrika Selskab
               </h1>
 
-              <p className='mt-4 text-gray-600 prose-sm md:prose font-sans dark:prose-invert lg:prose-lg  dark:text-gray-400  prose-a:text-cyan-600 dark:prose-a:text-cyan-200'>
+              <p className='mt-4  text-gray-800 lg:mb-6 md:text-lg lg:text-xl dark:text-gray-400'>
                 Som medlem af Det Danske Afrika Selskab bliver du en del af et
                 passioneret fællesskab, der dykker dybt ind i Afrikas hjerte.
                 Vores medlemskab tilbyder unikke muligheder for at forbinde,
@@ -29,110 +29,94 @@ export function Medlem() {
               </p>
             </div>
 
-            <div className='grid col-span-2  grid-cols-2 gap-4 sm:grid-cols-3'>
-              <a
-                className='block rounded-xl border border-gray-100 p-4 shadow-sm hover:border-gray-200 hover:ring-1 hover:ring-gray-200 focus:outline-none focus:ring'
-                href='#'
-              >
-                <span className='inline-block rounded-lg  '>
+            <div className='grid col-span-2  grid-cols-1 gap-4 sm:grid-cols-3'>
+              <div className='flex space-x-2  md:block rounded-xl border border-gray-100 p-4 shadow-sm   '>
+                <span className='md:inline-block rounded-lg  '>
                   {' '}
                   <Waypoints />
                 </span>
 
-                <h2 className='mt-2  font-bold '>Netværk med ligesindede</h2>
+                <h2 className='md:mt-2  font-bold '>Netværk med ligesindede</h2>
 
-                <p className='hidden sm:mt-1 sm:block sm:text-sm sm:text-gray-600'>
+                <p className='hidden sm:mt-1 sm:block text-base text-gray-800'>
                   Mød og forbind med et netværk af personer, der deler din
                   passion for Afrika.
                 </p>
-              </a>
+              </div>
 
-              <a
-                className='block rounded-xl border border-gray-100 p-4 shadow-sm hover:border-gray-200 hover:ring-1 hover:ring-gray-200 focus:outline-none focus:ring'
-                href='#'
-              >
+              <div className='flex space-x-2  md:block rounded-xl border border-gray-100 p-4 shadow-sm'>
                 <span className='inline-block rounded-lg  '>
                   <CalendarCheck2 />
                 </span>
 
-                <h2 className='mt-2 font-bold '>
+                <h2 className='md:mt-2 font-bold '>
                   Eksklusive møder og udflugter
                 </h2>
 
-                <p className='hidden sm:mt-1 sm:block sm:text-sm sm:text-gray-600'>
+                <p className='hidden sm:mt-1 sm:block text-base text-gray-800'>
                   Få adgang til inspirerende møder og unikke udflugter, der er
                   designet til at udforske Afrikas kultur, historie og nutid.
                 </p>
-              </a>
+              </div>
 
-              <a
-                className='block rounded-xl border border-gray-100 p-4 shadow-sm hover:border-gray-200 hover:ring-1 hover:ring-gray-200 focus:outline-none focus:ring'
-                href='#'
-              >
+              <div className='flex space-x-2  md:block  rounded-xl border border-gray-100 p-4 shadow-sm '>
                 <span className='inline-block rounded-lg  '>
                   <BookOpenText />
                 </span>
 
-                <h2 className='mt-2   font-bold'>
+                <h2 className='md:mt-2   font-bold'>
                   Uddannelsesmæssige ressourcer
                 </h2>
 
-                <p className='hidden sm:mt-1 sm:block sm:text-sm sm:text-gray-600'>
+                <p className='hidden sm:mt-1 sm:block text-base text-gray-800'>
                   Adgang til en rig samling af ressourcer for dybere forståelse
                   af Afrikas komplekse samfund.
                 </p>
-              </a>
+              </div>
 
-              <a
-                className='block rounded-xl border border-gray-100 p-4 shadow-sm hover:border-gray-200 hover:ring-1 hover:ring-gray-200 focus:outline-none focus:ring'
-                href='#'
-              >
+              <div className='flex space-x-2  md:block  rounded-xl border border-gray-100 p-4 shadow-sm '>
                 <span className='inline-block rounded-lg  '>
                   <Blocks />
                 </span>
 
-                <h2 className=' mt-2 font-bold'>
+                <h2 className=' md:mt-2 font-bold'>
                   Kulturel og forretningsmæssig udveksling
                 </h2>
 
-                <p className='hidden sm:mt-1 sm:block sm:text-sm sm:text-gray-600'>
+                <p className='hidden sm:mt-1 sm:block text-base text-gray-800'>
                   Deltag i unikke programmer, der fremmer både kulturel
                   forståelse og forretningsmæssigt samarbejde mellem Danmark og
                   Afrika.
                 </p>
-              </a>
+              </div>
 
-              <a
-                className='block rounded-xl border border-gray-100 p-4 shadow-sm hover:border-gray-200 hover:ring-1 hover:ring-gray-200 focus:outline-none focus:ring'
-                href='#'
-              >
+              <div className='flex space-x-2  md:block  rounded-xl border border-gray-100 p-4 shadow-sm '>
                 <span className='inline-block rounded-lg  '>
                   <Globe2 />
                 </span>
 
-                <h2 className='mt-2 font-bold '>Kulturelle begivenheder</h2>
+                <h2 className='md:mt-2 font-bold '>Kulturelle begivenheder</h2>
 
-                <p className='hidden sm:mt-1 sm:block sm:text-sm sm:text-gray-600'>
+                <p className='hidden sm:mt-1 sm:block text-base text-gray-800'>
                   Invitationer til eksklusive kulturelle arrangementer, der
                   fejrer Afrikas mangfoldige traditioner og samfund.
                 </p>
-              </a>
+              </div>
 
-              <a
-                className='block rounded-xl border border-gray-100 p-4 shadow-sm hover:border-gray-200 hover:ring-1 hover:ring-gray-200 focus:outline-none focus:ring'
-                href='#'
-              >
+              <div className='flex space-x-2  md:block  rounded-xl border border-gray-100 p-4 shadow-sm  '>
                 <span className='inline-block rounded-lg  '>
                   <Mails />
                 </span>
 
-                <h2 className='mt-2 font-bold '>Nyhedsbreve og opdateringer</h2>
+                <h2 className='md:mt-2 font-bold '>
+                  Nyhedsbreve og opdateringer
+                </h2>
 
-                <p className='hidden sm:mt-1 sm:block sm:text-sm sm:text-gray-600'>
+                <p className='hidden sm:mt-1 sm:block text-base text-gray-800'>
                   Hold dig informeret med de seneste nyheder og opdateringer om
                   Afrika samt selskabets aktiviteter.
                 </p>
-              </a>
+              </div>
             </div>
           </div>
         </div>

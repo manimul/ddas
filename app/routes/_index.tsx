@@ -7,6 +7,7 @@ import { useQuery } from '~/sanity/loader';
 import { loadQuery } from '~/sanity/loader.server';
 import { EVENTS_QUERY, NEWSES_QUERY } from '~/sanity/queries';
 import { OG_IMAGE_HEIGHT, OG_IMAGE_WIDTH } from '~/routes/resource.og';
+import urlBuilder from '@sanity/image-url';
 
 import type { EventStub } from '~/types/event';
 import { eventStubsZ } from '~/types/event';
@@ -18,6 +19,7 @@ import { Newses } from '~/components/Newses';
 import { MemberCTA } from '~/components/MemberCTA';
 import { CorporateCTA } from '~/components/CorporateCTA';
 import { Medlem } from '~/components/Medlem';
+import { dataset, projectId } from '~/sanity/projectDetails';
 
 export const meta: MetaFunction<
   typeof loader,
@@ -27,15 +29,23 @@ export const meta: MetaFunction<
 > = ({ matches }) => {
   const rootData = matches.find((match) => match.id === `root`)?.data;
   const home = rootData ? rootData.initial.data : null;
-  const title = [home?.title, home?.siteTitle].filter(Boolean).join(' | ');
-  //const ogImageUrl = home ? home.ogImageUrl : null;
+  const title = [home?.title, home?.heroHeading].filter(Boolean).join(' | ');
+  const ogImage = home ? home.heroImage : null;
+  const ogImageUrl = urlBuilder({ projectId, dataset })
+    .image(ogImage.asset._ref)
+    .height(800)
+    .width(800)
+    .fit('max')
+    .auto('format')
+    .url();
+
+  console.log('ogImageUrl', ogImageUrl);
 
   return [
     { title },
     {
       property: 'twitter:card',
-      content:
-        'https://cdn.midjourney.com/1e96445f-bcbc-4cc0-b961-d97c7402d9be/0_0.webp',
+      content: ogImageUrl,
     },
     { property: 'twitter:title', content: title },
     { property: 'og:title', content: title },
@@ -49,8 +59,8 @@ export const meta: MetaFunction<
     { property: 'og:image:height', content: String(OG_IMAGE_HEIGHT) },
     {
       property: 'og:image',
-      content:
-        'https://cdn.midjourney.com/1e96445f-bcbc-4cc0-b961-d97c7402d9be/0_0.webp',
+      //content:'https://cdn.midjourney.com/1e96445f-bcbc-4cc0-b961-d97c7402d9be/0_0.webp',
+      content: ogImageUrl,
     },
   ];
 };
@@ -126,7 +136,7 @@ export default function Index() {
             <h1 className='max-w-2xl mb-4 md:pr-6 text-4xl  tracking-tight leading-none md:text-5xl xl:text-6xl dark:text-white'>
               Udforsk Afrikas mangfoldighed med Det Danske Afrika Selskab
             </h1>
-            <p className='max-w-2xl  md:pr-6 mb-4 font-light text-gray-500 lg:mb-6 md:text-lg lg:text-xl dark:text-gray-400'>
+            <p className='max-w-2xl  md:pr-6 mb-4 font-light text-gray-800 lg:mb-6 md:text-lg lg:text-xl dark:text-gray-400'>
               Bliv en del af et engageret fællesskab dedikeret til at udforske
               og forstå Afrikas rige kultur, historie og udvikling. Med over 150
               medlemmer arrangerer vi inspirerende møder og udflugter, der åbner
@@ -135,7 +145,7 @@ export default function Index() {
             <Link
               unstable_viewTransition
               to='#mission'
-              className='group inline-flex items-center justify-center px-5 py-3 mr-3 uppercase text-sm  rounded-md p-4 tracking-wide  text-center   bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 dark:focus:ring-primary-900'
+              className='group  inline-flex items-center justify-center px-5 py-3 mr-3 uppercase text-sm  rounded-md p-4 tracking-wide  text-center   bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 dark:focus:ring-primary-900'
             >
               Lær mere
               <svg
@@ -155,7 +165,7 @@ export default function Index() {
               unstable_viewTransition
               prefetch='viewport'
               to='ansog-om-medlemskab'
-              className=' uppercase text-sm  rounded-md p-4 tracking-wide opacity-75    bg-[#ffae22] text-black hover:opacity-100 hover:rounded-[30px]  duration-500     '
+              className=' mx-auto  w-max inline-flex uppercase text-sm  rounded-md p-4 tracking-wide opacity-75    bg-[#ffae22] text-black hover:opacity-100 hover:rounded-[30px]  duration-500     '
             >
               Bliv medlem{' '}
             </Link>

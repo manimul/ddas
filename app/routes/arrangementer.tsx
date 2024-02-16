@@ -98,7 +98,7 @@ export default function Arrangementer() {
 
   return (
     <>
-      <div className='flex flex-col md:flex-row justify-start md:space-x-4  '>
+      <div className='flex flex-col md:flex-row justify-start  space-y-2 md:space-y-0 md:space-x-4 '>
         {' '}
         <NavLink
           to=''
