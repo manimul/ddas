@@ -128,7 +128,8 @@ export default function Virksomhed() {
         className=' col-span-4 md:-mt-32 -mx-2 p-2 md:pt-32  md:pr-32 md:-mr-32 h-min bg-fixed  '
         style={{
           backgroundImage:
-            "url('https://cdn.midjourney.com/3aa676ab-27e9-4b9c-abcd-0e0ab8768ecb/0_0.webp')",
+            //"url('https://cdn.midjourney.com/3aa676ab-27e9-4b9c-abcd-0e0ab8768ecb/0_0.webp')",
+            "url('https://cdn.midjourney.com/f66f6abb-d982-45ef-b03f-d13b30126620/0_1.webp')",
           width: 'auto',
           height: '100%',
         }}

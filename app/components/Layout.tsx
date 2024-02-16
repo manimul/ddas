@@ -14,7 +14,7 @@ export function Layout({ home, theme, children }: LayoutProps) {
   return (
     <>
       <Header home={home} theme={theme} />
-      <div className='container mx-auto  p-4 lg:p-12  grid grid-cols-1 gap-4 lg:gap-12 '>
+      <div className='container mx-auto  p-4 lg:p-12   grid grid-cols-1 gap-4 lg:gap-12 '>
         {/*{home?.title ? <Title>{home?.title}</Title> : null}*/}
         {children}
       </div>

@@ -173,7 +173,7 @@ export default function VirksomhedIndex() {
 
         <button
           type='submit'
-          className=' uppercase text-sm  rounded-md p-4 tracking-wide opacity-75    bg-[#ffae22] text-black hover:opacity-100 hover:rounded-[30px]  duration-500     '
+          className=' uppercase text-sm  rounded-md p-4 tracking-wide opacity-75    bg-gradient-to-br hover:bg-gradient-to-tr  from-[#FD9F1C] to-[#FF5107] font-bold text-black hover:opacity-100 hover:rounded-[30px]  duration-500     '
         >
           Send Besked
         </button>

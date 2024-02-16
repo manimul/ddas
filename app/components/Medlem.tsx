@@ -142,7 +142,8 @@ export function Medlem() {
             to='../../../ansog-om-medlemskab/personligt'
             style={{
               backgroundImage:
-                "url('https://cdn.midjourney.com/7f1b20ca-c243-4a2c-8feb-998de0488f14/0_2.webp')",
+                //"url('https://cdn.midjourney.com/7f1b20ca-c243-4a2c-8feb-998de0488f14/0_2.webp')",
+                "url('https://cdn.midjourney.com/e6d4632b-1c50-4525-b392-199df930b91a/0_0.webp')",
               width: 'auto',
               height: '200px',
             }}
@@ -156,7 +157,8 @@ export function Medlem() {
             className='bg-cover bg-center relative text-white font-bold py-2 px-4 rounded'
             style={{
               backgroundImage:
-                "url('https://cdn.midjourney.com/3aa676ab-27e9-4b9c-abcd-0e0ab8768ecb/0_0.webp')",
+                // "url('https://cdn.midjourney.com/3aa676ab-27e9-4b9c-abcd-0e0ab8768ecb/0_0.webp')",
+                "url('https://cdn.midjourney.com/f66f6abb-d982-45ef-b03f-d13b30126620/0_1.webp')",
               width: 'auto',
               height: '200px',
             }}

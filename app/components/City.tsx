@@ -1,7 +1,7 @@
 import { CityDocument } from '~/types/city';
 import { SanityContent } from '~/components/SanityContent';
 import { MemberImage } from '~/components/MemberImage';
-import { MoveLeft } from 'lucide-react';
+import { Link2, MoveLeft } from 'lucide-react';
 import { ExternalLink } from 'lucide-react';
 import { Link } from '@remix-run/react';
 
@@ -23,18 +23,19 @@ export function City(props: CityProps) {
   } = props.data;
 
   return (
-    <div className='flex flex-row flex-wrap  box-border'>
+    <div className='flex flex-col md:flex-row flex-wrap  box-border space-y-4'>
       <Link className=' inline-flex space-x-2' relative='path' to='../'>
         <MoveLeft />
         <span>Lande</span>
       </Link>
-      <h1 className=' py-4 basis-full text-bold pt-4 text-xl tracking-tighter transition-colors duration-100 ease-in-out  lg:text-4xl'>
+      <h1 className=' md:py-4 md:basis-full text-bold pt-4 text-2xl lg:text-4xl tracking-tighter transition-colors duration-100 ease-in-out  '>
         {title}
       </h1>
-      <div className='basis-1/4 space-y-4 '>
+      <div className=' md:basis-1/4 space-y-4 '>
         <MemberImage image={image} />
-        <h2 className=' uppercase opacity-50 tracking-widest text-sm '>
-          {title} Related Links
+        <h2 className='text-xs items-center  md:text-sm uppercase tracking-widest pb-2 inline-flex  text-gray-500 space-x-2  '>
+          <Link2 />
+          {` `} <span>Relaterede links</span>
         </h2>
         <ul>
           {landeprofil && (

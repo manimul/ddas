@@ -78,7 +78,8 @@ export default function Kontakt() {
       <div className=' grid  py-4  md:py-8 mx-auto md:gap-8 xl:gap-0 lg:py-10 lg:grid-cols-12'>
         <div className=' lg:mt-0 order-1  lg:col-span-5 lg:flex rounded-2xl pb-4'>
           <img
-            src='https://cdn.midjourney.com/7f1b20ca-c243-4a2c-8feb-998de0488f14/0_2.webp'
+            //src='https://cdn.midjourney.com/7f1b20ca-c243-4a2c-8feb-998de0488f14/0_2.webp'
+            src='https://cdn.midjourney.com/7419c635-9c49-4d01-9264-7c961219c070/0_3.webp'
             alt='mockup'
             className='rounded-lg'
           />
@@ -133,7 +134,7 @@ export default function Kontakt() {
 
               <button
                 type='submit'
-                className=' uppercase text-sm  rounded-md p-4 tracking-wide opacity-75    bg-[#ffae22] text-black hover:opacity-100 hover:rounded-[30px]  duration-500     '
+                className=' uppercase text-sm font-bold rounded-md p-4 tracking-wide opacity-75   bg-gradient-to-br hover:bg-gradient-to-tr  from-[#FD9F1C] to-[#FF5107] text-black hover:opacity-100 hover:rounded-[30px]  duration-500     '
               >
                 Send Besked
               </button>

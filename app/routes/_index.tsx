@@ -1,4 +1,6 @@
-import type { MetaFunction } from '@remix-run/node';
+import type { LoaderFunctionArgs, MetaFunction } from '@remix-run/node';
+import { useMatches } from '@remix-run/react';
+
 import { json } from '@remix-run/node';
 import { Link, useLoaderData } from '@remix-run/react';
 import { QueryResponseInitial } from '@sanity/react-loader';
@@ -10,6 +12,8 @@ import { OG_IMAGE_HEIGHT, OG_IMAGE_WIDTH } from '~/routes/resource.og';
 import urlBuilder from '@sanity/image-url';
 
 import type { EventStub } from '~/types/event';
+
+import type { homeZ, HomeDocument } from '~/types/home';
 import { eventStubsZ } from '~/types/event';
 import { Events } from '~/components/Events';
 
@@ -65,7 +69,7 @@ export const meta: MetaFunction<
   ];
 };
 
-export const loader = async () => {
+export const loader = async ({ params, request }: LoaderFunctionArgs) => {
   const currentDate = new Date().toISOString();
   const isFuture = true;
   const [eventsResult, newsesResult] = await Promise.all([
@@ -128,11 +132,28 @@ export default function Index() {
     return <div>Loading...</div>;
   }
 
+  const matches = useMatches();
+  // Find the match object for the root. You might need to adjust the condition based on your route structure.
+  const rootMatch = matches.find((match) => match.id === 'root');
+  const rootData = rootMatch?.data;
+
+  // Now rootData contains the data returned by the root loader, you can access `home` or any other data loaded there.
+  const home = (rootData as { initial?: { data: any } })?.initial?.data;
+  console.log('home', home);
+  const ogImage = home ? home.heroImage : null;
+  const ogImageUrl = urlBuilder({ projectId, dataset })
+    .image(ogImage.asset._ref)
+    .height(1273)
+    .width(1529)
+    .fit('max')
+    .auto('format')
+    .url();
+
   return (
     <>
       <section className=''>
-        <div className=' grid    py-4  md:py-8 mx-auto lg:gap-8 xl:gap-0 lg:py-10 lg:grid-cols-12'>
-          <div className='mr-auto md:order-1 order-2 place-self-center lg:col-span-7'>
+        <div className=' grid  md:-mt-6  py-4  md:py-8 mx-auto lg:gap-4 xl:gap-0 lg:py-10 lg:grid-cols-12'>
+          <div className='mr-auto md:order-1 order-2 place-self-center lg:col-span-6'>
             <h1 className='max-w-2xl mb-4 md:pr-6 text-4xl  tracking-tight leading-none md:text-5xl xl:text-6xl dark:text-white'>
               Udforsk Afrikas mangfoldighed med Det Danske Afrika Selskab
             </h1>
@@ -165,14 +186,15 @@ export default function Index() {
               unstable_viewTransition
               prefetch='viewport'
               to='ansog-om-medlemskab'
-              className=' mx-auto  w-max inline-flex uppercase text-sm  rounded-md p-4 tracking-wide opacity-75    bg-[#ffae22] text-black hover:opacity-100 hover:rounded-[30px]  duration-500     '
+              className=' mx-auto  w-max inline-flex font-bold uppercase text-sm  rounded-md p-4 tracking-wide bg-gradient-to-br hover:bg-gradient-to-tr  from-[#FD9F1C] to-[#FF5107] text-black hover:opacity-100 hover:rounded-[30px]  duration-500     '
             >
               Bliv medlem{' '}
             </Link>
           </div>
-          <div className=' lg:mt-0 order-1 md:order-2  lg:col-span-5 lg:flex rounded-2xl pb-4'>
+          <div className=' lg:mt-0 order-1 md:order-2 md:-ml-6 md:-mr-24  lg:col-span-6 lg:flex rounded-2xl pb-4'>
             <img
-              src='https://cdn.midjourney.com/1e96445f-bcbc-4cc0-b961-d97c7402d9be/0_0.webp'
+              //src='https://cdn.midjourney.com/1e96445f-bcbc-4cc0-b961-d97c7402d9be/0_0.webp'
+              src={ogImageUrl}
               alt='mockup'
               className='rounded-lg'
             />

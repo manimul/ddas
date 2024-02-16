@@ -125,7 +125,7 @@ export function Header(props: LayoutProps) {
           </NavLink>
           <NavLink
             to='ansog-om-medlemskab'
-            className=' uppercase text-sm  rounded-md p-4 tracking-wide opacity-75    bg-[#ffae22] text-black hover:opacity-100 hover:rounded-[30px]  duration-500     '
+            className=' uppercase text-sm font-bold  rounded-md p-4 tracking-wide   bg-gradient-to-br hover:bg-gradient-to-tr  from-[#FD9F1C] to-[#FF5107] text-black hover:opacity-100 hover:rounded-[30px]  duration-500     '
           >
             Bliv Medlem
           </NavLink>

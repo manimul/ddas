@@ -129,7 +129,9 @@ export default function Personligt() {
         className=' col-span-4 md:-mt-32 -mx-2 p-2 md:pt-32  md:pr-32 md:-mr-32 h-min bg-fixed  '
         style={{
           backgroundImage:
-            "url('https://cdn.midjourney.com/7f1b20ca-c243-4a2c-8feb-998de0488f14/0_2.webp')",
+            // "url('https://cdn.midjourney.com/7f1b20ca-c243-4a2c-8feb-998de0488f14/0_2.webp')",
+            "url('https://cdn.midjourney.com/e6d4632b-1c50-4525-b392-199df930b91a/0_0.webp')",
+
           width: 'auto',
           height: '100%',
         }}

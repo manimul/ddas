@@ -2,8 +2,8 @@ import { Link } from '@remix-run/react';
 
 export function MemberCTA() {
   return (
-    <div className='mx-auto  w-full md:py-12'>
-      <div className='relative isolate overflow-hidden bg-green-500 px-4 md:px-6 pt-6 shadow-2xl sm:rounded-3xl sm:px-16 md:pt-12 lg:flex lg:gap-x-20 lg:px-24 lg:pt-0'>
+    <div className='mx-auto  w-full md:py-12 '>
+      <div className='relative rounded-lg isolate overflow-hidden bg-gradient-to-tr from-[#05B29D] to-[#1C5340] px-4 md:px-6 pt-6 shadow-2xl sm:rounded-3xl sm:px-16 md:pt-12 lg:flex lg:gap-x-20 lg:px-24 lg:pt-0'>
         <div className='mx-auto text-center lg:mx-0 lg:flex-auto lg:py-16 lg:text-left'>
           <h2 className='text-2xl md:text-4xl font-bold md:tracking-tight text-white '>
             Bliv en Del Af Afrikas Fremtid - Bliv Personligt Medlem
@@ -43,7 +43,8 @@ export function MemberCTA() {
         <div className='relative h-20   md:h-80 '>
           <img
             className='absolute left-0 top-0 w-[57rem] max-w-none md:rounded-md bg-white/5 ring-1 ring-white/10'
-            src='https://cdn.midjourney.com/7f1b20ca-c243-4a2c-8feb-998de0488f14/0_2.webp'
+            //src='https://cdn.midjourney.com/7f1b20ca-c243-4a2c-8feb-998de0488f14/0_2.webp'
+            src='https://cdn.midjourney.com/7419c635-9c49-4d01-9264-7c961219c070/0_0.webp'
             alt='App screenshot'
             width={1824}
             height={1080}
