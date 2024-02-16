@@ -85,10 +85,10 @@ export default function Personligt() {
       <div className=' col-span-4 space-y-4 md:pr-12'>
         <div className='membership-page space-y-2'>
           <h1 className='text-lg text-orange-400'>Personligt Medlem</h1>
-          <h2 className='text-4xl [membership-title]'>
+          <h2 className='text-2xl md:text-4xl '>
             Bliv medlem af Det Danske Afrika Selskab i dag
           </h2>
-          <p className='md:text-lg md:leading-8 text-gray-600 dark:text-gray-300'>
+          <p className='text-gray-800 lg:mb-6 md:text-lg lg:text-xl dark:text-gray-400'>
             Påbegynd din rejse med os i Det Danske Afrika Selskab ved at blive
             personligt medlem. Det er en enkel proces – udfyld blot og indsend
             formularen nedenfor. Sørg for at udfylde hver sektion, og glem ikke
@@ -97,26 +97,26 @@ export default function Personligt() {
             dig besked, når den er godkendt.
           </p>
           <h3 className='text-2xl font-bold'>Hvorfor blive medlem?</h3>
-          <p className='md:text-lg md:leading-8 text-gray-600 dark:text-gray-300'>
+          <p className='text-gray-800 lg:mb-6 md:text-lg lg:text-xl dark:text-gray-400'>
             At være en del af vores selskab betyder, at du tilslutter dig et
             fællesskab af individer, der deler din interesse for Afrika. Uanset
             om det er kulturen, menneskene, landskaberne eller specifikke
             oplevelser, der trækker dig, er vi her for at udforske det sammen.
           </p>
           <h3 className='text-2xl font-bold'>Møder og sammenkomster</h3>
-          <p className='md:text-lg md:leading-8 text-gray-600 dark:text-gray-300'>
+          <p className='text-gray-800 lg:mb-6 md:text-lg lg:text-xl dark:text-gray-400'>
             Vi arrangerer møder og sammenkomster til meget rimelige priser.
             Detaljer og omkostninger vil blive oplyst med hver eventinvitation,
             så du altid ved, hvad du kan forvente.
           </p>
           <h3 className='text-2xl font-bold'>Medlemsgebyr</h3>
-          <p className='md:text-lg md:leading-8 text-gray-600 dark:text-gray-300'>
+          <p className='text-gray-800 lg:mb-6 md:text-lg lg:text-xl dark:text-gray-400'>
             Det årlige medlemsgebyr er kun 250 DKK per medlem. Dette nominelle
             gebyr hjælper os med at dække omkostningerne ved vores arrangementer
             og initiativer, så vi kan fortsætte med at tilbyde stor værdi til
             vores fællesskab.
           </p>
-          <p className='md:text-lg md:leading-8 text-gray-600 dark:text-gray-300'>
+          <p className='text-gray-800 lg:mb-6 md:text-lg lg:text-xl dark:text-gray-400'>
             Bliv medlem i dag og vær en del af et selskab, der fejrer og lærer
             fra det diverse og rige tæppe, som er Afrika. Vi glæder os til at
             byde dig velkommen!
@@ -126,7 +126,7 @@ export default function Personligt() {
         <p className='text-2xl'> Det årlige kontingent er kr. 250 per medlem</p>
       </div>
       <div
-        className=' col-span-4 -mt-32  pt-32  pr-32 -mr-32 h-min bg-fixed  '
+        className=' col-span-4 md:-mt-32 -mx-2 p-2 md:pt-32  md:pr-32 md:-mr-32 h-min bg-fixed  '
         style={{
           backgroundImage:
             "url('https://cdn.midjourney.com/7f1b20ca-c243-4a2c-8feb-998de0488f14/0_2.webp')",

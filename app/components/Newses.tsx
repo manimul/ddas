@@ -26,7 +26,7 @@ export function Newses(props: NewsesProps) {
     <>
       <Link
         prefetch='intent'
-        className='grid grid-cols-1 md:grid-cols-8 pb-6 gap-4 	'
+        className='grid grid-cols-1 md:grid-cols-8 md:pb-6 gap-4 	'
         relative='path'
         to={'../../nyheder/' + firstNews?.slug}
       >
@@ -62,7 +62,7 @@ export function Newses(props: NewsesProps) {
         </div>
       </Link>
 
-      <ul className='grid grid-cols-2 md:grid-cols-4 gap-2 '>
+      <ul className='grid grid-cols-1 md:grid-cols-4 gap-2 '>
         {remainingNews.map((news) => (
           <li
             key={news._id}
@@ -70,39 +70,41 @@ export function Newses(props: NewsesProps) {
           >
             <Link
               prefetch='intent'
+              className='flex md:block'
               relative='path'
               to={'../../nyheder/' + news?.slug}
             >
-              <NewsThumb image={news.image} />
+              <NewsThumb className='hidden md:block ' image={news.image} />
+              <div className=''>
+                <h2 className='md:px-3 text-bold md:pt-4 text-base md:text-xl tracking-tighter transition-colors duration-100 ease-in-out  lg:text-2xl'>
+                  {news.title}
+                </h2>
 
-              <h2 className='md:px-3 text-bold pt-4 text-base md:text-xl tracking-tighter transition-colors duration-100 ease-in-out  lg:text-2xl'>
-                {news.title}
-              </h2>
+                <div className='md:px-3 flex flex-col space-y-2  '>
+                  {news.publishedDate && (
+                    <div>
+                      <span className='text-sm md:text-base opacity-40'>
+                        {new Date(news.publishedDate).toLocaleDateString(
+                          'da-DK',
+                          {
+                            year: 'numeric',
+                            month: 'long',
+                            day: 'numeric',
+                          }
+                        )}
+                      </span>
+                    </div>
+                  )}
 
-              <div className='md:px-3 flex flex-col space-y-2  '>
-                {news.publishedDate && (
-                  <div>
-                    <span className='text-sm md:text-base opacity-40'>
-                      {new Date(news.publishedDate).toLocaleDateString(
-                        'da-DK',
-                        {
-                          year: 'numeric',
-                          month: 'long',
-                          day: 'numeric',
-                        }
-                      )}
-                    </span>
-                  </div>
-                )}
+                  <p className='hidden md:block  text-gray-800 lg:mb-6 md:text-base lg:text-lg dark:text-gray-400  	'>
+                    {news.extract}
+                  </p>
 
-                <p className='hidden md:block  text-gray-800 lg:mb-6 md:text-base lg:text-lg dark:text-gray-400  	'>
-                  {news.extract}
-                </p>
-
-                <span className='underline md:text-lg lg:text-xl opacity-75 text-orange-500 hover:opacity-100'>
-                  Lær mere
-                  <MoveRight className='hidden group-hover:inline-flex space-x-2' />
-                </span>
+                  <span className='underline md:text-lg lg:text-xl opacity-75 text-orange-500 hover:opacity-100'>
+                    Lær mere
+                    <MoveRight className='hidden group-hover:inline-flex space-x-2' />
+                  </span>
+                </div>
               </div>
             </Link>
           </li>

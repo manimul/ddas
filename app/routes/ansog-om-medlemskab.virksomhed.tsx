@@ -79,10 +79,10 @@ export default function Virksomhed() {
         <div className='corporate-membership-page space-y-2'>
           <h1 className='text-lg text-orange-400'>Virksomhedsmedlem</h1>
 
-          <h2 className='text-4xl [membership-title]'>
+          <h2 className='text-2xl md:text-4xl '>
             Bliv virksomhedsmedlem af Det Danske Afrika Selskab i dag
           </h2>
-          <p className='md:text-lg md:leading-8 text-gray-600 dark:text-gray-300'>
+          <p className='text-gray-800 lg:mb-6 md:text-lg lg:text-xl dark:text-gray-400'>
             Påbegynd jeres rejse med os i Det Danske Afrika Selskab ved at blive
             virksomhedsmedlem. Processen er enkel – udfyld blot og indsend
             formularen nedenfor. Sørg for at udfylde alle felter, og del de
@@ -91,7 +91,7 @@ export default function Virksomhed() {
             besked, når den er godkendt.
           </p>
           <h3 className='text-2xl font-bold'>Hvorfor blive medlem?</h3>
-          <p className='md:text-lg md:leading-8 text-gray-600 dark:text-gray-300'>
+          <p className='text-gray-800 lg:mb-6 md:text-lg lg:text-xl dark:text-gray-400'>
             At blive en del af vores selskab betyder, at jeres firma tilslutter
             sig et netværk af virksomheder og individer, der deler jeres passion
             for Afrika. Uanset om det er kulturen, menneskene, landskaberne
@@ -99,14 +99,14 @@ export default function Virksomhed() {
             her for at udforske og vokse sammen.
           </p>
           <h3 className='text-2xl font-bold'>Møder og sammenkomster</h3>
-          <p className='md:text-lg md:leading-8 text-gray-600 dark:text-gray-300'>
+          <p className='text-gray-800 lg:mb-6 md:text-lg lg:text-xl dark:text-gray-400'>
             Vi arrangerer møder og sammenkomster til meget rimelige priser,
             under de samme fordelagtige vilkår og priser som for vores
             individuelle medlemmer. Detaljer og omkostninger vil blive oplyst
             med hver eventinvitation, så I altid ved, hvad I kan forvente.
           </p>
           <h3 className='text-2xl font-bold'>Medlemsgebyr</h3>
-          <p className='md:text-lg md:leading-8 text-gray-600 dark:text-gray-300'>
+          <p className='text-gray-800 lg:mb-6 md:text-lg lg:text-xl dark:text-gray-400'>
             Det årlige medlemsgebyr for virksomhedsmedlemmer er tilpasset
             således, at op til fire medarbejdere fra jeres firma kan deltage i
             hvert af selskabets arrangementer. Dette gebyr muliggør vores
@@ -114,7 +114,7 @@ export default function Virksomhed() {
             tillader os at fortsætte med at tilbyde stor værdi til vores
             fællesskab.
           </p>
-          <p className='md:text-lg md:leading-8 text-gray-600 dark:text-gray-300'>
+          <p className='text-gray-800 lg:mb-6 md:text-lg lg:text-xl dark:text-gray-400'>
             Bliv medlem i dag og bliv en del af et selskab, der fejrer og lærer
             fra det diverse og rige tæppe, som er Afrika. Vi ser frem til at
             byde jer velkommen!
@@ -125,7 +125,7 @@ export default function Virksomhed() {
       </div>
 
       <div
-        className=' col-span-4 -mt-32  pt-32  pr-32 -mr-32 h-min bg-fixed  '
+        className=' col-span-4 md:-mt-32 -mx-2 p-2 md:pt-32  md:pr-32 md:-mr-32 h-min bg-fixed  '
         style={{
           backgroundImage:
             "url('https://cdn.midjourney.com/3aa676ab-27e9-4b9c-abcd-0e0ab8768ecb/0_0.webp')",

@@ -20,23 +20,23 @@ export function Event(props: EventProps) {
           <MoveLeft />
           <span> Arrangementer</span>
         </Link>
-        <div className='grid grid-cols-3'>
-          <div className='col-span-3'>
-            <div className='max-w-2xl text-center mx-auto mb-4'>
-              <h1 className=' py-4  text-bold pt-4 text-xl tracking-tighter transition-colors duration-100 ease-in-out  lg:text-4xl'>
+        <div className='grid  grid-cols-1 md:grid-cols-3'>
+          <div className='md:col-span-3 order-1'>
+            <div className='md:max-w-2xl text-center mx-auto mb-4'>
+              <h1 className=' py-4  text-bold pt-4 text-2xl tracking-tighter transition-colors duration-100 ease-in-out  lg:text-4xl'>
                 {title}
               </h1>
               {date && <DateFormat date={date} />}
-              {extract && <p className='text-lg  font-bold 	'>{extract}</p>}
+              {extract && <p className='md:text-lg  font-bold 	'>{extract}</p>}
             </div>
             <EventImage image={image} />
           </div>
 
-          <div className='col-span-1 -mt-32'>
+          <div className='md:col-span-1 my-4  md:-mt-32 order-3 md:order-2 '>
             <EventInformation />
           </div>
-          <div className='col-span-2  -mt-32'>
-            <div className=' px-6 flex flex-col space-y-4 '>
+          <div className='md:col-span-2  md:-mt-32 order-2 md:order-3'>
+            <div className=' md:px-6 flex flex-col space-y-4 '>
               {content && content?.length > 0 ? (
                 <div className='bg-white dark:bg-black p-4'>
                   <SanityContent value={content} />

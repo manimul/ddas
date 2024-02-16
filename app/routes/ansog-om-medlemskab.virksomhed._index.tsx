@@ -80,18 +80,9 @@ export default function VirksomhedIndex() {
   let actionData = useActionData<ActionData>();
 
   return (
-    <Form
-      className=' col-span-4 -mt-32  pt-32  pr-32 -mr-32 h-min bg-fixed  '
-      method='post'
-      style={{
-        backgroundImage:
-          "url('https://cdn.midjourney.com/3aa676ab-27e9-4b9c-abcd-0e0ab8768ecb/0_0.webp')",
-        width: 'auto',
-        height: '100%',
-      }}
-    >
+    <Form method='post'>
       <fieldset
-        className=' space-y-4 shadow-2xl -ml-12 p-6 bg-[#f4f4f5] dark:bg-black dark:bg-opacity-50 bg-opacity-75 backdrop-blur-2xl
+        className=' space-y-4 shadow-2xl md:-ml-12 p-2 md:p-6 bg-[#f4f4f5] dark:bg-black dark:bg-opacity-50 bg-opacity-75 backdrop-blur-2xl
         '
       >
         <div>

@@ -2,14 +2,14 @@ import { Link } from '@remix-run/react';
 
 export function EventInformation() {
   return (
-    <div className=' space-y-4 bg-white dark:bg-black py-6 h-min md:sticky top-8 border border-gray-100 dark:border-gray-800 rounded-md   -ml-6 px-6'>
+    <div className='text-sm md:text-base space-y-4 bg-white dark:bg-black p-4  md:py-6 h-min md:sticky top-8 border border-gray-100 dark:border-gray-800 rounded-md   md:-ml-6 md:px-6'>
       <div>
-        <h2 className='text-2xl  capitalize font-semibold '>
+        <h2 className='md:text-2xl  capitalize font-semibold '>
           Praktiske Informationer:
         </h2>
         <div>
           <h3 className='pt-2'>Deltagelse koster</h3>
-          <div className='flex flex-col w-3/4 text-lg '>
+          <div className='flex flex-col md:w-3/4 md:text-lg '>
             <span className='flex flex-row justify-between'>
               100 kr.<span> for medlemmer</span>
             </span>
@@ -40,7 +40,7 @@ export function EventInformation() {
       </div>
       <Link
         to='../../ansog-om-medlemskab'
-        className='inline-flex uppercase text-sm  rounded-md p-4 tracking-wide opacity-75    bg-[#ffae22] text-black hover:opacity-100 hover:rounded-[30px]  duration-500     '
+        className='inline-flex uppercase text-xs md:text-sm  rounded-md p-4 tracking-wide opacity-75    bg-[#ffae22] text-black hover:opacity-100 hover:rounded-[30px]  duration-500     '
       >
         Ansog Om Medlemskab
       </Link>

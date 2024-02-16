@@ -54,52 +54,66 @@ export function Country(props: CountryProps) {
       </h1>
       <div className=' md:basis-1/4 space-y-4 '>
         <MemberImage className='rounded-[0px] ' image={image} />
-        <div className=' space-y-4 bg-white dark:bg-black py-4 h-min md:sticky top-8 border border-gray-100 dark:border-gray-800 rounded-md   -ml-6 px-6'>
-          <ul>
-            <h2 className='text-base pb-2 inline-flex  text-gray-500 space-x-2  '>
-              <Link2 />
-              {` `} <span>{title} links</span>
-            </h2>
 
-            {landeprofil && (
-              <li>
-                {' '}
-                <Link className=' inline-flex space-x-2' to={landeprofil}>
-                  <ExternalLink /> Landeprofil
-                </Link>
-              </li>
-            )}
-            {reglerne && (
-              <li>
-                <Link className=' inline-flex space-x-2' to={reglerne}>
-                  <ExternalLink /> Reglerne
-                </Link>
-              </li>
-            )}
-            {opleve && (
-              <li>
-                <Link className=' inline-flex space-x-2' to={opleve}>
-                  <ExternalLink /> Opleve
-                </Link>
-              </li>
-            )}
-            {introduktion && (
-              <li>
-                {' '}
-                <Link className=' inline-flex space-x-2' to={introduktion}>
-                  <ExternalLink /> Introduktion
-                </Link>
-              </li>
-            )}
-          </ul>
+        <div className=' space-y-4 bg-white dark:bg-black h-min md:sticky top-8 border border-gray-100 dark:border-gray-800 rounded-md p-4   md:-ml-6 md:p-4'>
+          <div>
+            <h2 className='text-xs items-center  md:text-sm uppercase tracking-widest pb-2 inline-flex  text-gray-500 space-x-2  '>
+              <Link2 />
+              {` `} <span>Relaterede links</span>
+            </h2>
+            <ul>
+              {landeprofil && (
+                <li>
+                  {' '}
+                  <Link
+                    className=' inline-flex space-x-2 text-sm  md:text-base '
+                    to={landeprofil}
+                  >
+                    <ExternalLink /> Landeprofil
+                  </Link>
+                </li>
+              )}
+              {reglerne && (
+                <li>
+                  <Link
+                    className=' inline-flex space-x-2 text-sm  md:text-base'
+                    to={reglerne}
+                  >
+                    <ExternalLink /> Reglerne
+                  </Link>
+                </li>
+              )}
+              {opleve && (
+                <li>
+                  <Link
+                    className=' inline-flex space-x-2 text-sm  md:text-base'
+                    to={opleve}
+                  >
+                    <ExternalLink /> Opleve
+                  </Link>
+                </li>
+              )}
+              {introduktion && (
+                <li>
+                  {' '}
+                  <Link
+                    className=' inline-flex space-x-2 text-sm  md:text-base'
+                    to={introduktion}
+                  >
+                    <ExternalLink /> Introduktion
+                  </Link>
+                </li>
+              )}
+            </ul>
+          </div>
 
           {props.membersData && props.membersData.length > 0 ? (
             <div>
-              <hr className='py-3 opacity-50'></hr>
+              <hr className='pb-4 opacity-50'></hr>
 
-              <h2 className='text-base pb-2 inline-flex space-x-2  text-gray-500  '>
+              <h2 className='text-xs items-center  md:text-sm uppercase tracking-widest pb-2 inline-flex space-x-2  text-gray-500  '>
                 <Users />
-                <span>Medlemmer med ekspertise i {title}</span>
+                <span>Medlemmer med ekspertise </span>
               </h2>
               <ul className='grid grid-cols-3 gap-3 text-center'>
                 {props.membersData.map((member) => (
@@ -149,11 +163,12 @@ export function Country(props: CountryProps) {
       {((cities && cities.length > 0) ||
         (props.eventsData && props.eventsData.length > 0) ||
         (props.newsData && props.newsData.length > 0)) && (
-        <div className='md:basis-1/4 md:px-6 flex flex-col space-y-4 bg-white dark:bg-black py-4 border border-gray-100 dark:border-gray-800 rounded-md h-min md:sticky top-8    '>
+        <div className='md:basis-1/4  flex flex-col space-y-4 bg-white dark:bg-black py-4 border border-gray-100 dark:border-gray-800 rounded-md h-min md:sticky top-8     p-4   '>
           {cities && cities.length > 0 ? (
             <div>
-              <h2 className='text-base pb-2 inline-flex space-x-2   text-gray-500  '>
-                <MapPin /> Cities of {title}
+              <h2 className='text-xs items-center  md:text-sm uppercase tracking-widest pb-2 inline-flex space-x-2   text-gray-500  '>
+                <MapPin />
+                <span>Cities of {title}</span>
               </h2>
               <ul className=''>
                 {cities.map((city) => (
@@ -188,8 +203,8 @@ export function Country(props: CountryProps) {
             {' '}
             {props.eventsData && props.eventsData.length > 0 ? (
               <>
-                <hr className='py-3 opacity-50'></hr>
-                <h2 className='text-base  pb-2 inline-flex space-x-2  text-gray-500  '>
+                <hr className='pb-4 opacity-50'></hr>
+                <h2 className='text-xs items-center  md:text-sm uppercase tracking-widest  pb-2 inline-flex space-x-2  text-gray-500  '>
                   <CalendarCheck2 />
                   <span> {title} Arrangementer</span>
                 </h2>
@@ -227,8 +242,8 @@ export function Country(props: CountryProps) {
           <div>
             {props.newsData && props.newsData.length > 0 ? (
               <>
-                <hr className='py-3 opacity-50'></hr>
-                <h2 className='text-base pb-2 inline-flex space-x-2   text-gray-500  '>
+                <hr className='pb-4 opacity-50'></hr>
+                <h2 className='text-xs items-center  md:text-sm uppercase tracking-widest pb-2 inline-flex space-x-2   text-gray-500  '>
                   <Newspaper /> <span>{title} Nyheder</span>
                 </h2>
                 <ul className='space-y-4 '>
