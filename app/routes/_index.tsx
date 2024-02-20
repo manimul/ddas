@@ -58,6 +58,11 @@ export const meta: MetaFunction<
       content:
         'Bliv en del af et engageret fællesskab dedikeret til at udforske og forstå Afrikas rige kultur, historie og udvikling. Med over 150 medlemmer arrangerer vi inspirerende møder og udflugter, der åbner dørene til Afrikas mangfoldige verden.',
     },
+    {
+      property: 'og:description',
+      content:
+        'Bliv en del af et engageret fællesskab dedikeret til at udforske og forstå Afrikas rige kultur, historie og udvikling. Med over 150 medlemmer arrangerer vi inspirerende møder og udflugter, der åbner dørene til Afrikas mangfoldige verden.',
+    },
 
     { property: 'og:image:width', content: String(OG_IMAGE_WIDTH) },
     { property: 'og:image:height', content: String(OG_IMAGE_HEIGHT) },

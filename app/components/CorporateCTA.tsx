@@ -15,7 +15,8 @@ export function CorporateCTA() {
           </p>
           <div className='mt-10 flex items-center justify-center gap-x-6 lg:justify-start'>
             <Link
-              to='ansog-om-medlemskab/corporate'
+              to='../../ansog-om-medlemskab/virksomhed'
+              relative='route'
               className=' uppercase text-sm mb-6 md:mb-0   rounded-md p-4 tracking-wide opacity-75    bg-white text-black hover:opacity-100 hover:rounded-[30px]  duration-500     '
             >
               Bliv virksomhedsmedlem nu

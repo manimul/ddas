@@ -14,14 +14,16 @@ export function MemberCTA() {
           </p>
           <div className='mt-10 md:flex items-center justify-center gap-x-6 lg:justify-start space-y-4'>
             <Link
-              to='ansog-om-medlemskab/personligt'
+              to='../../ansog-om-medlemskab/personligt'
+              relative='route'
               className=' uppercase text-sm  rounded-md p-4 tracking-wide opacity-75    bg-white text-black hover:opacity-100 hover:rounded-[30px]  duration-500     '
             >
               Bliv personligt medlem nu
             </Link>
             <Link
               unstable_viewTransition
-              to='ansog-om-medlemskab'
+              relative='route'
+              to='../../ansog-om-medlemskab'
               className=' group inline-flex items-center justify-center px-5 py-3 mr-3 uppercase text-sm  rounded-md p-4 tracking-wide  text-center   bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 dark:focus:ring-primary-900'
             >
               Lær mere

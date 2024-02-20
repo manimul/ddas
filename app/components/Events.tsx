@@ -24,7 +24,7 @@ export function Events(props: EventsProps) {
           key={event._id}
         >
           <div className='[title-section]  md:-mt-12'>
-            <span className=' bg-[#f4f4f5]  dark:bg-[#0b1213] rounded-md p-2  text-gray-800 text-opacity-50 text-sm tracking-widest uppercase'>
+            <span className=' bg-[#f4f4f5]  dark:bg-[#0b1213] rounded-md p-2  text-gray-800 dark:text-gray-500 text-opacity-50 text-sm tracking-widest uppercase'>
               Kommende
             </span>
             <h2 className='text-bold pt-4 text-xl tracking-tighter transition-colors duration-100 ease-in-out  lg:text-4xl pb-2 md:py-4 basis-full'>

@@ -38,7 +38,7 @@ export function Medlem() {
 
                 <h2 className='md:mt-2  font-bold '>Netværk med ligesindede</h2>
 
-                <p className='hidden sm:mt-1 sm:block text-base text-gray-800'>
+                <p className='hidden sm:mt-1 sm:block text-base text-gray-800 dark:text-gray-400'>
                   Mød og forbind med et netværk af personer, der deler din
                   passion for Afrika.
                 </p>
@@ -53,7 +53,7 @@ export function Medlem() {
                   Eksklusive møder og udflugter
                 </h2>
 
-                <p className='hidden sm:mt-1 sm:block text-base text-gray-800'>
+                <p className='hidden sm:mt-1 sm:block text-base text-gray-800 dark:text-gray-400'>
                   Få adgang til inspirerende møder og unikke udflugter, der er
                   designet til at udforske Afrikas kultur, historie og nutid.
                 </p>
@@ -68,7 +68,7 @@ export function Medlem() {
                   Uddannelsesmæssige ressourcer
                 </h2>
 
-                <p className='hidden sm:mt-1 sm:block text-base text-gray-800'>
+                <p className='hidden sm:mt-1 sm:block text-base text-gray-800 dark:text-gray-400'>
                   Adgang til en rig samling af ressourcer for dybere forståelse
                   af Afrikas komplekse samfund.
                 </p>
@@ -83,7 +83,7 @@ export function Medlem() {
                   Kulturel og forretningsmæssig udveksling
                 </h2>
 
-                <p className='hidden sm:mt-1 sm:block text-base text-gray-800'>
+                <p className='hidden sm:mt-1 sm:block text-base text-gray-800 dark:text-gray-400 md:text'>
                   Deltag i unikke programmer, der fremmer både kulturel
                   forståelse og forretningsmæssigt samarbejde mellem Danmark og
                   Afrika.
@@ -97,7 +97,7 @@ export function Medlem() {
 
                 <h2 className='md:mt-2 font-bold '>Kulturelle begivenheder</h2>
 
-                <p className='hidden sm:mt-1 sm:block text-base text-gray-800'>
+                <p className='hidden sm:mt-1 sm:block text-base text-gray-800 dark:text-gray-400'>
                   Invitationer til eksklusive kulturelle arrangementer, der
                   fejrer Afrikas mangfoldige traditioner og samfund.
                 </p>
@@ -112,7 +112,7 @@ export function Medlem() {
                   Nyhedsbreve og opdateringer
                 </h2>
 
-                <p className='hidden sm:mt-1 sm:block text-base text-gray-800'>
+                <p className='hidden sm:mt-1 sm:block text-base text-gray-800 dark:text-gray-400'>
                   Hold dig informeret med de seneste nyheder og opdateringer om
                   Afrika samt selskabets aktiviteter.
                 </p>
