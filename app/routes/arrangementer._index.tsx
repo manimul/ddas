@@ -35,6 +35,16 @@ export const meta: MetaFunction<
     { title },
     { property: 'twitter:card', content: 'summary_large_image' },
     { property: 'twitter:title', content: title },
+    {
+      property: 'description',
+      content:
+        'I Det Danske Afrika Selskab afholder vi typisk 7-8 arrangementer om året, inklusive den årlige generalforsamling. Så vidt det er muligt afholdes arrangementerne kl 17.00, den 2. tirsdag i måneden. Alle arrangementer har et afrikansk tema/vinkel og kan fx være',
+    },
+    {
+      property: 'og:description',
+      content:
+        'I Det Danske Afrika Selskab afholder vi typisk 7-8 arrangementer om året, inklusive den årlige generalforsamling. Så vidt det er muligt afholdes arrangementerne kl 17.00, den 2. tirsdag i måneden. Alle arrangementer har et afrikansk tema/vinkel og kan fx være',
+    },
     { property: 'og:title', content: title },
     { property: 'og:image:width', content: String(OG_IMAGE_WIDTH) },
     { property: 'og:image:height', content: String(OG_IMAGE_HEIGHT) },

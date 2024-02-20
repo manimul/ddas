@@ -30,7 +30,7 @@ export default function Medlemshjornet() {
           Medlemmer
         </NavLink>
         <NavLink
-          to='corporate-medlemmer'
+          to='virksomhedsmedlemmer'
           className={({ isActive, isPending }) =>
             isPending
               ? 'pending'
@@ -39,7 +39,7 @@ export default function Medlemshjornet() {
                 : 'font-light text-gray-500 hover:text-gray-700'
           }
         >
-          Corporate Medlemmer
+          Virksomhedsmedlemmer
         </NavLink>
       </div>
       <Outlet />

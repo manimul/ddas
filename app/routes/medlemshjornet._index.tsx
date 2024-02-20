@@ -35,6 +35,18 @@ export const meta: MetaFunction<
     { title },
     { property: 'twitter:card', content: 'summary_large_image' },
     { property: 'twitter:title', content: title },
+    { propery: 'og:locale', content: 'da_DK' },
+
+    {
+      property: 'og:description',
+      content:
+        'Vi er i dag over 150 medlemmer med hver vores historie og oplevelser med Afrika.',
+    },
+    {
+      property: 'description',
+      content:
+        'Vi er i dag over 150 medlemmer med hver vores historie og oplevelser med Afrika.',
+    },
     { property: 'og:title', content: title },
     { property: 'og:image:width', content: String(OG_IMAGE_WIDTH) },
     { property: 'og:image:height', content: String(OG_IMAGE_HEIGHT) },

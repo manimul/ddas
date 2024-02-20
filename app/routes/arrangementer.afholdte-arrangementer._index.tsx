@@ -1,14 +1,17 @@
-import { json } from '@remix-run/node';
+import { MetaFunction, json, LoaderFunctionArgs } from '@remix-run/node';
 import { Outlet, useLoaderData } from '@remix-run/react';
+
 import { QueryResponseInitial } from '@sanity/react-loader';
 import { BoardMembers } from '~/components/BoardMembers';
 import { PastEvents } from '~/components/PastEvents';
+import { OG_IMAGE_HEIGHT, OG_IMAGE_WIDTH } from '~/routes/resource.og';
 
 import { useQuery } from '~/sanity/loader';
 import { loadQuery } from '~/sanity/loader.server';
 import { EVENTS_QUERY } from '~/sanity/queries';
 import type { EventStub } from '~/types/event';
 import { eventStubsZ } from '~/types/event';
+import type { Loader as RootLoader } from '~/root';
 
 export const loader = async () => {
   const currentDate = new Date().toISOString();
@@ -26,6 +29,7 @@ export const loader = async () => {
     throw new Response('Not found', { status: 404 });
   }
   console.log(`initial data:` + initial);
+
   return json({
     initial,
     query: EVENTS_QUERY,

@@ -1,7 +1,50 @@
-import { ActionFunctionArgs, ActionFunction, json } from '@remix-run/node';
+import {
+  ActionFunctionArgs,
+  ActionFunction,
+  json,
+  MetaFunction,
+} from '@remix-run/node';
 import { Form, useActionData } from '@remix-run/react';
+
+import type { Loader as RootLoader, loader } from '~/root';
+import { OG_IMAGE_HEIGHT, OG_IMAGE_WIDTH } from '~/routes/resource.og';
+
 import { z } from 'zod';
 import { BasicContactDocument, basicContactZ } from '~/types/basicContact';
+
+export const meta: MetaFunction<typeof loader, { root: RootLoader }> = ({
+  matches,
+}) => {
+  const rootData = matches.find((match) => match.id === `root`)?.data;
+  const home = rootData ? rootData.initial.data : null;
+  const title = ['Kontakt', home?.siteTitle].filter(Boolean).join(' | ');
+
+  return [
+    { title },
+    { property: 'twitter:card', content: 'summary_large_image' },
+    { property: 'twitter:title', content: title },
+    { propery: 'og:locale', content: 'da_DK' },
+
+    {
+      property: 'og:description',
+      content:
+        'Har du spørgsmål, eller ønsker du yderligere information om Det Danske Afrika Selskab? Udfyld venligst kontaktformularen på denne side, så vender vi tilbage til dig hurtigst muligt. Vi ser frem til at høre fra dig! ',
+    },
+    {
+      property: 'description',
+      content:
+        'Har du spørgsmål, eller ønsker du yderligere information om Det Danske Afrika Selskab? Udfyld venligst kontaktformularen på denne side, så vender vi tilbage til dig hurtigst muligt. Vi ser frem til at høre fra dig! ',
+    },
+    { property: 'og:title', content: title },
+    {
+      property: 'og:image',
+      content:
+        'https://cdn.midjourney.com/7419c635-9c49-4d01-9264-7c961219c070/0_3.webp',
+    },
+    { property: 'og:image:width', content: String(OG_IMAGE_WIDTH) },
+    { property: 'og:image:height', content: String(OG_IMAGE_HEIGHT) },
+  ];
+};
 
 // Function to send an email using Postmark
 // This function is asynchronous and returns a Promise

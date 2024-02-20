@@ -51,6 +51,7 @@ export const meta: MetaFunction<
       property: 'twitter:card',
       content: ogImageUrl,
     },
+    { propery: 'og:locale', content: 'da_DK' },
     { property: 'twitter:title', content: title },
     { property: 'og:title', content: title },
     {

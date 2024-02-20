@@ -23,11 +23,11 @@ export function Events(props: EventsProps) {
           className='max-w-6xl mx-auto flex  flex-col md:flex-row  flex-wrap rounded-lg group box-border    hover:border-orange-500 dark:hover:border-orange-500 border border-black  p-2 md:p-5 dark:border-white  hover:shadow-2xl hover:-translate-y-1 ease-in-out duration-300  '
           key={event._id}
         >
-          <div className='[title-section]  md:-mt-12'>
+          <div className='[title-section]  md:-mt-12 w-full'>
             <span className=' bg-[#f4f4f5]  dark:bg-[#0b1213] rounded-md p-2  text-gray-800 dark:text-gray-500 text-opacity-50 text-sm tracking-widest uppercase'>
               Kommende
             </span>
-            <h2 className='text-bold pt-4 text-xl tracking-tighter transition-colors duration-100 ease-in-out  lg:text-4xl pb-2 md:py-4 basis-full'>
+            <h2 className='w-full text-bold pt-4 text-xl tracking-tighter transition-colors duration-100 ease-in-out  lg:text-4xl pb-2 md:py-4 basis-full'>
               {event.title}
             </h2>
           </div>

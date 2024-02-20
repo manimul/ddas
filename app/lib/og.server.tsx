@@ -1,26 +1,26 @@
-import {Resvg} from '@resvg/resvg-js'
-import type {SanityDocument} from '@sanity/client'
-import urlBuilder from '@sanity/image-url'
-import type {SatoriOptions} from 'satori'
-import satori from 'satori'
+import { Resvg } from '@resvg/resvg-js';
+import type { SanityDocument } from '@sanity/client';
+import urlBuilder from '@sanity/image-url';
+import type { SatoriOptions } from 'satori';
+import satori from 'satori';
 
-import {OG_IMAGE_HEIGHT, OG_IMAGE_WIDTH} from '~/routes/resource.og'
-import {dataset, projectId} from '~/sanity/projectDetails'
+import { OG_IMAGE_HEIGHT, OG_IMAGE_WIDTH } from '~/routes/resource.og';
+import { dataset, projectId } from '~/sanity/projectDetails';
 
 // Load the font from the "public" directory
 const fontSans = (baseUrl: string) =>
   fetch(new URL(`${baseUrl}/fonts/Inter-ExtraBold.otf`)).then((res) =>
-    res.arrayBuffer(),
-  )
+    res.arrayBuffer()
+  );
 
 export async function generatePngFromDocument(
   doc: SanityDocument,
-  origin: string,
+  origin: string
 ) {
-  const {title, artist, image} = doc
+  const { title, artist, image } = doc;
 
   // Prepare font data and settings for Satori
-  const fontSansData = await fontSans(origin)
+  const fontSansData = await fontSans(origin);
   const options: SatoriOptions = {
     width: OG_IMAGE_WIDTH,
     height: OG_IMAGE_HEIGHT,
@@ -31,7 +31,7 @@ export async function generatePngFromDocument(
         style: 'normal',
       },
     ],
-  }
+  };
 
   // Create the SVG with satori
   const svg = await satori(
@@ -58,9 +58,10 @@ export async function generatePngFromDocument(
           gap: 25,
         }}
       >
-        <div style={{fontSize: 100}}>{title}</div>
+        <div style={{ fontSize: 30 }}>Det Danske Afrika Selskab</div>
+        <div style={{ fontSize: 70 }}>{title}</div>
         {artist?.title ? (
-          <div style={{fontSize: 40}}>{artist.title}</div>
+          <div style={{ fontSize: 40 }}>{artist.title}</div>
         ) : null}
       </div>
       {image?.asset?._ref ? (
@@ -73,8 +74,8 @@ export async function generatePngFromDocument(
           }}
         >
           <img
-            alt=""
-            src={urlBuilder({projectId, dataset})
+            alt=''
+            src={urlBuilder({ projectId, dataset })
               // @ts-ignore
               .image(image.asset._ref)
               .height(800)
@@ -82,17 +83,17 @@ export async function generatePngFromDocument(
               .fit('max')
               .auto('format')
               .url()}
-            width="500"
-            height="500"
+            width='500'
+            height='500'
           />
         </div>
       ) : null}
     </div>,
-    options,
-  )
+    options
+  );
 
   // Convert to PNG with resvg
-  const resvg = new Resvg(svg)
-  const pngData = resvg.render()
-  return pngData.asPng()
+  const resvg = new Resvg(svg);
+  const pngData = resvg.render();
+  return pngData.asPng();
 }

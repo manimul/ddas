@@ -1,13 +1,46 @@
 import { json } from '@remix-run/node';
+import type { LoaderFunctionArgs, MetaFunction } from '@remix-run/node';
+
 import { useLoaderData } from '@remix-run/react';
 import { QueryResponseInitial } from '@sanity/react-loader';
 import { BoardMembers } from '~/components/BoardMembers';
-
+import type { Loader as RootLoader } from '~/root';
 import { useQuery } from '~/sanity/loader';
 import { loadQuery } from '~/sanity/loader.server';
 import { BOARD_MEMBERS_QUERY } from '~/sanity/queries';
 import type { BoardMemberStub } from '~/types/boardMember';
 import { boardMemberStubsZ } from '~/types/boardMember';
+
+export const meta: MetaFunction<
+  typeof loader,
+  {
+    root: RootLoader;
+  }
+> = ({ data, matches }) => {
+  const rootData = matches.find((match) => match.id === `root`)?.data;
+  const home = rootData ? rootData.initial.data : null;
+  const title = ['Vores bestyrelse', home?.siteTitle]
+    .filter(Boolean)
+    .join(' | ');
+
+  return [
+    { title },
+    { property: 'twitter:title', content: title },
+    { property: 'og:title', content: title },
+
+    { property: 'og:locale', content: 'da_DK' },
+    {
+      property: 'description',
+      content:
+        ' Vores bestyrelse forener en dyb passion for Afrika med enestående ekspertise.',
+    },
+    {
+      property: 'og:description',
+      content:
+        ' Vores bestyrelse forener en dyb passion for Afrika med enestående ekspertise.',
+    },
+  ];
+};
 
 export const loader = async () => {
   const initial = await loadQuery<BoardMemberStub[]>(BOARD_MEMBERS_QUERY).then(
