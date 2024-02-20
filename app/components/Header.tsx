@@ -31,7 +31,7 @@ export function Header(props: LayoutProps) {
   return (
     <header className='border-b border-gray-100 transition-colors duration-1000 ease-in-out dark:border-gray-900 sticky top-0 w-full backdrop-blur-lg bg-white/80 dark:bg-black/60 z-50 '>
       <div
-        className={`container mx-auto flex  md:flex-row items-center md:justify-between p-4 lg:px-12 duration-150 py-4 md:py-0 `}
+        className={`xl:container mx-auto flex  md:flex-row items-center md:justify-between  p-2 xl:px-12 duration-150 py-4 md:py-0 `}
       >
         <div className='md:hidden md:mx-auto  items-center md:justify-between md:p-4 lg:px-4   flex md:grow'>
           <button
@@ -71,7 +71,7 @@ export function Header(props: LayoutProps) {
         </div>
         <Logo home={props.home} />
 
-        <div className='hidden text-xs lg:text-sm  mx-auto  items-center justify-end space-x-1 lg:space-x-4  lg:px-4  md:flex grow '>
+        <div className='hidden text-xs xl:text-sm   mx-auto  items-center justify-end space-x-3 lg:space-x-4 px-4  md:flex grow '>
           <Dropdown title='Om' items={omOssItems} />
           <Dropdown title='Medlemshjørnet' items={medlemItems} />
 
@@ -125,7 +125,7 @@ export function Header(props: LayoutProps) {
           </NavLink>
           <NavLink
             to='ansog-om-medlemskab'
-            className='hidden lg:block uppercase text-xs font-bold  rounded-md p-4 tracking-wide   bg-gradient-to-br hover:bg-gradient-to-tr  from-[#FD9F1C] to-[#FF5107] text-black hover:opacity-100 hover:rounded-[30px]  duration-500     '
+            className='hidden md:block lg:uppercase text-xs lg:font-bold  rounded-md lg:px-2 lg:py-4 xl:p-4 xl:tracking-wide   lg:bg-gradient-to-br lg:hover:bg-gradient-to-tr  font-light text-gray-500 hover:text-gray-700 from-[#FD9F1C] to-[#FF5107] lg:text-black hover:opacity-100 hover:rounded-[30px]  duration-500     '
           >
             Bliv Medlem
           </NavLink>

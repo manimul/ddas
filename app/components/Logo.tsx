@@ -14,12 +14,12 @@ export function Logo(props: LogoProps) {
   }
 
   return (
-    <p className='   font-bold tracking-tighter text-black  dark:text-white md:text-base lg:text-2xl'>
+    <p className='   font-bold tracking-tighter text-black  dark:text-white text-lg md:text-sm lg:text-lg'>
       <Link className='flex flex-row items-center' to='/'>
         {logo && (
           <>
             <img
-              className={'h-14 p-2 md:p-2  md:h-24 md:w-24    '} // Use the combined class
+              className={' h-14 p-2 md:p-2  md:h-24 md:w-24    '} // Use the combined class
               src={urlBuilder({ projectId, dataset })
                 // @ts-ignore
                 .image(logo.asset._ref)
