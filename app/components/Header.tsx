@@ -71,7 +71,7 @@ export function Header(props: LayoutProps) {
         </div>
         <Logo home={props.home} />
 
-        <div className='hidden  mx-auto  items-center justify-end space-x-4  lg:px-4  md:flex grow '>
+        <div className='hidden text-xs lg:text-sm  mx-auto  items-center justify-end space-x-1 lg:space-x-4  lg:px-4  md:flex grow '>
           <Dropdown title='Om' items={omOssItems} />
           <Dropdown title='Medlemshjørnet' items={medlemItems} />
 
@@ -125,7 +125,7 @@ export function Header(props: LayoutProps) {
           </NavLink>
           <NavLink
             to='ansog-om-medlemskab'
-            className=' uppercase text-sm font-bold  rounded-md p-4 tracking-wide   bg-gradient-to-br hover:bg-gradient-to-tr  from-[#FD9F1C] to-[#FF5107] text-black hover:opacity-100 hover:rounded-[30px]  duration-500     '
+            className='hidden lg:block uppercase text-xs font-bold  rounded-md p-4 tracking-wide   bg-gradient-to-br hover:bg-gradient-to-tr  from-[#FD9F1C] to-[#FF5107] text-black hover:opacity-100 hover:rounded-[30px]  duration-500     '
           >
             Bliv Medlem
           </NavLink>

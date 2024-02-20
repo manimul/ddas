@@ -14,7 +14,7 @@ export function Logo(props: LogoProps) {
   }
 
   return (
-    <p className='text-lg font-bold tracking-tighter text-black  dark:text-white lg:text-2xl'>
+    <p className='   font-bold tracking-tighter text-black  dark:text-white md:text-base lg:text-2xl'>
       <Link className='flex flex-row items-center' to='/'>
         {logo && (
           <>
@@ -33,7 +33,7 @@ export function Logo(props: LogoProps) {
             />
           </>
         )}
-        <span>{siteTitle ?? `Det Dansk Afrika Selskab`}</span>
+        <span className=' '>{siteTitle ?? `Det Dansk Afrika Selskab`}</span>
       </Link>
     </p>
   );
