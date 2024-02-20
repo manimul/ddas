@@ -124,7 +124,7 @@ export default function App() {
   });
 
   return (
-    <html lang='en'>
+    <html lang='da'>
       <head>
         <Meta />
         <meta charSet='utf-8' />

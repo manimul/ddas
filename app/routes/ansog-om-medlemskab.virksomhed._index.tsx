@@ -63,11 +63,11 @@ export const action: ActionFunction = async ({ request }) => {
 
   try {
     const emailResponse = await sendEmail(validatedParams);
-    console.log(emailResponse);
+    //console.log(emailResponse);
     //return json({ success: true, message: 'Tak for din besked!' });
     return redirect('success');
   } catch (error) {
-    console.error('Email sending error:', error);
+    // console.error('Email sending error:', error);
     return json({ success: false, message: 'Der skete en fejl' });
   }
 };

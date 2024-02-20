@@ -54,7 +54,7 @@ export const loader = async ({ params, request }: LoaderFunctionArgs) => {
     })
   );
 
-  console.log('country params:', params);
+  //console.log('country params:', params);
 
   if (!initial.data) {
     throw new Response('Not found', { status: 404 });

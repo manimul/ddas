@@ -59,7 +59,7 @@ export const loader = async ({ params, request }: LoaderFunctionArgs) => {
 
   // Check if the slug is valid
   if (!slug) {
-    console.error('No slug provided');
+    // console.error('No slug provided');
     throw new Response('Not found', { status: 404 });
   }
 
@@ -84,7 +84,7 @@ export const loader = async ({ params, request }: LoaderFunctionArgs) => {
       ogImageUrl,
     });
   } catch (error) {
-    console.error('Error loading page:', error);
+    // console.error('Error loading page:', error);
     throw new Response('Error loading page', { status: 500 });
   }
 };

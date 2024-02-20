@@ -53,7 +53,7 @@ export const loader = async () => {
   if (!initial.data) {
     throw new Response('Not found', { status: 404 });
   }
-  console.log(`initial data:` + initial);
+  //console.log(`initial data:` + initial);
   return json({
     initial,
     query: BOARD_MEMBERS_QUERY,

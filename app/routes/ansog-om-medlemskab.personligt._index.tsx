@@ -42,9 +42,6 @@ async function sendEmail(params: MedlemFormDocument) {
 export const action: ActionFunction = async ({ request }) => {
   let formData = await request.formData();
 
-  console.log(formData.get('fodselsar')); // Check the actual value
-  console.log(formData.get('navn')); // Check the actual value
-
   const emailParams: MedlemFormDocument = {
     navn: formData.get('navn')?.toString() || '',
     adresse: formData.get('adresse')?.toString() || '',
@@ -59,11 +56,9 @@ export const action: ActionFunction = async ({ request }) => {
 
   try {
     const emailResponse = await sendEmail(validatedParams);
-    console.log(emailResponse);
     //return json({ success: true, message: 'Tak for din besked!' });
     return redirect('success');
   } catch (error) {
-    console.error('Email sending error:', error);
     return json({ success: false, message: 'Der skete en fejl' });
   }
 };

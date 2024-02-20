@@ -25,26 +25,8 @@ export function PastEvents(props: EventsProps) {
               <div className=' '>
                 <MemberImage image={event.image} />
               </div>
-              <h2 className=' py-1 '>
-                {event?.slug ? (
-                  <Link
-                    prefetch='intent'
-                    relative='path'
-                    to={
-                      '../../arrangementer/afholdte-arrangementer/' +
-                      event?.slug
-                    }
-                    className='text-bold   md:text-xl tracking-tighter transition-colors duration-100 ease-in-out   lg:text-2xl'
-                  >
-                    {event.title}
-                    {/* Makes this entire block clickable */}
-                    {/* <span className="absolute inset-0" /> */}
-                  </Link>
-                ) : (
-                  <span className='pt-2 md:text-xl tracking-tighter'>
-                    {event.title}
-                  </span>
-                )}
+              <h2 className='text-bold py-1  md:text-xl tracking-tighter transition-colors duration-100 ease-in-out   lg:text-2xl'>
+                {event.title}
               </h2>
 
               <div className=' flex flex-col space-y-2 '>
@@ -60,25 +42,11 @@ export function PastEvents(props: EventsProps) {
                   </div>
                 )}
 
-                {event?.slug ? (
-                  <Link
-                    prefetch='intent'
-                    relative='path'
-                    to={
-                      '../../arrangementer/afholdte-arrangementer/' +
-                      event?.slug
-                    }
-                    className='underline opacity-75 text-orange-500 hover:opacity-100'
-                  >
-                    Lær mere
-                    {/* Makes this entire block clickable */}
-                    {/* <span className="absolute inset-0" /> */}
-                  </Link>
-                ) : (
-                  <span className='pt-4 text-xl font-bold tracking-tighter'>
-                    {event.title}
-                  </span>
-                )}
+                <span className='underline opacity-75 text-orange-500 hover:opacity-100'>
+                  Lær mere
+                  {/* Makes this entire block clickable */}
+                  {/* <span className="absolute inset-0" /> */}
+                </span>
               </div>
             </Link>
           </li>

@@ -47,7 +47,6 @@ export const meta: MetaFunction<
 export const loader = async ({ params, request }: LoaderFunctionArgs) => {
   // Params from the loader uses the filename
   // $slug.tsx has the params { slug: 'hello-world' }
-  console.log('params:' + params);
   const initial = await loadQuery<PageDocument>(PAGE_QUERY, params).then(
     (res) => ({ ...res, data: res.data ? pageZ.parse(res.data) : null })
   );

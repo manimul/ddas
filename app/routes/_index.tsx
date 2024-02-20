@@ -43,8 +43,6 @@ export const meta: MetaFunction<
     .auto('format')
     .url();
 
-  console.log('ogImageUrl', ogImageUrl);
-
   return [
     { title },
     {
@@ -145,7 +143,6 @@ export default function Index() {
 
   // Now rootData contains the data returned by the root loader, you can access `home` or any other data loaded there.
   const home = (rootData as { initial?: { data: any } })?.initial?.data;
-  console.log('home', home);
   const ogImage = home ? home.heroImage : null;
   const ogImageUrl = urlBuilder({ projectId, dataset })
     .image(ogImage.asset._ref)

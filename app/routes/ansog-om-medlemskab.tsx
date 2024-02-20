@@ -49,7 +49,7 @@ export const loader = async ({ params, request }: LoaderFunctionArgs) => {
 
   // Check if the slug is valid
   if (!slug) {
-    console.error('No slug provided');
+    //error('No slug provided');
     throw new Response('Not found', { status: 404 });
   }
 

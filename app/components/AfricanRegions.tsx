@@ -42,10 +42,10 @@ export function AfricanRegions(props: AfricanRegionsProps) {
                 <h2 className='text-lg md:text-3xl md:group-hover:translate-x-3 duration-200 align-bottom'>
                   {africanRegion.title}{' '}
                   <MoveRight className='hidden md:group-hover:inline-flex space-x-2' />
-                  <h3 className='text-sm md:text-3xl md:hidden md:opacity-0 md:group-hover:inline-flex group-hover:opacity-100 duration-150  text-green-500'>
+                  <span className='text-sm md:text-3xl md:hidden md:opacity-0 md:group-hover:inline-flex group-hover:opacity-100 duration-150  text-green-500'>
                     {' '}
                     {africanRegion.subtitle}
-                  </h3>
+                  </span>
                 </h2>
               </div>
             </Link>

@@ -56,8 +56,6 @@ export const loader = async ({ params, request }: LoaderFunctionArgs) => {
     data: res.data ? africanRegionZ.parse(res.data) : null,
   }));
 
-  console.log('region params:', params);
-
   if (!initial.data) {
     throw new Response('Not found', { status: 404 });
   }
@@ -107,10 +105,8 @@ export default function AfricanRegionPage() {
     initial: castedCountries,
   });
 
-  console.log('Region Data:', data);
-  console.log('Country Data:', countryData);
   if (countryData && countryData.length > 0) {
-    console.log('Example Country:', countryData[0]);
+    //console.log('Example Country:', countryData[0]);
   }
 
   const filteredCountries = countryData?.filter(
@@ -118,11 +114,7 @@ export default function AfricanRegionPage() {
       country.region?.some((regionRef) => regionRef._ref === data?._id)
   );
 
-  console.log(
-    'Filtered Countries:',
-    JSON.stringify(filteredCountries, null, 2)
-  );
-  console.log('Number of Filtered Countries:', filteredCountries?.length);
+  //console.log('Number of Filtered Countries:', filteredCountries?.length);
 
   if (loading || !data || countryLoading || !filteredCountries) {
     return <div>Loading...</div>;
