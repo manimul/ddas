@@ -23,8 +23,8 @@ export function Header(props: LayoutProps) {
     { slug: '/medlemshjornet', text: 'Medlemshjørnet' },
     { slug: '/medlemshjornet/medlemmer', text: 'Medlemmer' },
     {
-      slug: '/medlemshjornet/corporate-medlemmer',
-      text: 'Corporate Medlemmer',
+      slug: '/medlemshjornet/virksomhedsmedlemmer',
+      text: 'Virksomhedsmedlemmer',
     },
   ];
 
