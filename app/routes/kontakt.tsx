@@ -5,6 +5,7 @@ import {
   MetaFunction,
 } from '@remix-run/node';
 import { Form, useActionData } from '@remix-run/react';
+import { useMatches } from '@remix-run/react';
 
 import type { Loader as RootLoader, loader } from '~/root';
 import { OG_IMAGE_HEIGHT, OG_IMAGE_WIDTH } from '~/routes/resource.og';
@@ -18,6 +19,7 @@ export const meta: MetaFunction<typeof loader, { root: RootLoader }> = ({
   const rootData = matches.find((match) => match.id === `root`)?.data;
   const home = rootData ? rootData.initial.data : null;
   const title = ['Kontakt', home?.siteTitle].filter(Boolean).join(' | ');
+  const contactEmail = home?.email ?? 'mark@bambwa.com';
 
   return [
     { title },
@@ -48,7 +50,7 @@ export const meta: MetaFunction<typeof loader, { root: RootLoader }> = ({
 
 // Function to send an email using Postmark
 // This function is asynchronous and returns a Promise
-async function sendEmail(params: BasicContactDocument) {
+async function sendEmail(params: BasicContactDocument, homeEmail: string) {
   const { navn, email, besked } = params;
   const serverToken = process.env.POSTMARK_SERVER_TOKEN;
 
@@ -68,8 +70,8 @@ async function sendEmail(params: BasicContactDocument) {
     },
     // Convert the email parameters to a JSON string
     body: JSON.stringify({
-      From: 'mark@bambwa.com', // Replace with your sender signature
-      To: 'mark@bambwa.com', // Replace with your target email address
+      From: homeEmail, // Replace with your sender signature
+      To: homeEmail, // Replace with your target email address
       Subject: 'New contact form submission',
       HtmlBody: `<html><body><p>Name: ${navn}</p><p>Email: ${email}</p><p>Message: ${besked}</p></body></html>`,
       TextBody: `Navn: ${navn}\nEmail: ${email}\nBesked: ${besked}`,
@@ -92,10 +94,11 @@ export const action: ActionFunction = async ({ request }) => {
 
   // Validate the form data
   const validatedParams = basicContactZ.parse(emailParams);
+  const homeEmail = formData.get('homeEmail')?.toString() || 'mark@bambwa.com';
 
   // Send the email using the validated parameters
   try {
-    const emailResponse = await sendEmail(validatedParams);
+    const emailResponse = await sendEmail(validatedParams, homeEmail);
     console.log(emailResponse); // Log response for debugging
     // Return a JSON response to the client
     return json({ success: true, message: 'Tak for din besked!' });
@@ -115,6 +118,14 @@ interface ActionData {
 
 export default function Kontakt() {
   let actionData = useActionData<ActionData>();
+  const matches = useMatches();
+  // Find the match object for the root. You might need to adjust the condition based on your route structure.
+  const rootMatch = matches.find((match) => match.id === 'root');
+  const rootData = rootMatch?.data;
+
+  // Now rootData contains the data returned by the root loader, you can access `home` or any other data loaded there.
+  const home = (rootData as { initial?: { data: any } })?.initial?.data;
+  //const homeEmail = home?.email ?? 'default@example.com';
 
   return (
     <section className=''>
@@ -144,6 +155,8 @@ export default function Kontakt() {
                 <label htmlFor='name' className='sr-only'>
                   Navn
                 </label>
+                <input type='hidden' name='homeEmail' value={home.email} />
+
                 <input
                   type='text'
                   name='navn'

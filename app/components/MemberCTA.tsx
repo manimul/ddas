@@ -1,16 +1,25 @@
 import { Link } from '@remix-run/react';
 
-export function MemberCTA() {
+type MemberCTAProps = {
+  title: string;
+  text: string;
+};
+
+export function MemberCTA(props: MemberCTAProps) {
+  const { title, text } = props;
   return (
     <div className='mx-auto  w-full md:py-12 '>
       <div className='relative rounded-lg isolate overflow-hidden bg-gradient-to-tr from-[#05B29D] to-[#1C5340] px-4 md:px-6 pt-6 shadow-2xl sm:rounded-3xl sm:px-16 md:pt-12 lg:flex lg:gap-x-20 lg:px-24 lg:pt-0'>
         <div className='mx-auto text-center lg:mx-0 lg:flex-auto lg:py-16 lg:text-left'>
           <h2 className='text-2xl md:text-4xl font-bold md:tracking-tight text-white '>
-            Bliv en Del Af Afrikas Fremtid - Bliv Personligt Medlem
+            {title
+              ? title
+              : 'Bliv en Del Af Afrikas Fremtid - Bliv Personligt Medlem​​​​‌'}
           </h2>
           <p className='md:mt-3 md:text-2xl md:leading-8 text-gray-100'>
-            Deltag i dag for at forbinde dybt med Afrikas kultur, innovation og
-            mangfoldighed gennem eksklusive medlemsfordele.
+            {text
+              ? text
+              : 'Deltag i dag for at forbinde dybt med Afrikas kultur, innovation og mangfoldighed gennem eksklusive medlemsfordele'}
           </p>
           <div className='mt-10 md:flex items-center justify-center gap-x-6 lg:justify-start space-y-4'>
             <Link

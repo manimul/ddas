@@ -158,13 +158,14 @@ export default function Index() {
         <div className=' grid  md:-mt-6  py-4  md:py-8 mx-auto lg:gap-4 xl:gap-0 lg:py-10 lg:grid-cols-12'>
           <div className='mr-auto md:order-1 order-2 place-self-center lg:col-span-6'>
             <h1 className='max-w-2xl mb-4 md:pr-6 text-4xl  tracking-tight leading-none md:text-5xl xl:text-6xl dark:text-white'>
-              Udforsk Afrikas mangfoldighed med Det Danske Afrika Selskab
+              {home?.heroHeading
+                ? home.heroHeading
+                : 'Udforsk Afrikas mangfoldighed med Det Danske Afrika Selskab‌'}
             </h1>
             <p className='max-w-2xl  md:pr-6 mb-4 font-light text-gray-800 lg:mb-6 md:text-lg lg:text-xl dark:text-gray-400'>
-              Bliv en del af et engageret fællesskab dedikeret til at udforske
-              og forstå Afrikas rige kultur, historie og udvikling. Med over 150
-              medlemmer arrangerer vi inspirerende møder og udflugter, der åbner
-              dørene til Afrikas mangfoldige verden.
+              {home?.heroText
+                ? home.heroText
+                : ' Bliv en del af et engageret fællesskab dedikeret til at udforske og forstå Afrikas rige kultur, historie og udvikling. Med over 150 medlemmer arrangerer vi inspirerende møder og udflugter, der åbner dørene til Afrikas mangfoldige verden.'}
             </p>
             <Link
               unstable_viewTransition
@@ -209,13 +210,12 @@ export default function Index() {
         className='bg-[#101a1d] p-4 -ml-4 -mr-4  md:p-32 md:-ml-32 md:-mr-32  '
       >
         <h2 className='text-2xl pb-4 leading-loose text-[#FFB102]'>
-          Vores Mission{' '}
+          {home?.missionTitle ? home.missionTitle : 'Vores Mission'}
         </h2>
         <p className='text-2xl md:text-5xl text-white '>
-          Det Danske Afrika Selskab fremmer forståelse og samarbejde mellem
-          Danmark og Afrika gennem dialog, netværk og uddannelsesaktiviteter.
-          Selskapet styrker kendskabet til Afrikas kulturer, historie,
-          udvikling, økonomi, politik og erhvervslivet.
+          {home?.missionText
+            ? home.missionText
+            : 'Det Danske Afrika Selskab fremmer forståelse og samarbejde mellem Danmark og Afrika gennem dialog, netværk og uddannelsesaktiviteter. Selskapet styrker kendskabet til Afrikas kulturer, historie, udvikling, økonomi, politik og erhvervslivet.'}
         </p>
       </section>
 
@@ -227,7 +227,7 @@ export default function Index() {
       </section>
 
       <section id='personligt-medlem-cta'>
-        <MemberCTA />
+        <MemberCTA title={home?.memberCtaTitle} text={home?.memberCtaText} />
       </section>
 
       <section id='bliv-medlem'>
@@ -240,7 +240,10 @@ export default function Index() {
       </section>
 
       <section id='corporate-medlem-cta'>
-        <CorporateCTA />
+        <CorporateCTA
+          title={home?.corporateCtaTitle}
+          text={home?.corporateCtaText}
+        />
       </section>
     </>
   );

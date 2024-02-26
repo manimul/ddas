@@ -1,17 +1,26 @@
 import { Link } from '@remix-run/react';
 
-export function CorporateCTA() {
+type CorporateCTAProps = {
+  title: string;
+  text: string;
+};
+
+export function CorporateCTA(props: CorporateCTAProps) {
+  const { title, text } = props;
+
   return (
     <div className='mx-auto w-full py-32'>
       <div className='relative rounded-lg  isolate overflow-hidden bg-gradient-to-tr from-[#FD5F55] to-[#FE9201] px-4 md:px-6 pt-6  shadow-2xl sm:rounded-3xl sm:px-16 md:pt-24 lg:flex lg:gap-x-20 lg:px-24 lg:pt-0'>
         <div className='mx-auto max-w-md text-center lg:mx-0 lg:flex-auto lg:py-32 lg:text-left'>
           <h2 className='text-2xl md:text-4xl font-bold md:tracking-tight text-white'>
-            Styrk Din Virksomheds Afrikanske Forbindelser - Bliv
-            Virksomhedsmedlem
+            {title
+              ? title
+              : 'Styrk Din Virksomheds Afrikanske Forbindelser - Bliv Virksomhedsmedlem'}
           </h2>
           <p className='md:mt-3 md:text-2xl md:leading-8 text-gray-100'>
-            Udvid din virksomheds horisont med unik adgang til Afrikas markeder,
-            kultur og netværk af ligesindede.
+            {text
+              ? text
+              : 'Udvid din virksomheds horisont med unik adgang til Afrikas markeders, kultur og netværk af ligesindede'}
           </p>
           <div className='mt-10 flex items-center justify-center gap-x-6 lg:justify-start'>
             <Link

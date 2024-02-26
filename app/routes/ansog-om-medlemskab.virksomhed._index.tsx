@@ -1,4 +1,4 @@
-import { Form } from '@remix-run/react';
+import { Form, useMatches } from '@remix-run/react';
 import {
   ActionFunctionArgs,
   ActionFunction,
@@ -10,7 +10,7 @@ import { z } from 'zod';
 import { medlemFormZ, MedlemFormDocument } from '~/types/medlemForm';
 //import { Form } from '~/components/Form';
 
-async function sendEmail(params: MedlemFormDocument) {
+async function sendEmail(params: MedlemFormDocument, homeEmail: string) {
   const {
     firmanavn,
     adresse,
@@ -36,8 +36,8 @@ async function sendEmail(params: MedlemFormDocument) {
       'X-Postmark-Server-Token': serverToken,
     },
     body: JSON.stringify({
-      From: 'mark@bambwa.com',
-      To: 'mark@bambwa.com',
+      From: homeEmail,
+      To: homeEmail,
       Subject: 'Ny ansøgning om virksomhed medlemskab',
       HtmlBody: `<html><body><p>firmanavn: ${firmanavn}</p><p>Email: ${email}</p><p>Besked: ${besked}</p><p>Adresse: ${adresse}</p><p>Postnummber och By: ${postnummer} </p><p>Kontaktperson: ${kontaktperson} </p><p>Telefon: ${telefonnummer} </p></body></html>`,
       TextBody: `Firmanavn: ${firmanavn}\nEmail: ${email}\nBesked: ${besked} \nAdress: ${adresse} \nPostnummer och By: ${postnummer}  \nTelefon: ${telefonnummer}`,
@@ -60,14 +60,15 @@ export const action: ActionFunction = async ({ request }) => {
   };
 
   const validatedParams = medlemFormZ.parse(emailParams);
+  const homeEmail = formData.get('homeEmail')?.toString() || 'mark@bambwa.com';
 
   try {
-    const emailResponse = await sendEmail(validatedParams);
-    //console.log(emailResponse);
+    const emailResponse = await sendEmail(validatedParams, homeEmail);
+    // console.log(emailResponse);
     //return json({ success: true, message: 'Tak for din besked!' });
     return redirect('success');
   } catch (error) {
-    // console.error('Email sending error:', error);
+    console.error('Email sending error:', error);
     return json({ success: false, message: 'Der skete en fejl' });
   }
 };
@@ -78,6 +79,13 @@ interface ActionData {
 
 export default function VirksomhedIndex() {
   let actionData = useActionData<ActionData>();
+  const matches = useMatches();
+  // Find the match object for the root. You might need to adjust the condition based on your route structure.
+  const rootMatch = matches.find((match) => match.id === 'root');
+  const rootData = rootMatch?.data;
+
+  // Now rootData contains the data returned by the root loader, you can access `home` or any other data loaded there.
+  const home = (rootData as { initial?: { data: any } })?.initial?.data;
 
   return (
     <Form method='post'>

@@ -1,4 +1,4 @@
-import { Form, Outlet } from '@remix-run/react';
+import { Form, Outlet, useMatches } from '@remix-run/react';
 import {
   ActionFunctionArgs,
   ActionFunction,
@@ -10,7 +10,7 @@ import { z } from 'zod';
 import { medlemFormZ, MedlemFormDocument } from '~/types/medlemForm';
 //import { Form } from '~/components/Form';
 
-async function sendEmail(params: MedlemFormDocument) {
+async function sendEmail(params: MedlemFormDocument, homeEmail: string) {
   const { navn, adresse, telefonnummer, postnummer, email, fodselsar, besked } =
     params;
   const serverToken = process.env.POSTMARK_SERVER_TOKEN;
@@ -29,8 +29,8 @@ async function sendEmail(params: MedlemFormDocument) {
       'X-Postmark-Server-Token': serverToken,
     },
     body: JSON.stringify({
-      From: 'mark@bambwa.com',
-      To: 'mark@bambwa.com',
+      From: homeEmail, // Replace with your sender signature
+      To: homeEmail,
       Subject: 'Ny ansøgning om personligt medlemskab',
       HtmlBody: `<html><body><p>Navn: ${navn}</p><p>Email: ${email}</p><p>Besked: ${besked}</p><p>Adresse: ${adresse}</p><p>Postnummber och By: ${postnummer} </p><p>Fødselsår: ${fodselsar} </p><p>Telefon: ${telefonnummer} </p></body></html>`,
       TextBody: `Navn: ${navn}\nEmail: ${email}\nBesked: ${besked} \nAdresse: ${adresse} \nPostnummer och By: ${postnummer} \nFødselsår: ${fodselsar} \nTelefon: ${telefonnummer}`,
@@ -53,9 +53,10 @@ export const action: ActionFunction = async ({ request }) => {
   };
 
   const validatedParams = medlemFormZ.parse(emailParams);
+  const homeEmail = formData.get('homeEmail')?.toString() || 'mark@bambwa.com';
 
   try {
-    const emailResponse = await sendEmail(validatedParams);
+    const emailResponse = await sendEmail(validatedParams, homeEmail);
     //return json({ success: true, message: 'Tak for din besked!' });
     return redirect('success');
   } catch (error) {
@@ -74,6 +75,14 @@ export default function PersonligtForm() {
   };
 
   let actionData = useActionData<ActionData>();
+
+  const matches = useMatches();
+  // Find the match object for the root. You might need to adjust the condition based on your route structure.
+  const rootMatch = matches.find((match) => match.id === 'root');
+  const rootData = rootMatch?.data;
+
+  // Now rootData contains the data returned by the root loader, you can access `home` or any other data loaded there.
+  const home = (rootData as { initial?: { data: any } })?.initial?.data;
 
   return (
     <Form
@@ -107,6 +116,7 @@ export default function PersonligtForm() {
             className='w-full rounded-lg border-gray-200 bg-white dark:bg-black p-4 pe-12 text-sm shadow-sm'
             placeholder='Indtast Adresse'
           />
+          <input type='hidden' name='homeEmail' value={home.email} />
         </div>
         <div>
           <label htmlFor='telefonnummer' className='sr-only'>

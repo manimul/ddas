@@ -13,6 +13,7 @@ import { tagType } from '~/sanity/schema/tagType';
 import { africanCountryType } from '~/sanity/schema/africanCountryType';
 import { africanRegionType } from '~/sanity/schema/africanRegionType';
 import { cityType } from '~/sanity/schema/cityType';
+import { membershipType } from '~/sanity/schema/membershipType';
 export default [
   artistType,
   genreType,
@@ -29,4 +30,5 @@ export default [
   tagType,
   africanCountryType,
   africanRegionType,
+  membershipType,
 ];

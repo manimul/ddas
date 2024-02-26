@@ -10,6 +10,7 @@ import {
   BookOpenText,
   Globe2,
   MapPin,
+  UserPlus,
 } from 'lucide-react';
 import type {
   DefaultDocumentNodeResolver,
@@ -30,6 +31,12 @@ export const structure: StructureResolver = (S) =>
         .icon(Home)
         .id('home')
         .title('Home'),
+      S.divider(),
+      S.documentListItem()
+        .schemaType('membership')
+        .id('membership')
+        .icon(UserPlus)
+        .title('Membership'),
       S.divider(),
       // Document lists
       S.documentTypeListItem('page').title('Pages').icon(BookOpenText),
@@ -64,6 +71,8 @@ export const defaultDocumentNode: DefaultDocumentNodeResolver = (
 
   switch (schemaType) {
     case `home`:
+      return S.document().views([S.view.form()]);
+    case `membership`:
       return S.document().views([S.view.form()]);
     case `record`:
       return S.document().views([S.view.form(), OGPreviewView]);

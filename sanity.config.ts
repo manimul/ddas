@@ -14,10 +14,10 @@ export const config = defineConfig({
   title: 'Det Danske Afrika Selskab',
   plugins: [
     deskTool({ structure, defaultDocumentNode }),
-    presentationTool({
-      previewUrl: frontendUrl,
-      locate,
-    }),
+    //presentationTool({
+    //previewUrl: frontendUrl,
+    //locate,
+    //}),
     visionTool(),
   ],
   basePath: `/studio`,
