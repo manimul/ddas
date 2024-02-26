@@ -9,12 +9,12 @@ export function Header(props: LayoutProps) {
   const [navbar, setNavbar] = useState(false);
 
   const omOssItems = [
-    { slug: '/om-oss', text: 'Om Oss' },
-    { slug: '/om-oss/bestyrelsen', text: 'Bestyrelsen' },
-    { slug: '/om-oss/vores-historie', text: 'Vores historie' },
-    { slug: '/om-oss/vedtaegter', text: 'Vedtægter' },
+    { slug: '/om-os', text: 'Om Os' },
+    { slug: '/om-os/bestyrelsen', text: 'Bestyrelsen' },
+    { slug: '/om-os/vores-historie', text: 'Vores historie' },
+    { slug: '/om-os/vedtaegter', text: 'Vedtægter' },
     {
-      slug: '/om-oss/referater-og-arsrapporter',
+      slug: '/om-os/referater-og-arsrapporter',
       text: 'Referater og årsrapporter',
     },
     { slug: '/om-stifteren-johannes-konnild', text: 'Om stifteren' },

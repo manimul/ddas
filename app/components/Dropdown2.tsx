@@ -34,7 +34,7 @@ export default function Dropdown() {
             <Menu.Item>
               {({ active }) => (
                 <NavLink
-                  to='om-oss'
+                  to='om-os'
                   className={({ isActive, isPending }) =>
                     isPending
                       ? 'pending'
@@ -43,14 +43,14 @@ export default function Dropdown() {
                         : 'text-gray-700 block px-4 py-2 text-sm'
                   }
                 >
-                  Om Oss
+                  Om Os
                 </NavLink>
               )}
             </Menu.Item>
             <Menu.Item>
               {({ active }) => (
                 <NavLink
-                  to='/om-oss/bestyrelsen'
+                  to='/om-os/bestyrelsen'
                   className={classNames(
                     active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
                     'block px-4 py-2 text-sm'
@@ -63,7 +63,7 @@ export default function Dropdown() {
             <Menu.Item>
               {({ active }) => (
                 <NavLink
-                  to='/om-oss/vores-historie'
+                  to='/om-os/vores-historie'
                   className={classNames(
                     active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
                     'block px-4 py-2 text-sm'
@@ -76,7 +76,7 @@ export default function Dropdown() {
             <Menu.Item>
               {({ active }) => (
                 <NavLink
-                  to='/om-oss/vedtaegter'
+                  to='/om-os/vedtaegter'
                   className={classNames(
                     active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
                     'block px-4 py-2 text-sm'
@@ -89,7 +89,7 @@ export default function Dropdown() {
             <Menu.Item>
               {({ active }) => (
                 <NavLink
-                  to='/om-oss/referater-og-arsrapporter'
+                  to='/om-os/referater-og-arsrapporter'
                   className={classNames(
                     active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
                     'block px-4 py-2 text-sm'

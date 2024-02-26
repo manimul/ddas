@@ -127,6 +127,7 @@ export default function VirksomhedIndex() {
             className='w-full rounded-lg border-gray-200 bg-white dark:bg-black  p-4 pe-12 text-sm shadow-sm'
             placeholder='Indtast Telefonnummer'
           />
+          <input type='hidden' name='homeEmail' value={home.email} />
         </div>
         <div>
           <label htmlFor='postnummer' className='sr-only'>

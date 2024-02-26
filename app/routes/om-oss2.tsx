@@ -18,7 +18,7 @@ import { pageZ } from '~/types/page';
 export default function OmOss() {
   return (
     <div className='grid border-blue-500 border-2 grid-cols-1 gap-6 lg:gap-12'>
-      <Link to='.'>Om Oss</Link>
+      <Link to='.'>Om Os</Link>
       <div className='flex justify-between'>
         <NavLink
           to='bestyrelsen'

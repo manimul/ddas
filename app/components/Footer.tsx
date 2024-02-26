@@ -21,10 +21,10 @@ export function Footer(props: LogoProps) {
                 <ul className='list-unstyled'>
                   <li>
                     <Link
-                      to='om-oss'
+                      to='om-os'
                       className='text-gray-600 hover:text-gray-900 font-semibold block pb-2 text-sm'
                     >
-                      Om Oss
+                      Om Os
                     </Link>
                   </li>
                   <li>
@@ -38,7 +38,7 @@ export function Footer(props: LogoProps) {
                   <li>
                     <Link
                       className='text-gray-600 hover:text-gray-900 font-semibold block pb-2 text-sm'
-                      to='om-oss/bestyrelsen'
+                      to='om-os/bestyrelsen'
                     >
                       Bestyrelse
                     </Link>
