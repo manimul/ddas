@@ -12,7 +12,7 @@ export function Medlem() {
   return (
     <>
       <section className='space-y-6'>
-        <div className=''>
+        <div className='test'>
           <div className='grid grid-cols-1 gap-y-2 md:gap-y-8 lg:grid-cols-3  lg:gap-x-16'>
             <div className=' max-w-lg col-span-1  lg:mx-0 '>
               <h1 className='text-2xl md:text-4xl '>
