@@ -73,6 +73,7 @@ export const action: ActionFunction = async ({ request }) => {
   // Log all form fields and files
   let formData = await request.formData();
 
+  /*
   const { token, projectId } = writeClient.config();
   if (!token) {
     throw new Response(
@@ -84,6 +85,7 @@ export const action: ActionFunction = async ({ request }) => {
   for (let [key, value] of formData.entries()) {
     console.log(`${key}: ${value}`);
   }
+  * */
 
   const emailParams: MedlemFormDocument = {
     navn: formData.get('navn')?.toString() || '',
@@ -97,7 +99,7 @@ export const action: ActionFunction = async ({ request }) => {
 
   const validatedParams = medlemFormZ.parse(emailParams);
   const homeEmail = formData.get('homeEmail')?.toString() || 'mark@bambwa.com';
-
+  /*
   // Handling the uploaded file
   const imageFile = formData.get('image');
 
@@ -119,7 +121,7 @@ export const action: ActionFunction = async ({ request }) => {
     }
   }
 
-  /*
+  
     //Upload it
   if (imageFile instanceof File) {
     writeClient.assets
@@ -240,6 +242,7 @@ export default function PersonligtForm() {
             placeholder='Indtast e-mail'
           />
         </div>
+        {/**
         <div>
           <label
             htmlFor='image'
@@ -253,7 +256,7 @@ export default function PersonligtForm() {
             className='w-full rounded-lg border-gray-200 bg-white dark:bg-black p-4 pe-12 text-sm shadow-sm'
             accept='image/*' // This restricts the file input to accept only images.
           />
-        </div>
+        </div> */}
         <div>
           <label htmlFor='fodselsar' className='sr-only'>
             Fødselsår
