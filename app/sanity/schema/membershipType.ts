@@ -1,4 +1,4 @@
-import { FactoryIcon, PenIcon, Tags, User } from 'lucide-react';
+import { FactoryIcon, LifeBuoyIcon, PenIcon, Tags, User } from 'lucide-react';
 import { defineField, defineType } from 'sanity';
 import { ComposeIcon, MenuIcon, ThListIcon } from '@sanity/icons';
 
@@ -23,6 +23,11 @@ export const membershipType = defineType({
       name: 'corpoprateMembership',
       title: 'Corporate ',
       icon: FactoryIcon,
+    },
+    {
+      name: 'ngoMembership',
+      title: 'NGO ',
+      icon: LifeBuoyIcon,
     },
   ],
   fields: [
@@ -64,6 +69,19 @@ export const membershipType = defineType({
       type: 'array',
       of: [{ type: 'block' }],
       group: 'corpoprateMembership',
+    }),
+    defineField({
+      name: 'ngoMembershipTitle',
+      title: 'NGO Membership Title',
+      type: 'string',
+      group: 'ngoMembership',
+    }),
+    defineField({
+      name: 'ngoMembershipText',
+      title: 'NGO Membership Text',
+      type: 'array',
+      of: [{ type: 'block' }],
+      group: 'ngoMembership',
     }),
   ],
 });

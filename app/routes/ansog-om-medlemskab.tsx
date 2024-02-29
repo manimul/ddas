@@ -1,21 +1,14 @@
 import { Link, NavLink, Outlet } from '@remix-run/react';
-import type {
-  ActionFunction,
-  LoaderFunctionArgs,
-  MetaFunction,
-} from '@remix-run/node';
+import type { LoaderFunctionArgs, MetaFunction } from '@remix-run/node';
 import { json } from '@remix-run/node';
 import { useLoaderData } from '@remix-run/react';
 import type { Loader as RootLoader } from '~/root';
 import { OG_IMAGE_HEIGHT, OG_IMAGE_WIDTH } from '~/routes/resource.og';
-import { writeClient } from '~/sanity/client.server';
 import { useQuery } from '~/sanity/loader';
 import { loadQuery } from '~/sanity/loader.server';
-import { PAGE_QUERY } from '~/sanity/queries';
-import type { PageDocument } from '~/types/page';
-import { pageZ } from '~/types/page';
-import { SanityContent } from '~/components/SanityContent';
-import { MemberImage } from '~/components/MemberImage';
+import { MEMBERSHIP_QUERY } from '~/sanity/queries';
+import type { MembershipDocument } from '~/types/membership';
+import { membershipZ } from '~/types/membership';
 import { QueryResponseInitial } from '@sanity/react-loader';
 
 export const meta: MetaFunction<
@@ -26,7 +19,7 @@ export const meta: MetaFunction<
 > = ({ data, matches }) => {
   const rootData = matches.find((match) => match.id === `root`)?.data;
   const home = rootData ? rootData.initial.data : null;
-  const title = [data?.initial?.data?.title, home?.siteTitle]
+  const title = [data?.initial?.data?.membershipTitle, home?.siteTitle]
     .filter(Boolean)
     .join(' | ');
   const ogImageUrl = data ? data.ogImageUrl : null;
@@ -45,18 +38,10 @@ export const meta: MetaFunction<
 // Load the `record` document with this slug
 export const loader = async ({ params, request }: LoaderFunctionArgs) => {
   // Determine the slug to use
-  const slug = 'medlemsskab'; // Static identifier for this route
-
-  // Check if the slug is valid
-  if (!slug) {
-    //error('No slug provided');
-    throw new Response('Not found', { status: 404 });
-  }
 
   try {
-    const queryParams = { slug: slug }; // Ensure this matches your GROQ query
-    const initial = await loadQuery<PageDocument>(PAGE_QUERY, queryParams).then(
-      (res) => ({ ...res, data: res.data ? pageZ.parse(res.data) : null })
+    const initial = await loadQuery<MembershipDocument>(MEMBERSHIP_QUERY).then(
+      (res) => ({ ...res, data: res.data ? membershipZ.parse(res.data) : null })
     );
 
     if (!initial.data) {
@@ -69,8 +54,8 @@ export const loader = async ({ params, request }: LoaderFunctionArgs) => {
 
     return json({
       initial,
-      query: PAGE_QUERY,
-      params: { ...params, slug }, // Update params with the used slug
+      query: MEMBERSHIP_QUERY,
+      params: { ...params }, // Update params with the used slug
       ogImageUrl,
     });
   } catch (error) {
@@ -93,7 +78,16 @@ export default function AnsogOmMedlemskab() {
     return <div>Loading...</div>;
   }
 
-  const { _id, title, subtitle, content, image } = data;
+  const {
+    membershipTitle,
+    membershipText,
+    personalMembershipText,
+    personalMembershipTitle,
+    corporateMembershipText,
+    corporateMembershipTitle,
+    ngoMembershipText,
+    ngoMembershipTitle,
+  } = data;
 
   return (
     <>
@@ -136,8 +130,20 @@ export default function AnsogOmMedlemskab() {
         >
           Virksomhed
         </NavLink>
+        <NavLink
+          to='ngo'
+          className={({ isActive, isPending }) =>
+            isPending
+              ? 'pending'
+              : isActive
+                ? 'active font-bold border-b-2 border-[#f59e0b] decoration-[#f59e0b] '
+                : 'font-light text-gray-500 hover:text-gray-700'
+          }
+        >
+          NGO
+        </NavLink>
       </div>
-      <Outlet />
+      <Outlet context={data} />
     </>
   );
 }

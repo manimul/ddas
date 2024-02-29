@@ -3,23 +3,21 @@ import { useOutletContext } from '@remix-run/react';
 import { SanityContent } from '~/components/SanityContent';
 import { MembershipDocument } from '~/types/membership';
 
-export default function Virksomhed() {
-  const { corporateMembershipTitle, corporateMembershipText } =
+export default function Ngo() {
+  const { ngoMembershipText, ngoMembershipTitle } =
     useOutletContext<MembershipDocument>();
-
   const title =
-    corporateMembershipTitle ||
-    'Bliv virksomhedsmedlem af Det Danske Afrika Selskab i dag';
-
+    ngoMembershipTitle || 'Bliv NGOmedlem af Det Danske Afrika Selskab i dag';
   return (
     <div className='grid md:grid-cols-8 gap-6 '>
       <div className=' col-span-4 space-y-4 md:pr-12'>
         <div className='corporate-membership-page space-y-2'>
-          <h1 className='text-lg text-orange-400'>Virksomhedsmedlem</h1>
+          <h1 className='text-lg text-orange-400'>NGOmedlem</h1>
 
           <h2 className='text-2xl md:text-4xl '>{title}</h2>
-          {corporateMembershipText && corporateMembershipText?.length > 0 ? (
-            <SanityContent value={corporateMembershipText} />
+
+          {ngoMembershipText && ngoMembershipText?.length > 0 ? (
+            <SanityContent value={ngoMembershipText} />
           ) : (
             <>
               <p className='text-gray-800 lg:mb-6 md:text-lg lg:text-xl dark:text-gray-400'>
@@ -71,12 +69,12 @@ export default function Virksomhed() {
         style={{
           backgroundImage:
             //"url('https://cdn.midjourney.com/3aa676ab-27e9-4b9c-abcd-0e0ab8768ecb/0_0.webp')",
-            "url('https://cdn.midjourney.com/f66f6abb-d982-45ef-b03f-d13b30126620/0_1.webp')",
+            "url('https://cdn.midjourney.com/5fbda0b8-d5e2-4d0b-af3a-5946dd2a24f9/0_2.webp')",
           width: 'auto',
           height: '100%',
         }}
       >
-        <Outlet />
+        <Outlet context={'this is being passed in'} />
       </div>
     </div>
   );

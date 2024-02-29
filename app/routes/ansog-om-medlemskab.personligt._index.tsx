@@ -1,14 +1,27 @@
 import { Form, Outlet, useMatches } from '@remix-run/react';
+import { createClient } from '@sanity/client';
+
 import {
   ActionFunctionArgs,
   ActionFunction,
   json,
   redirect,
+  unstable_parseMultipartFormData,
+  unstable_createFileUploadHandler,
 } from '@remix-run/node';
 import { useActionData } from '@remix-run/react';
 import { z } from 'zod';
+import { writeClient } from '~/sanity/client.server';
+
 import { medlemFormZ, MedlemFormDocument } from '~/types/medlemForm';
 //import { Form } from '~/components/Form';
+
+/*const client = createClient({
+  projectId: process.env.SANITY_STUDIO_PROJECT_ID,
+  dataset: process.env.SANITY_STUDIO_DATASET,
+  apiVersion: process.env.SANITY_STUDIO_API_VERSION,
+  useCdn: false,
+});*/
 
 async function sendEmail(params: MedlemFormDocument, homeEmail: string) {
   const { navn, adresse, telefonnummer, postnummer, email, fodselsar, besked } =
@@ -29,8 +42,10 @@ async function sendEmail(params: MedlemFormDocument, homeEmail: string) {
       'X-Postmark-Server-Token': serverToken,
     },
     body: JSON.stringify({
-      From: homeEmail, // Replace with your sender signature
-      To: homeEmail,
+      //From: homeEmail, // Replace with your sender signature
+      //To: homeEmail,
+      From: 'mark@bambwa.com',
+      To: 'mark@bambwa.com',
       Subject: 'Ny ansøgning om personligt medlemskab',
       HtmlBody: `<html><body><p>Navn: ${navn}</p><p>Email: ${email}</p><p>Besked: ${besked}</p><p>Adresse: ${adresse}</p><p>Postnummber och By: ${postnummer} </p><p>Fødselsår: ${fodselsar} </p><p>Telefon: ${telefonnummer} </p></body></html>`,
       TextBody: `Navn: ${navn}\nEmail: ${email}\nBesked: ${besked} \nAdresse: ${adresse} \nPostnummer och By: ${postnummer} \nFødselsår: ${fodselsar} \nTelefon: ${telefonnummer}`,
@@ -40,7 +55,35 @@ async function sendEmail(params: MedlemFormDocument, homeEmail: string) {
 }
 
 export const action: ActionFunction = async ({ request }) => {
+  /*const uploadHandler = unstable_createFileUploadHandler({
+    maxPartSize: 5_000_000, // 5 MB limit for file size
+
+    //file: ({ filename }) => `uploads/${filename}`, // Define the directory and naming convention for uploaded files
+    file: ({ filename }) => {
+      console.log(`Uploading file: ${filename}`);
+      return `uploads/${filename}`; // Ensure this path is writable and correct
+    },
+    // Add other configurations as needed
+  });*/
+
+  /*const formData = await unstable_parseMultipartFormData(
+    request,
+    uploadHandler
+  );*/
+  // Log all form fields and files
   let formData = await request.formData();
+
+  const { token, projectId } = writeClient.config();
+  if (!token) {
+    throw new Response(
+      `Setup "SANITY_WRITE_TOKEN" with a token with "Editor" permissions to your environment variables. Create one at https://sanity.io/manage/project/${projectId}/api#tokens`,
+      { status: 401 }
+    );
+  }
+
+  for (let [key, value] of formData.entries()) {
+    console.log(`${key}: ${value}`);
+  }
 
   const emailParams: MedlemFormDocument = {
     navn: formData.get('navn')?.toString() || '',
@@ -54,6 +97,48 @@ export const action: ActionFunction = async ({ request }) => {
 
   const validatedParams = medlemFormZ.parse(emailParams);
   const homeEmail = formData.get('homeEmail')?.toString() || 'mark@bambwa.com';
+
+  // Handling the uploaded file
+  const imageFile = formData.get('image');
+
+  if (imageFile instanceof File) {
+    console.log(`File Name: ${imageFile.name}`);
+    console.log(`File Type: ${imageFile.type}`);
+    console.log(`File Size: ${imageFile.size} bytes`);
+  }
+
+  if (imageFile instanceof File) {
+    try {
+      const document = await writeClient.assets.upload('image', imageFile, {
+        contentType: imageFile.type,
+        filename: imageFile.name,
+      });
+      console.log('The image was uploaded!', document);
+    } catch (error) {
+      console.error('Upload failed:', error as any);
+    }
+  }
+
+  /*
+    //Upload it
+  if (imageFile instanceof File) {
+    writeClient.assets
+      .upload('image', imageFile, {
+        contentType: imageFile.type,
+        filename: imageFile.name,
+      })
+      .then((document) => {
+        console.log('The image was uploaded!', document);
+      })
+      .catch((error) => {
+        console.error('Upload failed:', error.message);
+      });
+  }
+ 
+
+  // Here you can add logic to move the file to a permanent storage location,
+  // or integrate with cloud storage, etc.
+*/
 
   try {
     const emailResponse = await sendEmail(validatedParams, homeEmail);
@@ -88,6 +173,7 @@ export default function PersonligtForm() {
     <Form
       //className=' col-span-4 -mt-32  pt-32  pr-32 -mr-32 h-min bg-fixed  '
       method='post'
+      encType='multipart/form-data'
     >
       <fieldset
         className=' space-y-4 shadow-2xl md:-ml-12 p-2 md:p-6 bg-[#f4f4f5] dark:bg-black dark:bg-opacity-50 bg-opacity-75 backdrop-blur-2xl
@@ -152,6 +238,20 @@ export default function PersonligtForm() {
             name='email'
             className='w-full rounded-lg border-gray-200 bg-white dark:bg-black p-4 pe-12 text-sm shadow-sm'
             placeholder='Indtast e-mail'
+          />
+        </div>
+        <div>
+          <label
+            htmlFor='image'
+            className='block text-sm font-medium text-gray-700'
+          >
+            Upload Image
+          </label>
+          <input
+            type='file'
+            name='image'
+            className='w-full rounded-lg border-gray-200 bg-white dark:bg-black p-4 pe-12 text-sm shadow-sm'
+            accept='image/*' // This restricts the file input to accept only images.
           />
         </div>
         <div>
