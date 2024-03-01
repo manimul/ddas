@@ -227,7 +227,7 @@ export const FILTERED_EVENTS_QUERY = groq`*[_type == "event" && select($isFuture
  content
 }`;
 
-export const NEWSES_QUERY = groq`*[_type == "news" ][0...12]|order(date asc){
+export const NEWSES_QUERY = groq`*[_type == "news" ][0...12]|order(publishedDate desc){
   _id,
   _type,
   title,

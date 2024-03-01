@@ -1,6 +1,11 @@
 import type { SanityImageObjectStub } from '@sanity/asset-utils';
 import urlBuilder from '@sanity/image-url';
-import { User, UserRound } from 'lucide-react';
+import {
+  SquareUserRound,
+  SquareUserRoundIcon,
+  User,
+  UserRound,
+} from 'lucide-react';
 
 import { dataset, projectId } from '~/sanity/projectDetails';
 
@@ -37,7 +42,7 @@ export function MemberImage(props: MemberImageProps) {
         </>
       ) : (
         <div className='flex aspect-square w-full items-center justify-center border rounded-lg border-gray-200 text-gray-500'>
-          <UserRound className='w-5 h-5' />
+          <SquareUserRound size={60} strokeWidth={0.4} />
         </div>
       )}
     </div>
