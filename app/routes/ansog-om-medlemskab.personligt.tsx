@@ -4,8 +4,11 @@ import { SanityContent } from '~/components/SanityContent';
 import { MembershipDocument } from '~/types/membership';
 
 export default function Personligt() {
-  const { personalMembershipText, personalMembershipTitle } =
-    useOutletContext<MembershipDocument>();
+  const {
+    personalMembershipEmail,
+    personalMembershipText,
+    personalMembershipTitle,
+  } = useOutletContext<MembershipDocument>();
   const title =
     personalMembershipTitle || 'Bliv medlem af Det Danske Afrika Selskab i dag';
 
@@ -72,7 +75,7 @@ export default function Personligt() {
           height: '100%',
         }}
       >
-        <Outlet />
+        <Outlet context={personalMembershipEmail} />
       </div>
     </div>
   );

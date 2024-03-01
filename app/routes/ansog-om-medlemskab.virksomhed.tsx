@@ -4,8 +4,11 @@ import { SanityContent } from '~/components/SanityContent';
 import { MembershipDocument } from '~/types/membership';
 
 export default function Virksomhed() {
-  const { corporateMembershipTitle, corporateMembershipText } =
-    useOutletContext<MembershipDocument>();
+  const {
+    corporateMembershipTitle,
+    corporateMembershipText,
+    corporateMembershipEmail,
+  } = useOutletContext<MembershipDocument>();
 
   const title =
     corporateMembershipTitle ||
@@ -76,7 +79,7 @@ export default function Virksomhed() {
           height: '100%',
         }}
       >
-        <Outlet />
+        <Outlet context={corporateMembershipEmail} />
       </div>
     </div>
   );

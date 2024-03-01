@@ -4,7 +4,7 @@ import { SanityContent } from '~/components/SanityContent';
 import { MembershipDocument } from '~/types/membership';
 
 export default function Ngo() {
-  const { ngoMembershipText, ngoMembershipTitle } =
+  const { ngoMembershipText, ngoMembershipTitle, ngoMembershipEmail } =
     useOutletContext<MembershipDocument>();
   const title =
     ngoMembershipTitle || 'Bliv NGOmedlem af Det Danske Afrika Selskab i dag';
@@ -74,7 +74,7 @@ export default function Ngo() {
           height: '100%',
         }}
       >
-        <Outlet context={'this is being passed in'} />
+        <Outlet context={ngoMembershipEmail} />
       </div>
     </div>
   );

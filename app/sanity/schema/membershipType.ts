@@ -45,6 +45,13 @@ export const membershipType = defineType({
       group: 'introduction',
     }),
     defineField({
+      name: 'personalMembershipEmail',
+      title: 'Personal Membership Email',
+      description: 'if left empty will default to email added on Home setting',
+      type: 'string',
+      group: 'personalMembership',
+    }),
+    defineField({
       name: 'personalMembershipTitle',
       title: 'Personal Membership Title',
       type: 'string',
@@ -56,6 +63,13 @@ export const membershipType = defineType({
       type: 'array',
       of: [{ type: 'block' }],
       group: 'personalMembership',
+    }),
+    defineField({
+      name: 'corporateMembershipEmail',
+      title: 'Corporate Membership Email',
+      description: 'if left empty will default to email added on Home setting',
+      type: 'string',
+      group: 'corpoprateMembership',
     }),
     defineField({
       name: 'corporateMembershipTitle',
@@ -71,8 +85,15 @@ export const membershipType = defineType({
       group: 'corpoprateMembership',
     }),
     defineField({
+      name: 'ngoMembershipEmail',
+      title: 'NGO Membership Email',
+      description: 'if left empty will default to email added on Home setting',
+      type: 'string',
+      group: 'ngoMembership',
+    }),
+    defineField({
       name: 'ngoMembershipTitle',
-      title: 'NGO Membership Title',
+      title: 'NGO Membership Titles',
       type: 'string',
       group: 'ngoMembership',
     }),

@@ -17,6 +17,8 @@ export const medlemFormZ = z.object({
   fodselsar: z.number().nullable().optional(),
   besked: z.string().nullable(),
   kontaktperson: z.string().nullable().optional(),
+  generalConsent: z.boolean().nullable().optional(),
+  mailConsent: z.boolean().nullable().optional(),
 });
 
 export type MedlemFormDocument = z.infer<typeof medlemFormZ>;

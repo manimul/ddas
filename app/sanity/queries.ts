@@ -2,7 +2,19 @@ import groq from 'groq';
 
 export const HOME_QUERY = groq`*[_id == "home"][0]{ title, siteTitle, logo, content, heroImage, heroHeading, heroText, missionTitle, missionText, memberCtaImage, memberCtaText, memberCtaTitle, corporateCtaTitle, corporateCtaText, corporateCtaImage, email}`;
 
-export const MEMBERSHIP_QUERY = groq`*[_id == "membership"][0]{ membershipTitle, membershipText, personalMembershipTitle, personalMembershipText, corporateMembershipTitle, corporateMembershipText, ngoMembershipTitle, ngoMembershipText}`;
+export const MEMBERSHIP_QUERY = groq`*[_id == "membership"][0]{ 
+  membershipTitle, 
+  membershipText, 
+  personalMembershipEmail, 
+  personalMembershipTitle, 
+  personalMembershipText,
+  corporateMembershipEmail, 
+  corporateMembershipTitle, 
+  corporateMembershipText,
+  ngoMembershipEmail, 
+  ngoMembershipTitle, 
+  ngoMembershipText
+  }`;
 
 export const PAGE_QUERY = groq`*[_type == "page" && slug.current == $slug][0]{
   _id,

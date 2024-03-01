@@ -10,6 +10,9 @@ import {
   unstable_createFileUploadHandler,
 } from '@remix-run/node';
 import { useActionData } from '@remix-run/react';
+import { useOutletContext } from '@remix-run/react';
+import { MembershipDocument } from '~/types/membership';
+
 import { z } from 'zod';
 import { writeClient } from '~/sanity/client.server';
 
@@ -22,10 +25,20 @@ import { medlemFormZ, MedlemFormDocument } from '~/types/medlemForm';
   apiVersion: process.env.SANITY_STUDIO_API_VERSION,
   useCdn: false,
 });*/
+//const { personalMembershipEmail } = useOutletContext<MembershipDocument>();
 
 async function sendEmail(params: MedlemFormDocument, homeEmail: string) {
-  const { navn, adresse, telefonnummer, postnummer, email, fodselsar, besked } =
-    params;
+  const {
+    navn,
+    adresse,
+    telefonnummer,
+    postnummer,
+    email,
+    fodselsar,
+    besked,
+    generalConsent,
+    mailConsent,
+  } = params;
   const serverToken = process.env.POSTMARK_SERVER_TOKEN;
 
   if (typeof serverToken !== 'string') {
@@ -42,13 +55,11 @@ async function sendEmail(params: MedlemFormDocument, homeEmail: string) {
       'X-Postmark-Server-Token': serverToken,
     },
     body: JSON.stringify({
-      //From: homeEmail, // Replace with your sender signature
-      //To: homeEmail,
-      From: 'mark@bambwa.com',
-      To: 'mark@bambwa.com',
+      From: homeEmail,
+      To: homeEmail,
       Subject: 'Ny ansøgning om personligt medlemskab',
-      HtmlBody: `<html><body><p>Navn: ${navn}</p><p>Email: ${email}</p><p>Besked: ${besked}</p><p>Adresse: ${adresse}</p><p>Postnummber och By: ${postnummer} </p><p>Fødselsår: ${fodselsar} </p><p>Telefon: ${telefonnummer} </p></body></html>`,
-      TextBody: `Navn: ${navn}\nEmail: ${email}\nBesked: ${besked} \nAdresse: ${adresse} \nPostnummer och By: ${postnummer} \nFødselsår: ${fodselsar} \nTelefon: ${telefonnummer}`,
+      HtmlBody: `<html><body><p>Navn: ${navn}</p><p>Email: ${email}</p><p>Besked: ${besked}</p><p>Adresse: ${adresse}</p><p>Postnummber och By: ${postnummer} </p><p>Fødselsår: ${fodselsar} </p><p>Telefon: ${telefonnummer} </p><p>General Consent: ${generalConsent}</p><p>Email Consent: ${mailConsent}</p></body></html>`,
+      TextBody: `Navn: ${navn}\nEmail: ${email}\nBesked: ${besked} \nAdresse: ${adresse} \nPostnummer och By: ${postnummer} \nFødselsår: ${fodselsar} \nTelefon: ${telefonnummer} \nGeneral Consent: ${generalConsent}\nEmail Consent: ${mailConsent}`,
     }),
   });
   return response.json();
@@ -95,10 +106,15 @@ export const action: ActionFunction = async ({ request }) => {
     email: formData.get('email')?.toString() || '',
     fodselsar: Number(formData.get('fodselsar')) || 0,
     besked: formData.get('besked')?.toString() || '',
+    generalConsent: formData.get('generalConsent') === 'on',
+    mailConsent: formData.get('mailConsent') === 'on',
   };
-
+  console.log('emailParams', emailParams);
   const validatedParams = medlemFormZ.parse(emailParams);
-  const homeEmail = formData.get('homeEmail')?.toString() || 'mark@bambwa.com';
+  const homeEmail =
+    formData.get('homeEmail')?.toString() || 'mail@afrikaselskabet.dk';
+  console.log('homeEmail', homeEmail);
+
   /*
   // Handling the uploaded file
   const imageFile = formData.get('image');
@@ -144,7 +160,7 @@ export const action: ActionFunction = async ({ request }) => {
 
   try {
     const emailResponse = await sendEmail(validatedParams, homeEmail);
-    //return json({ success: true, message: 'Tak for din besked!' });
+    // return json({ success: true, message: 'Tak for din besked!' });
     return redirect('success');
   } catch (error) {
     return json({ success: false, message: 'Der skete en fejl' });
@@ -162,6 +178,7 @@ export default function PersonligtForm() {
   };
 
   let actionData = useActionData<ActionData>();
+  const personalMembershipEmail = useOutletContext<string>();
 
   const matches = useMatches();
   // Find the match object for the root. You might need to adjust the condition based on your route structure.
@@ -170,6 +187,7 @@ export default function PersonligtForm() {
 
   // Now rootData contains the data returned by the root loader, you can access `home` or any other data loaded there.
   const home = (rootData as { initial?: { data: any } })?.initial?.data;
+  const emailToSend = personalMembershipEmail || home.email;
 
   return (
     <Form
@@ -192,6 +210,7 @@ export default function PersonligtForm() {
             className='w-full rounded-lg border-gray-200 bg-white dark:bg-black p-4 pe-12 text-sm shadow-sm'
             placeholder='Indtast navn'
           />
+          <input type='hidden' name='contextValue' />
         </div>
         <div>
           <label htmlFor='adresse' className='sr-only'>
@@ -204,7 +223,7 @@ export default function PersonligtForm() {
             className='w-full rounded-lg border-gray-200 bg-white dark:bg-black p-4 pe-12 text-sm shadow-sm'
             placeholder='Indtast Adresse'
           />
-          <input type='hidden' name='homeEmail' value={home.email} />
+          <input type='hidden' name='homeEmail' value={emailToSend} />
         </div>
         <div>
           <label htmlFor='telefonnummer' className='sr-only'>
@@ -265,9 +284,15 @@ export default function PersonligtForm() {
             className='w-full pr-3 rounded-lg border-gray-200 bg-white dark:bg-black p-4 pe-12 text-sm shadow-sm'
             name='fodselsar'
             id='fodselsar'
+            defaultValue='Vælg dit fødselsår'
             required
           >
-            <option value='' disabled selected className='opacity-50'>
+            <option
+              selected
+              value='Vælg dit fødselsår'
+              disabled
+              className='opacity-50'
+            >
               Vælg dit fødselsår
             </option>
 
@@ -278,6 +303,7 @@ export default function PersonligtForm() {
             ))}
           </select>
         </div>
+
         <div>
           <label htmlFor='besked' className='sr-only'>
             Besked
@@ -291,7 +317,30 @@ export default function PersonligtForm() {
             placeholder='Beskrivelse af din afrikaerfaring'
           />
         </div>
-
+        <div className='flex flex-row space-x-2 items-center'>
+          <input
+            type='checkbox'
+            id='generalConsent'
+            name='generalConsent'
+            required
+            className='w-4 h-4 text-gray-700 border-gray-300 focus:ring-gray-500'
+          />
+          <label htmlFor='generalConsent' className=''>
+            Jeg giver mit samtykke til lagring af mine personlige data{' '}
+          </label>
+        </div>
+        <div className='flex flex-row space-x-2 items-center'>
+          <input
+            type='checkbox'
+            id='mailConsent'
+            name='mailConsent'
+            className='w-4 h-4 text-gray-700 border-gray-300 focus:ring-gray-500'
+          />
+          <label htmlFor='mailConsent' className=''>
+            Jeg giver mit samtykke til at blive tilføjet Det Danske Afrika
+            Selskab postliste
+          </label>
+        </div>
         <button
           type='submit'
           className=' uppercase text-sm  rounded-md p-4 tracking-wide opacity-75    bg-gradient-to-br hover:bg-gradient-to-tr  from-[#FD9F1C] to-[#FF5107] text-black hover:opacity-100 hover:rounded-[30px]  duration-500     '

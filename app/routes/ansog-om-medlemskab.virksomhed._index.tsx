@@ -7,6 +7,7 @@ import {
 } from '@remix-run/node';
 import { useActionData } from '@remix-run/react';
 import { z } from 'zod';
+import { useOutletContext } from '@remix-run/react';
 import { medlemFormZ, MedlemFormDocument } from '~/types/medlemForm';
 //import { Form } from '~/components/Form';
 
@@ -19,6 +20,8 @@ async function sendEmail(params: MedlemFormDocument, homeEmail: string) {
     kontaktperson,
     email,
     besked,
+    generalConsent,
+    mailConsent,
   } = params;
   const serverToken = process.env.POSTMARK_SERVER_TOKEN;
 
@@ -39,8 +42,8 @@ async function sendEmail(params: MedlemFormDocument, homeEmail: string) {
       From: homeEmail,
       To: homeEmail,
       Subject: 'Ny ansøgning om virksomhed medlemskab',
-      HtmlBody: `<html><body><p>firmanavn: ${firmanavn}</p><p>Email: ${email}</p><p>Besked: ${besked}</p><p>Adresse: ${adresse}</p><p>Postnummber och By: ${postnummer} </p><p>Kontaktperson: ${kontaktperson} </p><p>Telefon: ${telefonnummer} </p></body></html>`,
-      TextBody: `Firmanavn: ${firmanavn}\nEmail: ${email}\nBesked: ${besked} \nAdress: ${adresse} \nPostnummer och By: ${postnummer}  \nTelefon: ${telefonnummer}`,
+      HtmlBody: `<html><body><p>firmanavn: ${firmanavn}</p><p>Email: ${email}</p><p>Besked: ${besked}</p><p>Adresse: ${adresse}</p><p>Postnummber och By: ${postnummer} </p><p>Kontaktperson: ${kontaktperson} </p><p>Telefon: ${telefonnummer} </p><p>General Consent: ${generalConsent}</p><p>Email Consent: ${mailConsent}</p></body></html>`,
+      TextBody: `Firmanavn: ${firmanavn}\nEmail: ${email}\nBesked: ${besked} \nAdress: ${adresse} \nPostnummer och By: ${postnummer}  \nTelefon: ${telefonnummer} \nGeneral Consent: ${generalConsent}\nEmail Consent: ${mailConsent}`,
     }),
   });
   return response.json();
@@ -57,11 +60,14 @@ export const action: ActionFunction = async ({ request }) => {
     kontaktperson: formData.get('kontaktperson')?.toString() || '',
     email: formData.get('email')?.toString() || '',
     besked: formData.get('besked')?.toString() || '',
+    generalConsent: formData.get('generalConsent') === 'on',
+    mailConsent: formData.get('mailConsent') === 'on',
   };
 
   const validatedParams = medlemFormZ.parse(emailParams);
-  const homeEmail = formData.get('homeEmail')?.toString() || 'mark@bambwa.com';
-
+  const homeEmail =
+    formData.get('homeEmail')?.toString() || 'mail@afrikaselskabet.dk';
+  console.log('homeEmail', homeEmail);
   try {
     const emailResponse = await sendEmail(validatedParams, homeEmail);
     // console.log(emailResponse);
@@ -79,6 +85,8 @@ interface ActionData {
 
 export default function VirksomhedIndex() {
   let actionData = useActionData<ActionData>();
+  const corporateMembershipEmail = useOutletContext<string>();
+
   const matches = useMatches();
   // Find the match object for the root. You might need to adjust the condition based on your route structure.
   const rootMatch = matches.find((match) => match.id === 'root');
@@ -86,6 +94,7 @@ export default function VirksomhedIndex() {
 
   // Now rootData contains the data returned by the root loader, you can access `home` or any other data loaded there.
   const home = (rootData as { initial?: { data: any } })?.initial?.data;
+  const emailToSend = corporateMembershipEmail || home.email;
 
   return (
     <Form method='post'>
@@ -127,7 +136,7 @@ export default function VirksomhedIndex() {
             className='w-full rounded-lg border-gray-200 bg-white dark:bg-black  p-4 pe-12 text-sm shadow-sm'
             placeholder='Indtast Telefonnummer'
           />
-          <input type='hidden' name='homeEmail' value={home.email} />
+          <input type='hidden' name='homeEmail' value={emailToSend} />
         </div>
         <div>
           <label htmlFor='postnummer' className='sr-only'>
@@ -178,6 +187,30 @@ export default function VirksomhedIndex() {
             className='w-full rounded-lg border-gray-200 bg-white dark:bg-black  p-4 pe-12 text-sm shadow-sm'
             placeholder='Beskrivelse af firmaets interesser i Afrika'
           />
+        </div>
+        <div className='flex flex-row space-x-2 items-center'>
+          <input
+            type='checkbox'
+            id='generalConsent'
+            name='generalConsent'
+            required
+            className='w-4 h-4 text-gray-700 border-gray-300 focus:ring-gray-500'
+          />
+          <label htmlFor='generalConsent' className=''>
+            Jeg giver mit samtykke til lagring af mine personlige data{' '}
+          </label>
+        </div>
+        <div className='flex flex-row space-x-2 items-center'>
+          <input
+            type='checkbox'
+            id='mailConsent'
+            name='mailConsent'
+            className='w-4 h-4 text-gray-700 border-gray-300 focus:ring-gray-500'
+          />
+          <label htmlFor='mailConsent' className=''>
+            Jeg giver mit samtykke til at blive tilføjet Det Danske Afrika
+            Selskab postliste
+          </label>
         </div>
 
         <button

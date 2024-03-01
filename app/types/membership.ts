@@ -12,10 +12,13 @@ export const membershipZ = z.object({
   _id: z.string().optional(),
   membershipTitle: z.string().nullable().optional(),
   membershipText: z.array(z.any()).nullable().optional(),
+  personalMembershipEmail: z.string().nullable().optional(),
   personalMembershipTitle: z.string().nullable().optional(),
   personalMembershipText: z.array(z.any()).nullable().optional(),
+  corporateMembershipEmail: z.string().nullable().optional(),
   corporateMembershipTitle: z.string().nullable().optional(),
   corporateMembershipText: z.array(z.any()).nullable().optional(),
+  ngoMembershipEmail: z.string().nullable().optional(),
   ngoMembershipTitle: z.string().nullable().optional(),
   ngoMembershipText: z.array(z.any()).nullable().optional(),
 });
