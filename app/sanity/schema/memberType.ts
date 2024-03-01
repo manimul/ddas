@@ -17,6 +17,7 @@ export const memberType = defineType({
       type: 'string',
       name: 'title',
       title: 'Title',
+      initialValue: 'Member',
       validation: (e) => e.required(),
     },
     {
@@ -66,6 +67,7 @@ export const memberType = defineType({
     {
       type: 'slug',
       name: 'slug',
+      validation: (Rule) => Rule.required(),
       options: {
         source: 'name',
       },
