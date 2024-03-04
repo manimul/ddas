@@ -1,5 +1,6 @@
 import { Form, Outlet, useMatches } from '@remix-run/react';
-import { createClient } from '@sanity/client';
+import { SanityDocument, createClient } from '@sanity/client';
+import fs from 'fs';
 
 import {
   ActionFunctionArgs,
@@ -65,6 +66,39 @@ async function sendEmail(params: MedlemFormDocument, homeEmail: string) {
   return response.json();
 }
 
+export async function createImageAsset(
+  image: File | Blob
+): Promise<SanityDocument> {
+  const stream = Buffer.from(await image.arrayBuffer());
+  console.log('stream', stream);
+  const imageDoc = await writeClient.assets.upload('image', stream, {
+    filename: image instanceof File ? image.name : '',
+    contentType: image.type,
+  });
+  //const imageUrl = `https://cdn.sanity.io/images/${
+  // writeClient.config().projectId
+  //}/${writeClient.config().dataset}/${imageDoc._id}.${imageDoc.extension}`;
+  // console.log('Uploaded image URL:', imageUrl);
+
+  let assetId = imageDoc._id.replace(/^image-/, ''); // Remove "image-" prefix
+  const extensionMatch = assetId.match(/-(\w+)$/);
+  let extension = '';
+  if (extensionMatch) {
+    extension = extensionMatch[1]; // Capture the actual extension without the "-"
+    // Remove the extension from the assetIdBase
+    assetId = assetId.replace(/-\w+$/, '');
+  }
+
+  // However, based on the expected URL, we shouldn't manually add the extension, as it seems to be already included in the _id for image assets. Let's adjust:
+  const correctImageUrl = `https://cdn.sanity.io/images/${
+    writeClient.config().projectId
+  }/${writeClient.config().dataset}/${assetId}.${extension}`;
+
+  console.log('Uploaded image URL:', correctImageUrl);
+
+  return imageDoc;
+}
+
 export const action: ActionFunction = async ({ request }) => {
   /*const uploadHandler = unstable_createFileUploadHandler({
     maxPartSize: 5_000_000, // 5 MB limit for file size
@@ -84,7 +118,6 @@ export const action: ActionFunction = async ({ request }) => {
   // Log all form fields and files
   let formData = await request.formData();
 
-  /*
   const { token, projectId } = writeClient.config();
   if (!token) {
     throw new Response(
@@ -93,6 +126,9 @@ export const action: ActionFunction = async ({ request }) => {
     );
   }
 
+  // Create a file with "foo" as its content
+
+  /*
   for (let [key, value] of formData.entries()) {
     console.log(`${key}: ${value}`);
   }
@@ -115,15 +151,17 @@ export const action: ActionFunction = async ({ request }) => {
     formData.get('homeEmail')?.toString() || 'mail@afrikaselskabet.dk';
   console.log('homeEmail', homeEmail);
 
-  /*
   // Handling the uploaded file
   const imageFile = formData.get('image');
 
   if (imageFile instanceof File) {
-    console.log(`File Name: ${imageFile.name}`);
-    console.log(`File Type: ${imageFile.type}`);
-    console.log(`File Size: ${imageFile.size} bytes`);
+    createImageAsset(imageFile);
+    //console.log(`File Name: ${imageFile.name}`);
+    //console.log(`File Type: ${imageFile.type}`);
+    //console.log(`File Size: ${imageFile.size} bytes`);
   }
+
+  /*
 
   if (imageFile instanceof File) {
     try {
@@ -133,12 +171,11 @@ export const action: ActionFunction = async ({ request }) => {
       });
       console.log('The image was uploaded!', document);
     } catch (error) {
-      console.error('Upload failed:', error as any);
+      console.error('Upload failed1:', error as any);
     }
   }
 
-  
-    //Upload it
+  //Upload it
   if (imageFile instanceof File) {
     writeClient.assets
       .upload('image', imageFile, {
@@ -149,14 +186,12 @@ export const action: ActionFunction = async ({ request }) => {
         console.log('The image was uploaded!', document);
       })
       .catch((error) => {
-        console.error('Upload failed:', error.message);
+        console.error('Upload failed2:', error.message);
       });
   }
- 
-
+*/
   // Here you can add logic to move the file to a permanent storage location,
   // or integrate with cloud storage, etc.
-*/
 
   try {
     const emailResponse = await sendEmail(validatedParams, homeEmail);
@@ -261,7 +296,7 @@ export default function PersonligtForm() {
             placeholder='Indtast e-mail'
           />
         </div>
-        {/**
+
         <div>
           <label
             htmlFor='image'
@@ -275,7 +310,7 @@ export default function PersonligtForm() {
             className='w-full rounded-lg border-gray-200 bg-white dark:bg-black p-4 pe-12 text-sm shadow-sm'
             accept='image/*' // This restricts the file input to accept only images.
           />
-        </div> */}
+        </div>
         <div>
           <label htmlFor='fodselsar' className='sr-only'>
             Fødselsår
