@@ -70,7 +70,7 @@ export async function createImageAsset(
   image: File | Blob
 ): Promise<SanityDocument> {
   const stream = Buffer.from(await image.arrayBuffer());
-  console.log('stream', stream);
+  // console.log('stream', stream);
   const imageDoc = await writeClient.assets.upload('image', stream, {
     filename: image instanceof File ? image.name : '',
     contentType: image.type,
@@ -94,7 +94,7 @@ export async function createImageAsset(
     writeClient.config().projectId
   }/${writeClient.config().dataset}/${assetId}.${extension}`;
 
-  console.log('Uploaded image URL:', correctImageUrl);
+  //console.log('Uploaded image URL:', correctImageUrl);
 
   return imageDoc;
 }
@@ -145,11 +145,11 @@ export const action: ActionFunction = async ({ request }) => {
     generalConsent: formData.get('generalConsent') === 'on',
     mailConsent: formData.get('mailConsent') === 'on',
   };
-  console.log('emailParams', emailParams);
+  //console.log('emailParams', emailParams);
   const validatedParams = medlemFormZ.parse(emailParams);
   const homeEmail =
     formData.get('homeEmail')?.toString() || 'mail@afrikaselskabet.dk';
-  console.log('homeEmail', homeEmail);
+  // console.log('homeEmail', homeEmail);
 
   // Handling the uploaded file
   const imageFile = formData.get('image');
@@ -322,12 +322,7 @@ export default function PersonligtForm() {
             defaultValue='Vælg dit fødselsår'
             required
           >
-            <option
-              selected
-              value='Vælg dit fødselsår'
-              disabled
-              className='opacity-50'
-            >
+            <option value='Vælg dit fødselsår' disabled className='opacity-50'>
               Vælg dit fødselsår
             </option>
 

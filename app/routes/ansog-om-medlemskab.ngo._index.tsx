@@ -67,7 +67,7 @@ export const action: ActionFunction = async ({ request }) => {
   const validatedParams = medlemFormZ.parse(emailParams);
   const homeEmail =
     formData.get('homeEmail')?.toString() || 'mail@afrikaselskabet.dk';
-  console.log('homeEmail', homeEmail);
+  //console.log('homeEmail', homeEmail);
 
   try {
     const emailResponse = await sendEmail(validatedParams, homeEmail);

@@ -22,22 +22,41 @@ export const meta: MetaFunction<
   {
     root: RootLoader;
   }
-> = ({ data, matches }) => {
+> = ({ data, params, matches }) => {
   const rootData = matches.find((match) => match.id === `root`)?.data;
+  const slug = params.slug; // Example of accessing the slug parameter
+
   const home = rootData ? rootData.initial.data : null;
   const title = [data?.initial?.data?.title, home?.siteTitle]
     .filter(Boolean)
     .join(' | ');
   const ogImageUrl = data ? data.ogImageUrl : null;
+  const dynamicUrl = `https://afrikaselskabet.dk/arrangementer/kommende-arrangementer/${
+    slug || ''
+  }`;
 
   return [
     { title },
-    { property: 'twitter:card', content: 'summary_large_image' },
-    { property: 'twitter:title', content: title },
+    { name: 'description', content: data?.initial?.data?.extract },
+
+    //  <!-- Facebook Meta Tags -->
     { property: 'og:title', content: title },
     { property: 'og:image:width', content: String(OG_IMAGE_WIDTH) },
     { property: 'og:image:height', content: String(OG_IMAGE_HEIGHT) },
     { property: 'og:image', content: ogImageUrl },
+    { property: 'og:description', content: data?.initial?.data?.extract },
+    { property: 'og:url', content: dynamicUrl },
+    { property: 'og:site_name', content: 'Det Danske Afrika Selskab ' },
+    { property: 'og:locale', content: 'da_DK' },
+    { property: 'og:type', content: 'website' },
+
+    // <!-- Twitter Meta Tags -->
+    { property: 'twitter:card', content: 'summary_large_image' },
+    { property: 'twitter:title', content: title },
+    { property: 'twitter:image', content: ogImageUrl },
+    { property: 'twitter:url', content: dynamicUrl },
+    { property: 'twitter:description', content: data?.initial?.data?.extract },
+    { property: 'twitter:domain', content: 'https://afrikaselskabet.dk/' },
   ];
 };
 

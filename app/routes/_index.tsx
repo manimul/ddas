@@ -30,11 +30,16 @@ export const meta: MetaFunction<
   {
     root: RootLoader;
   }
-> = ({ matches }) => {
+> = ({ params, matches }) => {
   const rootData = matches.find((match) => match.id === `root`)?.data;
+
   const home = rootData ? rootData.initial.data : null;
   const title = [home?.title, home?.heroHeading].filter(Boolean).join(' | ');
   const ogImage = home ? home.heroImage : null;
+  const description = home?.heroText;
+  const dynamicUrl = 'https://afrikaselskabet.dk/ ';
+  const description2 =
+    'Bliv en del af et engageret fællesskab dedikeret til at udforske og forstå Afrikas rige kultur, historie og udvikling. Med over 150 medlemmer arrangerer vi inspirerende møder og udflugter, der åbner dørene til Afrikas mangfoldige verden.';
   const ogImageUrl = urlBuilder({ projectId, dataset })
     .image(ogImage.asset._ref)
     .height(800)
@@ -45,31 +50,28 @@ export const meta: MetaFunction<
 
   return [
     { title },
-    {
-      property: 'twitter:card',
-      content: ogImageUrl,
-    },
-    { propery: 'og:locale', content: 'da_DK' },
-    { property: 'twitter:title', content: title },
-    { property: 'og:title', content: title },
-    {
-      property: 'description',
-      content:
-        'Bliv en del af et engageret fællesskab dedikeret til at udforske og forstå Afrikas rige kultur, historie og udvikling. Med over 150 medlemmer arrangerer vi inspirerende møder og udflugter, der åbner dørene til Afrikas mangfoldige verden.',
-    },
-    {
-      property: 'og:description',
-      content:
-        'Bliv en del af et engageret fællesskab dedikeret til at udforske og forstå Afrikas rige kultur, historie og udvikling. Med over 150 medlemmer arrangerer vi inspirerende møder og udflugter, der åbner dørene til Afrikas mangfoldige verden.',
-    },
+    { property: 'description', content: description2 },
 
+    //  <!-- Facebook Meta Tags -->
+
+    { propery: 'og:locale', content: 'da_DK' },
+    { property: 'og:title', content: title },
+    { property: 'og:description', content: description },
+    { property: 'og:site_name', content: 'Det Danske Afrika Selskab ' },
+    { property: 'og:url', content: dynamicUrl },
     { property: 'og:image:width', content: String(OG_IMAGE_WIDTH) },
     { property: 'og:image:height', content: String(OG_IMAGE_HEIGHT) },
-    {
-      property: 'og:image',
-      //content:'https://cdn.midjourney.com/1e96445f-bcbc-4cc0-b961-d97c7402d9be/0_0.webp',
-      content: ogImageUrl,
-    },
+    { property: 'og:image', content: ogImageUrl },
+    { property: 'og:locale', content: 'da_DK' },
+    { property: 'og:type', content: 'website' },
+
+    // <!-- Twitter Meta Tags -->
+    { property: 'twitter:card', content: 'summary_large_image' },
+    { property: 'twitter:title', content: title },
+    { property: 'twitter:image', content: ogImageUrl },
+    { property: 'twitter:url', content: dynamicUrl },
+    { property: 'twitter:description', content: description },
+    { property: 'twitter:domain', content: 'https://afrikaselskabet.dk/' },
   ];
 };
 
