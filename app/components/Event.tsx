@@ -12,7 +12,7 @@ type EventProps = {
 };
 
 export function Event(props: EventProps) {
-  const { _id, title, extract, date, content, image } = props.data;
+  const { _id, title, extract, location, date, content, image } = props.data;
   return (
     <>
       <div className='flex flex-row flex-wrap  box-border'>
@@ -23,11 +23,20 @@ export function Event(props: EventProps) {
         <div className='grid  grid-cols-1 md:grid-cols-3'>
           <div className='md:col-span-3 order-1'>
             <div className='md:max-w-2xl text-center mx-auto mb-4'>
-              <h1 className=' py-4  text-bold pt-4 text-2xl tracking-tighter transition-colors duration-100 ease-in-out  lg:text-4xl'>
+              <h1 className=' pb-2  text-bold pt-4 text-2xl tracking-tighter transition-colors duration-100 ease-in-out  lg:text-4xl'>
                 {title}
               </h1>
               {date && <DateFormat date={date} />}
-              {extract && <p className='md:text-lg  font-bold 	'>{extract}</p>}
+              {location && (
+                <Link
+                  to={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
+                    location
+                  )}`}
+                  className='md:text-lg text-orange-500 underline   pb-4	'
+                >
+                  {location}
+                </Link>
+              )}
             </div>
             <EventImage image={image} />
           </div>
@@ -37,11 +46,14 @@ export function Event(props: EventProps) {
           </div>
           <div className='md:col-span-2  md:-mt-32 order-2 md:order-3'>
             <div className=' md:px-6 flex flex-col space-y-4 '>
-              {content && content?.length > 0 ? (
-                <div className='bg-white dark:bg-black p-4'>
+              <div className='bg-white dark:bg-black p-4'>
+                {extract && (
+                  <p className='md:text-2xl py-3  font-bold 	'>{extract}</p>
+                )}
+                {content && content?.length > 0 ? (
                   <SanityContent value={content} />
-                </div>
-              ) : null}
+                ) : null}
+              </div>
             </div>
           </div>
         </div>

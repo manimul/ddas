@@ -120,7 +120,7 @@ export function Medlem() {
             </div>
           </div>
         </div>
-        <div className='grid text-white   md:grid-cols-3 gap-6  bg-[#101a1d]  p-4 -ml-4 -mr-4  md:p-32 md:-ml-32 md:-mr-32'>
+        <div className='grid text-white   md:grid-cols-4 gap-6  bg-[#101a1d]  p-4 -ml-4 -mr-4  md:p-32 md:-ml-32 md:-mr-32'>
           <p className='text-2xl  '>
             Uanset om du er en person med{' '}
             <span className='text-orange-500'>
@@ -148,7 +148,7 @@ export function Medlem() {
               height: '200px',
             }}
           >
-            <span className='absolute inset-0 flex justify-center bg-black bg-opacity-25 hover:backdrop-grayscale duration-150	 items-center text-2xl'>
+            <span className='absolute inset-0 flex justify-center bg-black bg-opacity-25 hover:backdrop-grayscale duration-150	 items-center text-xl'>
               Personligt medlemskab
             </span>
           </Link>
@@ -163,8 +163,23 @@ export function Medlem() {
               height: '200px',
             }}
           >
-            <span className='absolute inset-0 flex justify-center items-center drop-shadow-lg bg-black bg-opacity-25  hover:backdrop-grayscale duration-150	  p-2 text-2xl'>
+            <span className='absolute inset-0 flex justify-center items-center drop-shadow-lg bg-black bg-opacity-25  hover:backdrop-grayscale duration-150	  p-2 text-xl'>
               Virksomhedsmedlemskab
+            </span>
+          </Link>
+          <Link
+            to='../../../ansog-om-medlemskab/ngo'
+            className='bg-cover bg-center relative text-white font-bold py-2 px-4 rounded'
+            style={{
+              backgroundImage:
+                // "url('https://cdn.midjourney.com/3aa676ab-27e9-4b9c-abcd-0e0ab8768ecb/0_0.webp')",
+                "url('https://cdn.midjourney.com/f66f6abb-d982-45ef-b03f-d13b30126620/0_2.webp')",
+              width: 'auto',
+              height: '200px',
+            }}
+          >
+            <span className='absolute inset-0 flex justify-center items-center drop-shadow-lg bg-black bg-opacity-25  hover:backdrop-grayscale duration-150	  p-2 text-xl'>
+              Ngomedlemskab
             </span>
           </Link>
         </div>{' '}
