@@ -1,7 +1,7 @@
 import { EventDocument } from '~/types/event';
 import { SanityContent } from '~/components/SanityContent';
 import { MemberImage } from '~/components/MemberImage';
-import { MoveLeft } from 'lucide-react';
+import { CalendarClock, MapPin, MoveLeft } from 'lucide-react';
 import { Link } from '@remix-run/react';
 import { EventInformation } from './EventInformation';
 import { DateFormat } from './DateFormat';
@@ -22,21 +22,31 @@ export function Event(props: EventProps) {
         </Link>
         <div className='grid  grid-cols-1 md:grid-cols-3'>
           <div className='md:col-span-3 order-1'>
-            <div className='md:max-w-2xl text-center mx-auto mb-4'>
-              <h1 className=' pb-2  text-bold pt-4 text-2xl tracking-tighter transition-colors duration-100 ease-in-out  lg:text-4xl'>
+            <div className='md:max-w-4xl md:text-center mx-auto md:mb-2'>
+              <h1 className=' pb-2  text-bold pt-4 text-3xl tracking-tighter transition-colors duration-100 ease-in-out  lg:text-5xl'>
                 {title}
               </h1>
-              {date && <DateFormat date={date} />}
-              {location && (
-                <Link
-                  to={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
-                    location
-                  )}`}
-                  className='md:text-lg text-orange-500 underline   pb-4	'
-                >
-                  {location}
-                </Link>
-              )}
+              <div className='flex-col md:flex-row md:space-x-3 flex md:m-auto  md:justify-center'>
+                {date && (
+                  <span className='inline-flex'>
+                    <CalendarClock />
+                    <DateFormat date={date} />
+                  </span>
+                )}
+                {location && (
+                  <span className='inline-flex'>
+                    <MapPin />{' '}
+                    <Link
+                      to={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
+                        location
+                      )}`}
+                      className='md:text-lg text-orange-500 underline   pb-4	'
+                    >
+                      {location}
+                    </Link>
+                  </span>
+                )}
+              </div>
             </div>
             <EventImage image={image} />
           </div>

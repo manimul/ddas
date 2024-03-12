@@ -16,7 +16,7 @@ export function News(props: NewsProps) {
         <MoveLeft />
         <span> Nyheder</span>
       </Link>
-      <h1 className='mx-auto text-center max-w-3xl  basis-full text-bold pt-4 text-xl tracking-tighter transition-colors duration-100 ease-in-out  lg:text-4xl'>
+      <h1 className='mx-auto text-center max-w-3xl  basis-full text-bold pt-4 text-3xl tracking-tighter transition-colors duration-100 ease-in-out  lg:text-5xl'>
         {title}
       </h1>
       {publishedDate && (

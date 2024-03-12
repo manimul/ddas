@@ -46,7 +46,7 @@ export function Footer(props: LogoProps) {
                   <li>
                     <Link
                       className='text-gray-600 hover:text-gray-900 font-semibold block pb-2 text-sm'
-                      to='arrangementer/kommende-arrangementer'
+                      to='kontakt'
                     >
                       Kontakt
                     </Link>
@@ -78,9 +78,9 @@ export function Footer(props: LogoProps) {
                   <li>
                     <Link
                       className='text-gray-600 hover:text-gray-900 font-semibold block pb-2 text-sm'
-                      to='medlemshjornet/corporate-medlemmer'
+                      to='medlemshjornet/virksomhedsmedlemmer'
                     >
-                      Corporate Medlemmer
+                      Virksomhedsmedlemmer
                     </Link>
                   </li>
                   <li>
