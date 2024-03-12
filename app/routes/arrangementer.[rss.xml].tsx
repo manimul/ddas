@@ -50,8 +50,6 @@ export function generateRss({
   </rss>`;
 }
 
-// app/routes/[rss.xml].tsx
-
 export const loader: LoaderFunction = async () => {
   // Adjust this to fetch your events data instead
   const currentDate = new Date().toISOString();

@@ -18,17 +18,12 @@ import { z } from 'zod';
 import { writeClient } from '~/sanity/client.server';
 
 import { medlemFormZ, MedlemFormDocument } from '~/types/medlemForm';
-//import { Form } from '~/components/Form';
 
-/*const client = createClient({
-  projectId: process.env.SANITY_STUDIO_PROJECT_ID,
-  dataset: process.env.SANITY_STUDIO_DATASET,
-  apiVersion: process.env.SANITY_STUDIO_API_VERSION,
-  useCdn: false,
-});*/
-//const { personalMembershipEmail } = useOutletContext<MembershipDocument>();
-
-async function sendEmail(params: MedlemFormDocument, homeEmail: string) {
+async function sendEmail(
+  params: MedlemFormDocument,
+  homeEmail: string,
+  imageUrl: string
+) {
   const {
     navn,
     adresse,
@@ -59,63 +54,46 @@ async function sendEmail(params: MedlemFormDocument, homeEmail: string) {
       From: homeEmail,
       To: homeEmail,
       Subject: 'Ny ansøgning om personligt medlemskab',
-      HtmlBody: `<html><body><p>Navn: ${navn}</p><p>Email: ${email}</p><p>Besked: ${besked}</p><p>Adresse: ${adresse}</p><p>Postnummber och By: ${postnummer} </p><p>Fødselsår: ${fodselsar} </p><p>Telefon: ${telefonnummer} </p><p>General Consent: ${generalConsent}</p><p>Email Consent: ${mailConsent}</p></body></html>`,
+      HtmlBody: `<html><body><p>Image: <img src="${imageUrl}" alt="Uploaded Image"/></p><p>Image Link: <a href="${imageUrl}">${imageUrl}</a> </p><p>Navn: ${navn}</p><p>Email: ${email}</p><p>Besked: ${besked}</p><p>Adresse: ${adresse}</p><p>Postnummber och By: ${postnummer} </p><p>Fødselsår: ${fodselsar} </p> </p> <p>Telefon: ${telefonnummer} </p><p>General Consent: ${generalConsent}</p><p>Email Consent: ${mailConsent}</p></body></html>`,
       TextBody: `Navn: ${navn}\nEmail: ${email}\nBesked: ${besked} \nAdresse: ${adresse} \nPostnummer och By: ${postnummer} \nFødselsår: ${fodselsar} \nTelefon: ${telefonnummer} \nGeneral Consent: ${generalConsent}\nEmail Consent: ${mailConsent}`,
     }),
   });
+  //console.log('response', response);
   return response.json();
 }
 
 export async function createImageAsset(
   image: File | Blob
-): Promise<SanityDocument> {
+  //): Promise<SanityDocument> {
+): Promise<string> {
   const stream = Buffer.from(await image.arrayBuffer());
   // console.log('stream', stream);
   const imageDoc = await writeClient.assets.upload('image', stream, {
     filename: image instanceof File ? image.name : '',
     contentType: image.type,
   });
-  //const imageUrl = `https://cdn.sanity.io/images/${
-  // writeClient.config().projectId
-  //}/${writeClient.config().dataset}/${imageDoc._id}.${imageDoc.extension}`;
-  // console.log('Uploaded image URL:', imageUrl);
 
   let assetId = imageDoc._id.replace(/^image-/, ''); // Remove "image-" prefix
   const extensionMatch = assetId.match(/-(\w+)$/);
   let extension = '';
   if (extensionMatch) {
-    extension = extensionMatch[1]; // Capture the actual extension without the "-"
+    extension = extensionMatch[1];
+    // Capture the actual extension without the "-"
     // Remove the extension from the assetIdBase
     assetId = assetId.replace(/-\w+$/, '');
   }
 
-  // However, based on the expected URL, we shouldn't manually add the extension, as it seems to be already included in the _id for image assets. Let's adjust:
   const correctImageUrl = `https://cdn.sanity.io/images/${
     writeClient.config().projectId
   }/${writeClient.config().dataset}/${assetId}.${extension}`;
 
-  //console.log('Uploaded image URL:', correctImageUrl);
-
-  return imageDoc;
+  console.log('Uploaded image URL:', correctImageUrl);
+  //console.log('imageDoc', imageDoc);
+  // return imageDoc;
+  return correctImageUrl;
 }
 
 export const action: ActionFunction = async ({ request }) => {
-  /*const uploadHandler = unstable_createFileUploadHandler({
-    maxPartSize: 5_000_000, // 5 MB limit for file size
-
-    //file: ({ filename }) => `uploads/${filename}`, // Define the directory and naming convention for uploaded files
-    file: ({ filename }) => {
-      console.log(`Uploading file: ${filename}`);
-      return `uploads/${filename}`; // Ensure this path is writable and correct
-    },
-    // Add other configurations as needed
-  });*/
-
-  /*const formData = await unstable_parseMultipartFormData(
-    request,
-    uploadHandler
-  );*/
-  // Log all form fields and files
   let formData = await request.formData();
 
   const { token, projectId } = writeClient.config();
@@ -125,14 +103,6 @@ export const action: ActionFunction = async ({ request }) => {
       { status: 401 }
     );
   }
-
-  // Create a file with "foo" as its content
-
-  /*
-  for (let [key, value] of formData.entries()) {
-    console.log(`${key}: ${value}`);
-  }
-  * */
 
   const emailParams: MedlemFormDocument = {
     navn: formData.get('navn')?.toString() || '',
@@ -149,53 +119,17 @@ export const action: ActionFunction = async ({ request }) => {
   const validatedParams = medlemFormZ.parse(emailParams);
   const homeEmail =
     formData.get('homeEmail')?.toString() || 'mail@afrikaselskabet.dk';
-  // console.log('homeEmail', homeEmail);
 
   // Handling the uploaded file
   const imageFile = formData.get('image');
+  let imageUrl = ''; // Initialize variable to hold the image URL
 
   if (imageFile instanceof File) {
-    createImageAsset(imageFile);
-    //console.log(`File Name: ${imageFile.name}`);
-    //console.log(`File Type: ${imageFile.type}`);
-    //console.log(`File Size: ${imageFile.size} bytes`);
+    imageUrl = await createImageAsset(imageFile);
   }
-
-  /*
-
-  if (imageFile instanceof File) {
-    try {
-      const document = await writeClient.assets.upload('image', imageFile, {
-        contentType: imageFile.type,
-        filename: imageFile.name,
-      });
-      console.log('The image was uploaded!', document);
-    } catch (error) {
-      console.error('Upload failed1:', error as any);
-    }
-  }
-
-  //Upload it
-  if (imageFile instanceof File) {
-    writeClient.assets
-      .upload('image', imageFile, {
-        contentType: imageFile.type,
-        filename: imageFile.name,
-      })
-      .then((document) => {
-        console.log('The image was uploaded!', document);
-      })
-      .catch((error) => {
-        console.error('Upload failed2:', error.message);
-      });
-  }
-*/
-  // Here you can add logic to move the file to a permanent storage location,
-  // or integrate with cloud storage, etc.
 
   try {
-    const emailResponse = await sendEmail(validatedParams, homeEmail);
-    // return json({ success: true, message: 'Tak for din besked!' });
+    const emailResponse = await sendEmail(validatedParams, homeEmail, imageUrl);
     return redirect('success');
   } catch (error) {
     return json({ success: false, message: 'Der skete en fejl' });
@@ -223,6 +157,7 @@ export default function PersonligtForm() {
   // Now rootData contains the data returned by the root loader, you can access `home` or any other data loaded there.
   const home = (rootData as { initial?: { data: any } })?.initial?.data;
   const emailToSend = personalMembershipEmail || home.email;
+  console.log('emailToSend', emailToSend);
 
   return (
     <Form
@@ -231,7 +166,7 @@ export default function PersonligtForm() {
       encType='multipart/form-data'
     >
       <fieldset
-        className=' space-y-4 shadow-2xl md:-ml-12 p-2 md:p-6 bg-[#f4f4f5] dark:bg-black dark:bg-opacity-50 bg-opacity-75 backdrop-blur-2xl
+        className=' space-y-4 shadow-2xl md:-ml-12 p-2 md:p-6 bg-[#f4f4f5] dark:bg-black md:dark:bg-opacity-50 md:bg-opacity-75 md:backdrop-blur-2xl
         '
       >
         <div>

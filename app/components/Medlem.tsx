@@ -120,8 +120,8 @@ export function Medlem() {
             </div>
           </div>
         </div>
-        <div className='grid text-white   md:grid-cols-4 gap-6  bg-[#101a1d]  p-4 -ml-4 -mr-4  md:p-32 md:-ml-32 md:-mr-32'>
-          <p className='text-2xl  '>
+        <div className='grid text-white   md:grid-cols-12 gap-4   bg-[#101a1d]  p-4 -ml-4 -mr-4  md:p-32 md:-ml-32 md:-mr-32'>
+          <p className='text-2xl md:col-span-12 '>
             Uanset om du er en person med{' '}
             <span className='text-orange-500'>
               passion for afrikansk kultur{' '}
@@ -138,7 +138,7 @@ export function Medlem() {
           </p>
 
           <Link
-            className='bg-cover bg-center relative text-white font-bold py-2 px-4 rounded'
+            className='bg-cover md:col-span-4  bg-center relative text-white font-bold py-2 px-4 rounded'
             to='../../../ansog-om-medlemskab/personligt'
             style={{
               backgroundImage:
@@ -148,13 +148,13 @@ export function Medlem() {
               height: '200px',
             }}
           >
-            <span className='absolute inset-0 flex justify-center bg-black bg-opacity-25 hover:backdrop-grayscale duration-150	 items-center text-xl'>
+            <span className='absolute inset-0 flex justify-center bg-black bg-opacity-25 hover:backdrop-grayscale duration-150	 items-center text-xl md:text-2xl'>
               Personligt medlemskab
             </span>
           </Link>
           <Link
             to='../../../ansog-om-medlemskab/virksomhed'
-            className='bg-cover bg-center relative text-white font-bold py-2 px-4 rounded'
+            className='bg-cover md:col-span-4  bg-center relative text-white font-bold py-2 px-4 rounded'
             style={{
               backgroundImage:
                 // "url('https://cdn.midjourney.com/3aa676ab-27e9-4b9c-abcd-0e0ab8768ecb/0_0.webp')",
@@ -163,13 +163,13 @@ export function Medlem() {
               height: '200px',
             }}
           >
-            <span className='absolute inset-0 flex justify-center items-center drop-shadow-lg bg-black bg-opacity-25  hover:backdrop-grayscale duration-150	  p-2 text-xl'>
+            <span className='absolute inset-0 flex justify-center items-center drop-shadow-lg bg-black bg-opacity-25  hover:backdrop-grayscale duration-150	  p-2  text-xl md:text-2xl'>
               Virksomhedsmedlemskab
             </span>
           </Link>
           <Link
             to='../../../ansog-om-medlemskab/ngo'
-            className='bg-cover bg-center relative text-white font-bold py-2 px-4 rounded'
+            className='bg-cover md:col-span-4  bg-center relative text-white font-bold py-2 px-4 rounded'
             style={{
               backgroundImage:
                 // "url('https://cdn.midjourney.com/3aa676ab-27e9-4b9c-abcd-0e0ab8768ecb/0_0.webp')",
@@ -178,7 +178,7 @@ export function Medlem() {
               height: '200px',
             }}
           >
-            <span className='absolute inset-0 flex justify-center items-center drop-shadow-lg bg-black bg-opacity-25  hover:backdrop-grayscale duration-150	  p-2 text-xl'>
+            <span className='absolute inset-0 flex justify-center items-center drop-shadow-lg bg-black bg-opacity-25  hover:backdrop-grayscale duration-150	  p-2  text-xl md:text-2xl'>
               Ngomedlemskab
             </span>
           </Link>
