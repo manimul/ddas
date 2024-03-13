@@ -33,7 +33,7 @@ export function generateRss({
       <link>${link}</link>
       <language>da-dk</language>
       <ttl>60</ttl>
-      <atom:link href="https://ddas.vercel.app/arrangementer/rss.xml" rel="self" type="application/rss+xml" />
+      <atom:link href="https://afrikaselskabet.dk/arrangementer/rss.xml" rel="self" type="application/rss+xml" />
       ${entries
         .map(
           (entry) => `
@@ -72,13 +72,13 @@ export const loader: LoaderFunction = async () => {
   const feed = generateRss({
     title: 'Kommende Arrangementer med Det Danske Afrika Selskab',
     description: 'Liste over kommende arrangementer.',
-    link: 'https://ddas.vercel.app/arrangementer/kommende-arrangementer/',
+    link: 'https://afrikaselskabet.dk/arrangementer/kommende-arrangementer/',
     entries: events.map((event) => ({
       title: event.title || 'No Title', // Provide a default value if event.title is null
       description: event.extract || 'No Description', // Provide a default value if event.extract is null
       pubDate: event.date ? new Date(event.date).toUTCString() : '', // Adjust 'startDate' based on your EventStub
-      link: `https://ddas.vercel.app/arrangementer/kommende-arrangementer/${event.slug}`, // Adjust URL structure as needed
-      guid: `https://ddas.vercel.app/arrangementer/kommende-arrangementer/${event.slug}`, // This is often the same as link
+      link: `https://afrikaselskabet.dk/arrangementer/kommende-arrangementer/${event.slug}`, // Adjust URL structure as needed
+      guid: `https://afrikaselskabet.dk/arrangementer/kommende-arrangementer/${event.slug}`, // This is often the same as link
     })),
   });
 

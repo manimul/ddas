@@ -72,8 +72,8 @@ export function Events(props: EventsProps) {
       ))}
     </ul>
   ) : (
-    <div className='prose prose-xl mx-auto bg-green-50 p-4'>
-      <p>No Events found, yet!</p>
+    <div className='prose prose-xl mx-auto bg-gray-50 p-4'>
+      <p>Nye arrangementer kommer snart!</p>
     </div>
   );
 }
