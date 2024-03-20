@@ -169,7 +169,7 @@ export const action: ActionFunction = async ({ request, params }) => {
       eventDate: date,
       email: emailParams.email,
       eventLocation: initial?.data?.location || '',
-      guestNumber: emailParams.guests,
+      guestNumber: emailParams.guests || '0',
       member: emailParams.medlemskab,
     });
 
@@ -182,7 +182,7 @@ export const action: ActionFunction = async ({ request, params }) => {
       eventName: initial?.data?.title || '',
       eventDate: date,
       eventLocation: initial?.data?.location || '',
-      guestNumber: emailParams.guests,
+      guestNumber: emailParams.guests || '0',
       member: emailParams.medlemskab,
     });
 

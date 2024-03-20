@@ -69,15 +69,15 @@ export function Register() {
           />
           <label htmlFor='medlemskab-2'>Nej</label>
         </div>
-        <div>
-          <label htmlFor='guests' className='sr-only'>
-            Antal gæster
+        <div className='flex flex-row items-center justify-start   space-x-4'>
+          <label htmlFor='guests' className=''>
+            Antal gæster, om nogen:
           </label>
           <input
             type='number'
             name='guests'
-            className='w-full rounded-lg border-gray-200 bg-gray-50 placeholder-gray-600 p-4 pe-12 text-sm shadow-sm'
-            placeholder='Antal gæster - om nogen'
+            className='w-1/4 rounded-lg border-gray-200 bg-gray-50 placeholder-gray-600 p-4  text-sm shadow-sm'
+            placeholder='0'
           />
         </div>
 
