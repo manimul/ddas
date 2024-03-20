@@ -83,7 +83,7 @@ export function Register() {
 
         <button
           type='submit'
-          className='ml-auto uppercase text-sm font-bold rounded-md p-4 tracking-wide opacity-75   bg-gradient-to-br   border-[#FF5107] border-2 text-black hover:opacity-100 hover:rounded-[30px]  duration-500     '
+          className='ml-auto uppercase text-sm font-bold rounded-md p-4 tracking-wide opacity-75   bg-gradient-to-br   border-[#FF5107] border-2 text-black dark:text-white hover:opacity-100 hover:rounded-[30px]  duration-500     '
         >
           Tilmeld
         </button>
