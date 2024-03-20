@@ -1,4 +1,5 @@
 import { Link } from '@remix-run/react';
+import { Register } from './Register';
 
 export function EventInformation() {
   return (
@@ -18,17 +19,22 @@ export function EventInformation() {
             </span>
           </div>
         </div>
-        <p className='my-2 opacity-60 italic'>
+        <p className='my-2 pb-2 opacity-60 italic'>
           Inkluderet i prisen er øl, vand, vin og en sandwich. Efter foredraget
           er der mulighed for at udnytte vort meget erfarne ”Afrika-netværk”.
         </p>
-        <p> Tilmeld dig via mail til: </p>
+        <hr className='py-2'></hr>
+        <p className='pt-3'> Tilmeld dig via mail til: </p>
         <Link
           to='mailto:mail@afrikaselskabet.dk'
           className='text-bold text-[#ffae22] underline'
         >
           mail@afrikaselskabet.dk
         </Link>
+        <p className='py-3'> Eller direkte her: </p>
+
+        <Register />
+
         <p className='mt-2   '>
           Betalingen sker via Mobile-Pay: 34 32 50 eller ved at overføre beløbet
           til Afrikaselskabets konto 2150 8350007263.
@@ -40,7 +46,7 @@ export function EventInformation() {
       </div>
       <Link
         to='../../ansog-om-medlemskab'
-        className='inline-flex uppercase text-xs md:text-sm  rounded-md p-4 tracking-wide opacity-75    bg-[#ffae22] text-black hover:opacity-100 hover:rounded-[30px]  duration-500     '
+        className='inline-flex uppercase text-xs md:text-sm  rounded-md p-4 tracking-wide opacity-75 bg-gradient-to-br   from-[#ffae22] to-[#FF5107] text-black hover:opacity-100 hover:rounded-[30px]  duration-500     '
       >
         Ansog Om Medlemskab
       </Link>

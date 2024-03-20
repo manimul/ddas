@@ -3,7 +3,7 @@ import type {
   LoaderFunctionArgs,
   MetaFunction,
 } from '@remix-run/node';
-import { json } from '@remix-run/node';
+import { json, redirect } from '@remix-run/node';
 import { useLoaderData } from '@remix-run/react';
 import { QueryResponseInitial } from '@sanity/react-loader';
 
@@ -14,6 +14,7 @@ import { writeClient } from '~/sanity/client.server';
 import { useQuery } from '~/sanity/loader';
 import { loadQuery } from '~/sanity/loader.server';
 import { EVENT_QUERY } from '~/sanity/queries';
+import { BasicContactDocument, basicContactZ } from '~/types/basicContact';
 import type { EventDocument } from '~/types/event';
 import { eventZ } from '~/types/event';
 
@@ -58,6 +59,137 @@ export const meta: MetaFunction<
     { property: 'twitter:description', content: data?.initial?.data?.extract },
     { property: 'twitter:domain', content: 'https://afrikaselskabet.dk/' },
   ];
+};
+
+async function sendEmail({
+  to,
+  from,
+  templateAlias,
+  name,
+  eventName,
+  eventDate,
+  eventLocation,
+  guestNumber,
+  member,
+}: {
+  to: string;
+  from: string;
+  eventLocation: string;
+  templateAlias: string;
+  name: string;
+  eventName: string;
+  eventDate: string;
+  guestNumber: string;
+  member: string;
+}) {
+  const serverToken = process.env.POSTMARK_SERVER_TOKEN;
+
+  if (typeof serverToken !== 'string') {
+    throw new Error(
+      'Postmark server token is not set in environment variables.'
+    );
+  }
+
+  const response = await fetch(
+    'https://api.postmarkapp.com/email/withTemplate',
+    {
+      method: 'POST',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+        'X-Postmark-Server-Token': serverToken,
+      },
+      /* body: JSON.stringify({
+      From: from,
+      To: to,
+      Subject: subject,
+      HtmlBody: htmlBody,
+      TextBody: textBody,
+    }),*/
+      body: JSON.stringify({
+        From: from,
+        To: to,
+        TemplateAlias: templateAlias,
+        TemplateModel: {
+          product_url: 'Det Danske Afrika Selskab',
+          product_name: 'Det Danske Afrika Selskab Arrangementer',
+          name: name,
+          event_name: eventName,
+          event_location: eventLocation,
+          event_date: eventDate,
+          company_name: 'Det Danske Afrika Selskab',
+          sender_name: name,
+          guest_name: name,
+          guest_email: from,
+          guest_no: guestNumber,
+          member: member,
+        },
+      }),
+    }
+  );
+
+  return response.json();
+}
+
+export const action: ActionFunction = async ({ request, params }) => {
+  let formData = await request.formData();
+  const initial = await loadQuery<EventDocument>(EVENT_QUERY, params).then(
+    (res) => ({ ...res, data: res.data ? eventZ.parse(res.data) : null })
+  );
+
+  const date = new Date(initial?.data?.date || '').toLocaleDateString('da-DK', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+    hour: '2-digit',
+    minute: '2-digit',
+  });
+
+  const emailParams = {
+    navn: formData.get('navn')?.toString() || '',
+    email: formData.get('email')?.toString() || '',
+    besked: formData.get('besked')?.toString() || '',
+    medlemskab: formData.get('medlemskab')?.toString() || '',
+    guests: formData.get('guests')?.toString() || '',
+  };
+  // Send the email using the validated parameters
+  try {
+    //const emailResponse = await sendEmail(validatedParams, homeEmail);
+    // console.log(emailResponse); // Log response for debugging
+    await sendEmail({
+      to: 'mail@afrikaselskabet.dk',
+      from: 'mail@afrikaselskabet.dk',
+      templateAlias: 'welcome-1',
+      name: emailParams.navn,
+      eventName: initial?.data?.title || '',
+      eventDate: date,
+      eventLocation: initial?.data?.location || '',
+      guestNumber: emailParams.guests,
+      member: emailParams.medlemskab,
+    });
+
+    await sendEmail({
+      to: emailParams.email,
+      from: 'mail@afrikaselskabet.dk',
+      templateAlias: 'welcome',
+      name: emailParams.navn,
+      eventName: initial?.data?.title || '',
+      eventDate: date,
+      eventLocation: initial?.data?.location || '',
+      guestNumber: emailParams.guests,
+      member: emailParams.medlemskab,
+    });
+
+    // Return a JSON response to the client
+    return redirect('../success');
+    //return json({ success: true, message: 'Tak for din besked!' });
+  } catch (error) {
+    console.error('Email sending error:', error);
+    return json({
+      success: false,
+      message: 'Der opstod en fejl under afsendelsen af din besked.',
+    });
+  }
 };
 
 // Load the `record` document with this slug
