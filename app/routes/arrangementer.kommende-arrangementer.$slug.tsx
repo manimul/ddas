@@ -69,11 +69,15 @@ async function sendEmail({
   eventName,
   eventDate,
   eventLocation,
+  email,
+
   guestNumber,
   member,
 }: {
   to: string;
   from: string;
+  email: string;
+
   eventLocation: string;
   templateAlias: string;
   name: string;
@@ -120,7 +124,7 @@ async function sendEmail({
           company_name: 'Det Danske Afrika Selskab',
           sender_name: name,
           guest_name: name,
-          guest_email: from,
+          guest_email: email,
           guest_no: guestNumber,
           member: member,
         },
@@ -163,6 +167,7 @@ export const action: ActionFunction = async ({ request, params }) => {
       name: emailParams.navn,
       eventName: initial?.data?.title || '',
       eventDate: date,
+      email: emailParams.email,
       eventLocation: initial?.data?.location || '',
       guestNumber: emailParams.guests,
       member: emailParams.medlemskab,
@@ -173,6 +178,7 @@ export const action: ActionFunction = async ({ request, params }) => {
       from: 'mail@afrikaselskabet.dk',
       templateAlias: 'welcome',
       name: emailParams.navn,
+      email: emailParams.email,
       eventName: initial?.data?.title || '',
       eventDate: date,
       eventLocation: initial?.data?.location || '',
