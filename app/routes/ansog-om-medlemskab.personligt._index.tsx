@@ -124,8 +124,12 @@ export const action: ActionFunction = async ({ request }) => {
   const imageFile = formData.get('image');
   let imageUrl = ''; // Initialize variable to hold the image URL
 
-  if (imageFile instanceof File) {
+  // Check if imageFile is an instance of File and has a size greater than 0
+  if (imageFile instanceof File && imageFile.size > 0) {
     imageUrl = await createImageAsset(imageFile);
+  } else {
+    // If there's no file or the file is empty, you can optionally log this or handle it as needed
+    console.log('No image file provided or file is empty');
   }
 
   try {
