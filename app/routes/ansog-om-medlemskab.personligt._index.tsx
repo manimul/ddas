@@ -42,6 +42,11 @@ async function sendEmail(
       'Postmark server token is not set in environment variables.'
     );
   }
+  let imgHtml = '';
+
+  if (imageUrl !== null && imageUrl !== '') {
+    imgHtml = `<p>Image: <img src="${imageUrl}" alt="Uploaded Image"/></p><p>Image Link: <a href="${imageUrl}">${imageUrl}</a> </p>`;
+  }
 
   const response = await fetch('https://api.postmarkapp.com/email', {
     method: 'POST',
@@ -54,7 +59,7 @@ async function sendEmail(
       From: homeEmail,
       To: homeEmail,
       Subject: 'Ny ansøgning om personligt medlemskab',
-      HtmlBody: `<html><body><p>Image: <img src="${imageUrl}" alt="Uploaded Image"/></p><p>Image Link: <a href="${imageUrl}">${imageUrl}</a> </p><p>Navn: ${navn}</p><p>Email: ${email}</p><p>Besked: ${besked}</p><p>Adresse: ${adresse}</p><p>Postnummber och By: ${postnummer} </p><p>Fødselsår: ${fodselsar} </p> </p> <p>Telefon: ${telefonnummer} </p><p>General Consent: ${generalConsent}</p><p>Email Consent: ${mailConsent}</p></body></html>`,
+      HtmlBody: `<html><body>${imgHtml} <p>Navn: ${navn}</p><p>Email: ${email}</p><p>Besked: ${besked}</p><p>Adresse: ${adresse}</p><p>Postnummber och By: ${postnummer} </p><p>Fødselsår: ${fodselsar} </p> </p> <p>Telefon: ${telefonnummer} </p><p>General Consent: ${generalConsent}</p><p>Email Consent: ${mailConsent}</p></body></html>`,
       TextBody: `Navn: ${navn}\nEmail: ${email}\nBesked: ${besked} \nAdresse: ${adresse} \nPostnummer och By: ${postnummer} \nFødselsår: ${fodselsar} \nTelefon: ${telefonnummer} \nGeneral Consent: ${generalConsent}\nEmail Consent: ${mailConsent}`,
     }),
   });
