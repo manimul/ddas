@@ -1,12 +1,20 @@
 import { Tags } from 'lucide-react';
 import { defineField, defineType } from 'sanity';
+import {
+  orderRankField,
+  orderRankOrdering,
+} from '@sanity/orderable-document-list';
 
 export const boardMemberType = defineType({
   name: 'boardmember',
   title: 'Board Member',
   type: 'document',
+  orderings: [orderRankOrdering],
+
   icon: Tags,
   fields: [
+    orderRankField({ type: 'boardmember' }),
+
     {
       type: 'string',
       name: 'name',

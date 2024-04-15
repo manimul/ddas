@@ -263,7 +263,7 @@ export const FILTERED_NEWSES_QUERY = groq`*[_type == "news" && $countryTag in af
   content
 }`;
 
-export const BOARD_MEMBERS_QUERY = groq`*[_type == "boardmember"][0...12]|order(name asc){
+export const BOARD_MEMBERS_QUERY = groq`*[_type == "boardmember"][0...12]|order(orderRank){
   _id,
   _type,
   name,

@@ -43,11 +43,15 @@ async function sendEmail(
     );
   }
   let imgHtml = '';
-
   if (imageUrl !== null && imageUrl !== '') {
     imgHtml = `<p>Image: <img src="${imageUrl}" alt="Uploaded Image"/></p><p>Image Link: <a href="${imageUrl}">${imageUrl}</a> </p>`;
   }
 
+  /*
+  
+
+
+  /*
   const response = await fetch('https://api.postmarkapp.com/email', {
     method: 'POST',
     headers: {
@@ -56,14 +60,48 @@ async function sendEmail(
       'X-Postmark-Server-Token': serverToken,
     },
     body: JSON.stringify({
-      From: homeEmail,
-      To: homeEmail,
+      //From: homeEmail,
+      //To: homeEmail,
+      From: 'mark@bambwa.com',
+      To: 'mark@bambwa.com',
       Subject: 'Ny ansøgning om personligt medlemskab',
       HtmlBody: `<html><body>${imgHtml} <p>Navn: ${navn}</p><p>Email: ${email}</p><p>Besked: ${besked}</p><p>Adresse: ${adresse}</p><p>Postnummber och By: ${postnummer} </p><p>Fødselsår: ${fodselsar} </p> </p> <p>Telefon: ${telefonnummer} </p><p>General Consent: ${generalConsent}</p><p>Email Consent: ${mailConsent}</p></body></html>`,
       TextBody: `Navn: ${navn}\nEmail: ${email}\nBesked: ${besked} \nAdresse: ${adresse} \nPostnummer och By: ${postnummer} \nFødselsår: ${fodselsar} \nTelefon: ${telefonnummer} \nGeneral Consent: ${generalConsent}\nEmail Consent: ${mailConsent}`,
     }),
-  });
-  //console.log('response', response);
+  });*/
+
+  const response = await fetch(
+    'https://api.postmarkapp.com/email/withTemplate',
+    {
+      method: 'POST',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+        'X-Postmark-Server-Token': serverToken,
+      },
+      body: JSON.stringify({
+        From: homeEmail,
+        To: homeEmail,
+        //From: 'mark@bambwa.com',
+        //To: 'mark@bambwa.com',
+        TemplateAlias: 'welcome-2',
+        TemplateModel: {
+          navn: navn,
+          email: email,
+          besked: besked,
+          adresse: adresse,
+          postnummer: postnummer,
+          fodselsar: fodselsar,
+          telefonnummer: telefonnummer,
+          generalConsent: generalConsent,
+          mailConsent: mailConsent,
+          imageUrl: imageUrl,
+        },
+      }),
+    }
+  );
+
+  console.log('response', response);
   return response.json();
 }
 

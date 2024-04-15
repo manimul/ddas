@@ -6,6 +6,7 @@ import {
 } from '@remix-run/node';
 import { Form, useActionData } from '@remix-run/react';
 import { useMatches } from '@remix-run/react';
+import { invariantResponse } from '~/lib/misc';
 
 import type { Loader as RootLoader, loader } from '~/root';
 import { OG_IMAGE_HEIGHT, OG_IMAGE_WIDTH } from '~/routes/resource.og';
@@ -72,6 +73,7 @@ async function sendEmail(params: BasicContactDocument, homeEmail: string) {
     body: JSON.stringify({
       From: homeEmail, // Replace with your sender signature
       To: homeEmail, // Replace with your target email address
+
       Subject: 'New contact form submission',
       HtmlBody: `<html><body><p>Name: ${navn}</p><p>Email: ${email}</p><p>Message: ${besked}</p></body></html>`,
       TextBody: `Navn: ${navn}\nEmail: ${email}\nBesked: ${besked}`,
@@ -90,7 +92,10 @@ export const action: ActionFunction = async ({ request }) => {
     navn: formData.get('navn')?.toString() || '',
     email: formData.get('email')?.toString() || '',
     besked: formData.get('besked')?.toString() || '',
+    confirmNavn: formData.get('confirmNavn')?.toString() || '',
   };
+
+  invariantResponse(emailParams.confirmNavn === '', 'Invalid form submission');
 
   // Validate the form data
   const validatedParams = basicContactZ.parse(emailParams);
@@ -163,6 +168,10 @@ export default function Kontakt() {
                   className='w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm'
                   placeholder='Indtast navn'
                 />
+              </div>
+              <div className='hidden'>
+                <label htmlFor='navn-input'>Ignore this field</label>
+                <input id='navn-input' type='text' name='confirmNavn' />
               </div>
               <div>
                 <label htmlFor='email' className='sr-only'>

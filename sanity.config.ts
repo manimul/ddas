@@ -1,7 +1,8 @@
 import { presentationTool } from '@sanity/presentation';
 import { visionTool } from '@sanity/vision';
 import { defineConfig } from 'sanity';
-import { deskTool } from 'sanity/desk';
+//import { deskTool } from 'sanity/desk';
+import { structureTool } from 'sanity/structure';
 
 import { locate } from '~/sanity/presentation/locate';
 import { frontendUrl, projectDetails } from '~/sanity/projectDetails';
@@ -13,7 +14,7 @@ export const config = defineConfig({
   name: 'sanity-remix',
   title: 'Det Danske Afrika Selskab',
   plugins: [
-    deskTool({ structure, defaultDocumentNode }),
+    structureTool({ structure, defaultDocumentNode }),
     //presentationTool({
     //previewUrl: frontendUrl,
     //locate,

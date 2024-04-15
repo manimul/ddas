@@ -163,6 +163,8 @@ export const action: ActionFunction = async ({ request, params }) => {
     await sendEmail({
       to: 'mail@afrikaselskabet.dk',
       from: 'mail@afrikaselskabet.dk',
+      //to: 'mark@bambwa.com',
+      //from: 'mark@bambwa.com',
       templateAlias: 'welcome-1',
       name: emailParams.navn,
       eventName: initial?.data?.title || '',
@@ -176,6 +178,8 @@ export const action: ActionFunction = async ({ request, params }) => {
     await sendEmail({
       to: emailParams.email,
       from: 'mail@afrikaselskabet.dk',
+      //to: 'mark@bambwa.com',
+      //from: 'mark@bambwa.com',
       templateAlias: 'welcome',
       name: emailParams.navn,
       email: emailParams.email,

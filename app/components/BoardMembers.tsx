@@ -48,12 +48,13 @@ export function BoardMembers(props: BoardMembersProps) {
                 {boardMember.title}
               </p>
 
-              <p className='text-gray-800 lg:mb-6 md:text-lg lg:text-xl dark:text-gray-400'>
+              <p className='text-gray-800 md:text-base lg:text-lg dark:text-gray-400'>
                 {boardMember.bio && boardMember.bio?.length > 0 ? (
                   <SanityContent value={boardMember.bio} />
                 ) : null}
               </p>
-              <p>
+              {/** 
+              <p >
                 {boardMember.phone && (
                   <a
                     href={'tel:' + boardMember.phone}
@@ -72,7 +73,7 @@ export function BoardMembers(props: BoardMembersProps) {
                     {boardMember.email}
                   </a>
                 )}
-              </p>
+              </p>*/}
             </div>
           </div>
         </li>

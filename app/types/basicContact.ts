@@ -11,6 +11,7 @@ export const basicContactZ = z.object({
   navn: z.string().nullable(),
   email: z.string().nullable(),
   besked: z.string().nullable(),
+  confirmNavn: z.string().nullable(),
 });
 
 export type BasicContactDocument = z.infer<typeof basicContactZ>;

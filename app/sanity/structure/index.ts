@@ -15,17 +15,19 @@ import {
 import type {
   DefaultDocumentNodeResolver,
   StructureResolver,
-} from 'sanity/desk';
+} from 'sanity/structure';
+import { orderableDocumentListDeskItem } from '@sanity/orderable-document-list';
 
 import OGPreview from '~/sanity/components/OGPreview';
 import { resolveOGUrl } from '~/sanity/structure/resolveOGUrl';
 
-export const structure: StructureResolver = (S) =>
+export const structure: StructureResolver = (S, context) =>
   S.list()
     .id('root')
     .title('Content')
     .items([
       // Singleton, home page curation
+
       S.documentListItem()
         .schemaType('home')
         .icon(Home)
@@ -42,10 +44,17 @@ export const structure: StructureResolver = (S) =>
       S.documentTypeListItem('page').title('Pages').icon(BookOpenText),
       S.documentTypeListItem('event').title('Events').icon(Calendar),
       S.documentTypeListItem('news').title('News').icon(Newspaper),
+
       S.documentTypeListItem('tag').title('Tags').icon(Tags),
       S.divider(),
       S.documentTypeListItem('member').title('Members').icon(User),
-      S.documentTypeListItem('boardmember').title('Board Members').icon(Users),
+      // S.documentTypeListItem('boardmember').title('Board Members').icon(Users),
+      orderableDocumentListDeskItem({
+        type: 'boardmember',
+        title: 'Board Members',
+        context: context,
+        S: S,
+      }),
       S.documentTypeListItem('corporatemember')
         .title('Corporate Members')
         .icon(Factory),
